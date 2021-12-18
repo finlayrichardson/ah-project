@@ -1,4 +1,6 @@
+from time import sleep
+
 print("hello")
 while True:
-    a = input("Enter some waffle:")
-    print(a)
+    print("hi")
+    sleep(2)
