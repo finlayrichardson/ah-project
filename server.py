@@ -2,8 +2,28 @@
 
 import asyncio
 import websockets
-import subprocess
 import socket
+from threading import Thread
+
+
+async def receive(websocket):
+    # try:
+    #     s.connect(("localhost", 31337))
+    # except:
+    #     pass
+    while True:
+        print("hi")
+        message = await websocket.recv() + "\n"
+        print(message)
+        s.send(message.encode('utf-8'))
+
+
+async def send(websocket):
+    while True:
+        print("hello")
+        output = s.recv(1024)
+        print(output)
+        await websocket.send(output.decode("utf-8"))
 
 
 async def handler(websocket, _):
@@ -11,13 +31,8 @@ async def handler(websocket, _):
         s.connect(("localhost", 31337))
     except:
         pass
-    while True:
-        message = await websocket.recv() + "\n"
-        s.send(message.encode('utf-8'))
-        output = s.recv(1024)
-        print(output)
-        await websocket.send(output.decode("utf-8"))
-        # await websocket.send("Command error")
+    Thread(target=asyncio.run(receive), args=(websocket,)).start()
+    Thread(target=asyncio.run(send), args=(websocket,)).start()
 
 
 async def main():
