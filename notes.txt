@@ -1,1 +1,7 @@
 socat tcp-listen:31337,reuseaddr,fork, exec:"/bin/bash"
+
+
+setup email
+
+setup repl and github
+setup auto push
