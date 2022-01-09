@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // Validate First Name
     if (empty($_POST['first_name'])) {
         $errors[] = "Please enter a first name";
-    } elseif (!preg_match("/[a-zA-ZäöüßÄÖÜ]/", $_POST['first_name'])) {
+    } elseif (!preg_match("/[a-zA-ZäöüßÄÖÜ ]/", $_POST['first_name'])) {
         $errors[] = "First name must contain only letters";
     } else {
         $first_name = mysqli_real_escape_string($db, trim($_POST['first_name']));
@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // Validate Last Name
     if (empty($_POST['last_name'])) {
         $errors[] = "Please enter a last name";
-    } elseif (!preg_match('/[a-zA-ZäöüßÄÖÜ]/', $_POST['last_name'])) {
+    } elseif (!preg_match('/[a-zA-ZäöüßÄÖÜ ]/', $_POST['last_name'])) {
         $errors[] = "Last name must contain only letters";
     } else {
         $last_name = mysqli_real_escape_string($db, trim($_POST['last_name']));
@@ -92,8 +92,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <body>
 <h1>Register</h1>
 <form method="POST" action="">
-    <input type="text" name="first_name" required pattern="[a-zA-ZäöüßÄÖÜ]+" placeholder="First Name" value="<?php if (isset($_POST['first_name'])) echo $_POST['first_name'];?>"><br>
-    <input type="text" name="last_name" required pattern="[a-zA-ZäöüßÄÖÜ]+" placeholder="Last Name" value="<?php if (isset($_POST['last_name'])) echo $_POST['last_name'];?>"><br>
+    <input type="text" name="first_name" required pattern="[a-zA-ZäöüßÄÖÜ ]+" placeholder="First Name" value="<?php if (isset($_POST['first_name'])) echo $_POST['first_name'];?>"><br>
+    <input type="text" name="last_name" required pattern="[a-zA-ZäöüßÄÖÜ ]+" placeholder="Last Name" value="<?php if (isset($_POST['last_name'])) echo $_POST['last_name'];?>"><br>
     <input type="text" name="email" required pattern="^.+?@esms\.org\.uk$" placeholder="Email" value="<?php if (isset($_POST['email'])) echo $_POST['email'];?>"><br>
     <input type="password" name="password1" required placeholder="Password" value="<?php if (isset($_POST['password1'])) echo $_POST['password1'];?>"><br>
     <input type="password" name="password2" required placeholder="Confirm Password" value="<?php if (isset($_POST['password2'])) echo $_POST['password2'];?>"><br>

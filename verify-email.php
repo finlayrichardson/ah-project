@@ -1,12 +1,10 @@
 <?php
 require('./connect-db.php');
+require('./tools.php');
 // Session variables
 session_start();
 
-if (empty($_SESSION['first_name'])) {
-    // No session variables
-    load();
-} else {
+if (isset($_SESSION['first_name'])) {
     // User has session variables
     $user_id = $_SESSION['user_id'];
     $email = $_SESSION['email'];
@@ -27,10 +25,10 @@ if (isset($_GET['token'])) {
     $sql = "SELECT * FROM token WHERE token = '$token';";
     $result = mysqli_fetch_assoc(mysqli_query($db, $sql));
     $type = $result['type'];
-    $uid = $result['user_id'];
+    $user_id = $result['user_id'];
     $expiry_time = $result['expires'];
     // Check token is valid
-    if ($uid != $user_id || $type != "email") {
+    if ($type != "email") {
         echo "<p>Token is invalid</p>";
         exit();
     } elseif (strtotime($expiry_time) < strtotime('now')){
@@ -41,7 +39,7 @@ if (isset($_GET['token'])) {
         $sql = "UPDATE user SET verified = true WHERE user_id = '$user_id';";
         mysqli_query($db, $sql);
         echo "<p>Email validated!</p><br>";
-        echo "<a href='index.php'>Home</a>";
+        echo "<a href='login.php'>Login</a>";
         exit();
     }
 }
