@@ -40,11 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
     // Check email isn't already registered
     if (empty($errors)) {
-        $sql = "SELECT user_id FROM user WHERE email=?;";
-        $stmt = mysqli_prepare($db, $sql);
-        mysqli_stmt_bind_param($stmt, 's', $email);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
+        $result = query("SELECT user_id FROM user WHERE email=?;", 's', $email);
         if (mysqli_num_rows($result) != 0) {
             $errors[] = "Email already registered";
         }
@@ -52,28 +48,23 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // Check if errors should be displayed or user should be inserted
     if (empty($errors)) {
         // Insert user into database
-        $sql = "INSERT INTO user (email, password, first_name, last_name, role) VALUES (?, ?, ?, ?, 'student');";
-        $stmt = mysqli_prepare($db, $sql);
-        mysqli_stmt_bind_param($stmt, 'ssss', $email, $password, $first_name, $last_name);
-        mysqli_stmt_execute($stmt);
+        query("INSERT INTO user (email, password, first_name, last_name, role) VALUES (?, ?, ?, ?, 'student');", 'ssss', $email, $password, $first_name, $last_name);
 
-        // Setup session and got to verify-email page
+        // Setup session and go to verify-email.php
         session_start();
+        $result = query("SELECT user_id FROM user WHERE email = ?;", 's', $email);
+        $user_id = mysqli_fetch_row($result)[0];
+        $_SESSION['user_id'] = $user_id;
         $_SESSION['email'] = $email;
         $_SESSION['first_name'] = $first_name;
         $_SESSION['last_name'] = $last_name;
-        $sql = "SELECT user_id FROM user WHERE email = '$email';";
-        $result = mysqli_query($db, $sql);
-        $user_id = mysqli_fetch_row($result)[0];
-        $_SESSION['user_id'] = $user_id;
 
         load('verify-email.php');
-        mysqli_close($db);
-        exit();
     } else {
+        // Display errors
         echo "<h1>Error!</h1>
         <p>The following error(s) occured:<br>";
-        foreach($errors as $msg) {
+        foreach ($errors as $msg) {
             echo "- $msg<br>";
         }
         echo "<p>Please try again.</p>";
@@ -90,16 +81,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 </head>
 
 <body>
-<h1>Register</h1>
-<form method="POST" action="">
-    <input type="text" name="first_name" required pattern="[a-zA-ZäöüßÄÖÜ ]+" placeholder="First Name" value="<?php if (isset($_POST['first_name'])) echo $_POST['first_name'];?>"><br>
-    <input type="text" name="last_name" required pattern="[a-zA-ZäöüßÄÖÜ ]+" placeholder="Last Name" value="<?php if (isset($_POST['last_name'])) echo $_POST['last_name'];?>"><br>
-    <input type="text" name="email" required pattern="^.+?@esms\.org\.uk$" placeholder="Email" value="<?php if (isset($_POST['email'])) echo $_POST['email'];?>"><br>
-    <input type="password" name="password1" required placeholder="Password" value="<?php if (isset($_POST['password1'])) echo $_POST['password1'];?>"><br>
-    <input type="password" name="password2" required placeholder="Confirm Password" value="<?php if (isset($_POST['password2'])) echo $_POST['password2'];?>"><br>
-    <input type="submit" value="Register">
-</form>
-<a href="login.php" class="button">Login</a>
+    <h1>Register</h1>
+    <form method="POST" action="">
+        <input type="text" name="first_name" required autofocus pattern="[a-zA-ZäöüßÄÖÜ ]+" placeholder="First Name" value="<?php if (isset($_POST['first_name'])) echo $_POST['first_name'];?>"><br>
+        <input type="text" name="last_name" required pattern="[a-zA-ZäöüßÄÖÜ ]+" placeholder="Last Name" value="<?php if (isset($_POST['last_name'])) echo $_POST['last_name'];?>"><br>
+        <input type="text" name="email" required pattern="^.+?@esms\.org\.uk$" placeholder="Email" value="<?php if (isset($_POST['email'])) echo $_POST['email'];?>"><br>
+        <input type="password" name="password1" required placeholder="Password" value="<?php if (isset($_POST['password1'])) echo $_POST['password1'];?>"><br>
+        <input type="password" name="password2" required placeholder="Confirm Password" value="<?php if (isset($_POST['password2'])) echo $_POST['password2'];?>"><br>
+        <input type="submit" value="Register">
+    </form>
+    <a href="login.php" class="button">Login</a>
 </body>
 
 </html>

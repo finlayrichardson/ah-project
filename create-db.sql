@@ -1,7 +1,7 @@
-CREATE DATABASE snakesoar;
-USE snakesoar;
-CREATE USER 'snakesoar_user'@'localhost' IDENTIFIED BY '9?7!3(2f3c2f';
-GRANT ALL PRIVILEGES ON snakesoar.* TO 'snakesoar_user'@'localhost';
+CREATE DATABASE codecanopy;
+USE codecanopy;
+CREATE USER 'codecanopy_user'@'localhost' IDENTIFIED BY '2*(aebdf8)a9';
+GRANT ALL PRIVILEGES ON codecanopy.* TO 'codecanopy_user'@'localhost';
 
 CREATE TABLE user(
     user_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,

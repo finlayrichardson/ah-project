@@ -1,2 +1,6 @@
 <?php
-echo php_uname();
+function test($query, ...$vars) {
+    echo var_dump($vars);
+}
+
+test("hi", 1, "email", true);
