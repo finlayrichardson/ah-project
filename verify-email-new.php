@@ -1,4 +1,22 @@
 <?php
+require('./connect-db.php');
+require('./tools.php');
+
+if (isset($_SESSION['user_id'])) {
+    // User has session variables
+    $user_id = $_SESSION['user_id'];
+    $email = $_SESSION['email'];
+    $first_name = $_SESSION['first_name'];
+    $last_name = $_SESSION['last_name'];
+
+    $result = mysqli_query($db, "SELECT verified FROM user WHERE user_id = '$user_id';");
+    $verified = mysqli_fetch_row($result)[0];
+    if ($verified) {
+        // User is already verified
+        load('index.php');
+    }
+} 
+
 if (isset($_GET['token'])) {
     require('./auth.php');
     $token = $_GET['token'];
@@ -18,6 +36,7 @@ if (isset($_GET['token'])) {
         mysqli_query($db, "UPDATE user SET verified = true WHERE user_id = '$user_id';");
         echo "<p>Email validated!</p><br>";
         if (isset($_SESSION['user_id']) && $user_id == $_SESSION['user_id']) {
+            // Is a brand new user
             $_SESSION['role'] = "student";
             echo "<a href='index.php'>Home</a>";
         } else {
@@ -26,25 +45,8 @@ if (isset($_GET['token'])) {
         exit();
     }
 }
-
-require('./connect-db.php');
-require('./tools.php');
-
-if (isset($_SESSION['user_id'])) {
-    // User has session variables
-    $user_id = $_SESSION['user_id'];
-    $email = $_SESSION['email'];
-    $first_name = $_SESSION['first_name'];
-    $last_name = $_SESSION['last_name'];
-
-    $result = mysqli_query($db, "SELECT verified FROM user WHERE user_id = '$user_id';");
-    $verified = mysqli_fetch_row($result)[0];
-    if ($verified == 1) {
-        // User is already verified
-        load('index.php');
-    }
-} else {
-    // User with no token and not logged in gets sent to login
+// User with no token and not logged in gets sent to login
+if (empty($_SESSION['user_id']) && empty($_GET['token'])) {
     load();
 }
 
