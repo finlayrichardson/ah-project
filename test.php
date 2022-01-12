@@ -1,6 +1,6 @@
 <?php
-function test($query, ...$vars) {
-    echo var_dump($vars);
-}
+$test = "";
 
-test("hi", 1, "email", true);
+if (isset($test)) {
+    echo "hi";
+}

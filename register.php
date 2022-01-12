@@ -1,7 +1,7 @@
 <?php
+require('./auth.php');
+
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    require('./connect-db.php');
-    require('./tools.php');
     $errors = array();
     // Validate First Name
     if (empty($_POST['first_name'])) {
@@ -20,10 +20,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $last_name = mysqli_real_escape_string($db, trim($_POST['last_name']));
     }
     // Validate Email
-
     if (empty($_POST['email'])) {
         $errors[] = "Please enter an email";
-    } elseif (!preg_match('/^.+?@esms\.org\.uk$/', $_POST['email'])) {
+    } elseif (!preg_match('/^.+?@esms\.org\.uk *?$/', $_POST['email'])) {
         $errors[] = "Please use your school email";
     } else {
         $email = mysqli_real_escape_string($db, trim($_POST['email']));
@@ -40,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
     // Check email isn't already registered
     if (empty($errors)) {
-        $result = query("SELECT user_id FROM user WHERE email=?;", 's', $email);
+        $result = query("SELECT user_id FROM user WHERE email = ?;", 's', $email);
         if (mysqli_num_rows($result) != 0) {
             $errors[] = "Email already registered";
         }
@@ -68,7 +67,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             echo "- $msg<br>";
         }
         echo "<p>Please try again.</p>";
-        mysqli_close($db);
     }
 }
 ?>
@@ -85,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <form method="POST" action="">
         <input type="text" name="first_name" required autofocus pattern="[a-zA-ZäöüßÄÖÜ ]+" placeholder="First Name" value="<?php if (isset($_POST['first_name'])) echo $_POST['first_name'];?>"><br>
         <input type="text" name="last_name" required pattern="[a-zA-ZäöüßÄÖÜ ]+" placeholder="Last Name" value="<?php if (isset($_POST['last_name'])) echo $_POST['last_name'];?>"><br>
-        <input type="text" name="email" required pattern="^.+?@esms\.org\.uk$" placeholder="Email" value="<?php if (isset($_POST['email'])) echo $_POST['email'];?>"><br>
+        <input type="text" name="email" required pattern="^.+?@esms\.org\.uk *?$" placeholder="Email" value="<?php if (isset($_POST['email'])) echo $_POST['email'];?>"><br>
         <input type="password" name="password1" required placeholder="Password" value="<?php if (isset($_POST['password1'])) echo $_POST['password1'];?>"><br>
         <input type="password" name="password2" required placeholder="Confirm Password" value="<?php if (isset($_POST['password2'])) echo $_POST['password2'];?>"><br>
         <input type="submit" value="Register">

@@ -1,11 +1,12 @@
 <?php
 require('./auth.php');
+// make sure admin
 ?>
 
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Codecanopy</title>
+        <title></title>
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>

@@ -5,7 +5,7 @@ require('./auth.php');
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Codecanopy</title>
+        <title></title>
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>

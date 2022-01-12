@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         mysqli_query($db, "INSERT INTO token VALUES ('$token', 'password', $user_id, '$expiry_time');");
 
         $mail->addAddress($email, $first_name . '' . $last_name);
-        $mail->Subject = "Verify Email"; // change to subject that works
+        $mail->Subject = "Reset Login Details"; //change to something that works
         $mail->Body = "<html>
         <p>Please click the button below to reset your password.</p><br>
         <a href='http://$host/reset-password.php?token=$token' class='button'>Reset Password</a>
@@ -42,21 +42,32 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         echo "<p>Email sent to $email</p>";
         exit();
+    } else {
+        // Display errors
+        echo "<h1>Error!</h1>
+        <p>The following error(s) occured:<br>";
+        foreach ($errors as $msg) {
+            echo "- $msg<br>";
+        }
+        echo "<p>Please try again.</p>";
     }
 }
 ?>
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Forgot Password</title>
-    </head>
-    <body>
-        <h1>Forgot Password</h1>
-        <p>Please enter your email below and a link will be sent to change your password.</p>
-        <form method="POST" action="">
-            <input type="text" name="email" required autofocus placeholder="Email" value="<?php if (isset($_GET['email'])) echo $_GET['email'];?>"><br>
-            <input type="submit" value="Send Reset Link">
-        </form>
-    </body>
+
+<head>
+    <title>Forgot Password</title>
+</head>
+
+<body>
+    <h1>Forgot Password</h1>
+    <p>Please enter your email below and a link will be sent to change your password.</p>
+    <form method="POST" action="">
+        <input type="text" name="email" required autofocus placeholder="Email" value="<?php if (isset($_GET['email'])) echo $_GET['email']; ?>"><br>
+        <input type="submit" value="Send Reset Link">
+    </form>
+</body>
+
 </html>

@@ -63,7 +63,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             echo "- $msg<br>";
         }
         echo "<p>Please try again.</p>";
-        mysqli_close($db);
     }
 }
 ?>
