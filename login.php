@@ -59,8 +59,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         // Display errors
         echo "<h1>Error!</h1>
         <p>The following error(s) occured:<br>";
-        foreach ($errors as $msg) {
-            echo "- $msg<br>";
+        foreach ($errors as $error) {
+            echo "- $error<br>";
         }
         echo "<p>Please try again.</p>";
     }
