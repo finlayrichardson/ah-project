@@ -6,7 +6,7 @@ session_start();
 if (empty($_SESSION['user_id'])) {
     // User isn't logged in
     if ($_SERVER['SCRIPT_NAME'] != '/forgot-password.php' && $_SERVER['SCRIPT_NAME'] != '/register.php' && $_SERVER['SCRIPT_NAME'] != '/reset-password.php') {
-        load('login.php?return=' . $_SERVER['REQUEST_URI']);
+        load('login.php?return=' . basename($_SERVER['REQUEST_URI']));
     }
 } else {
     // User is logged in

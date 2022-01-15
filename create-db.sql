@@ -1,6 +1,6 @@
 CREATE DATABASE codecanopy;
 USE codecanopy;
-CREATE USER 'codecanopy_user'@'localhost' IDENTIFIED BY '2*(aebdf8)a9';
+CREATE USER 'codecanopy_user'@'localhost' IDENTIFIED BY '!0044bf1c4*@';
 GRANT ALL PRIVILEGES ON codecanopy.* TO 'codecanopy_user'@'localhost';
 
 CREATE TABLE user(

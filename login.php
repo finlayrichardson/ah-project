@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (empty($_POST['password'])) {
         $errors[] = "Please enter a password";
     } else {
-        $password = mysqli_real_escape_string($db, trim($_POST['password']));
+        $password = trim($_POST['password']);
     }
 
     if (empty($errors)) {

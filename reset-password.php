@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             } elseif ($_POST['password1'] !== $_POST['password2']) {
                 $errors[] = "Passwords must match";
             } else {
-                $password = password_hash(mysqli_real_escape_string($db, trim($_POST['password1'])), PASSWORD_BCRYPT);
+                $password = password_hash(trim($_POST['password1']), PASSWORD_BCRYPT);
             }
 
             // Change password or display errors

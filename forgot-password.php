@@ -31,8 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $expiry_time = date('Y-m-d H:i:s', strtotime('+4 hours'));
         mysqli_query($db, "INSERT INTO token VALUES ('$token', 'password', $user_id, '$expiry_time');");
 
-        $mail->addAddress($email, $first_name . '' . $last_name);
-        $mail->Subject = "Reset Login Details"; //change to something that works
+        $mail->addAddress($email, $first_name . ' ' . $last_name);
+        $mail->Subject = "Reset Login Details";
         $mail->Body = "<html>
         <p>Please click the button below to reset your password.</p><br>
         <a href='http://$host/reset-password.php?token=$token' class='button'>Reset Password</a>

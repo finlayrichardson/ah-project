@@ -17,7 +17,7 @@ if (isset($_SESSION['user_id'])) {
 } 
 
 if (isset($_GET['token'])) {
-    $token = $_GET['token'];
+    $token = mysqli_real_escape_string($db, trim($_GET['token']));
     $result = mysqli_fetch_assoc(query("SELECT * FROM token WHERE token = ?;", 's', $token));
     $type = $result['type'];
     $user_id = $result['user_id'];
