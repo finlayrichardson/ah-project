@@ -13,3 +13,12 @@ nav ul li {
   float: right;
   margin-right: 50px;
 }
+
+.group {
+  float: left;
+  margin-right: 50px;
+}
+
+.buttons form {
+  float: right;
+}
