@@ -22,3 +22,8 @@ nav ul li {
 .buttons form {
   float: right;
 }
+
+.students,
+.teachers {
+  width: 175px;
+}

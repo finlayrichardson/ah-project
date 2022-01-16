@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         echo "<p>You must specify a User ID</p>";
         exit();
     } else {
-        $user_id = mysqli_real_escape_string($db, trim($_POST['user_id']));
+        $user_id = intval(trim($_POST['user_id']));
     }
     $result = query("SELECT user_id FROM user WHERE user_id = ?;", 'i', $user_id);
     if (mysqli_num_rows($result) == 0) {

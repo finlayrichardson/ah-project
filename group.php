@@ -44,7 +44,7 @@ if (empty($_REQUEST['id'])) {
     echo "<p>No group specified</p>";
     exit();
 } else {
-    $group_id = mysqli_real_escape_string($db, trim($_REQUEST['id']));
+    $group_id = intval(trim($_REQUEST['id']));
 }
 // Check if group exists
 $group_result = query("SELECT * FROM `group` WHERE group_id = ?;", 'i', $group_id);
