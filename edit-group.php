@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 $errors[] = "Invalid User ID: $user_id";
                 break;
             }
-            $result = query("SELECT user_id FROM user WHERE user_id = ?", 'i', intval($user_id));
+            $result = query("SELECT user_id FROM user WHERE verified = true AND user_id = ?", 'i', intval($user_id));
             if (mysqli_num_rows($result) == 0) {
                 $errors[] = "User not found with ID: $user_id";
             }
@@ -110,11 +110,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <div class='title'>
             <h1>Edit Group</h1>
         </div>
-        <form method="POST" action="">
+        <form method="POST">
             <input type="text" name="name" required placeholder="Name" value="<?php echo mysqli_fetch_assoc($group_result)['name'];?>"><br>
             <select name="students[]" class="students" multiple>
                 <?php
-                $result = mysqli_query($db, "SELECT user_id, first_name, last_name FROM user WHERE user.role = 'student';");
+                $result = mysqli_query($db, "SELECT user_id, first_name, last_name FROM user WHERE role = 'student' AND verified = true;");
                 while ($row = mysqli_fetch_assoc($result)) {
                     $student_id = $row['user_id'];
                     $name = $row['first_name'] . " " . $row['last_name'];
@@ -125,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <select name="teachers[]" class="teachers" multiple>
                 <?php
                 $user_id = $_SESSION['user_id'];
-                $result = mysqli_query($db, "SELECT user_id, first_name, last_name FROM user WHERE user.role != 'student' AND user.user_id != $user_id;");
+                $result = mysqli_query($db, "SELECT user_id, first_name, last_name FROM user WHERE role != 'student' AND verified = true AND user.user_id != $user_id;");
                 while ($row = mysqli_fetch_assoc($result)) {
                     $teacher_id = $row['user_id'];
                     $name = $row['first_name'] . " " . $row['last_name'];

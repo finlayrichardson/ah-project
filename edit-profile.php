@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <body>
         <?php include("includes/nav.php");?>
         <h1>Edit Profile</h1>
-        <form method="POST" action="">
+        <form method="POST">
             <input type="text" name="first_name" required pattern="[a-zA-ZäöüßÄÖÜ ]+" placeholder="First Name" value="<?php echo $_SESSION['first_name'];?>"><br>
             <input type="text" name="last_name" required pattern="[a-zA-ZäöüßÄÖÜ ]+" placeholder="Last Name" value="<?php echo $_SESSION['last_name'];?>"><br>
             <input type="password" name="password1" placeholder="New Password" value="<?php if (isset($_POST['password1'])) echo $_POST['password1'];?>"><br>

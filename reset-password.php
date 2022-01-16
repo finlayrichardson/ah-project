@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <body>
     <h1>Reset Password</h1>
     <p>Please enter your new password below to change it.</p>
-    <form method="POST" action="">
+    <form method="POST">
         <input type="password" name="password1" required placeholder="Password" value="<?php if (isset($_POST['password1'])) echo $_POST['password1']; ?>"><br>
         <input type="password" name="password2" required placeholder="Confirm Password" value="<?php if (isset($_POST['password2'])) echo $_POST['password2']; ?>"><br>
         <input type="submit" value="Reset Password">
