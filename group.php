@@ -69,15 +69,17 @@ if (mysqli_fetch_array($owner_result)[0] == $user_id || $_SESSION['role'] == "ad
 <!DOCTYPE html>
 <html>
     <head>
-        <title></title>
-        <link rel="stylesheet" href="styles.css">
-    </head>
-    <body>
-        <?php include("includes/nav.php");
+        <?php
         // Get group details
         $group = mysqli_fetch_assoc($group_result);
         $group_id = $group['group_id'];
         $name = $group['name'];
+        echo "<title>$name</title>";
+        ?>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <?php include("includes/nav.php");
         echo "
              <div class='title'>
                  <h1>$name</h1>
