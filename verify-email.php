@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     $mail->addAddress($email, $first_name . '' . $last_name);
     $mail->Subject = "Verify Email";
-    $mail->Body = "<html>
+    $mail->Body = "<html lang='en'>
     <p>Please click the button below to verify your email.</p><br>
     <a href='http://$host/verify-email.php?token=$token' class='button'>Verify Email</a>
     </html>";
@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 }
 ?>
 <!DOCTYPE html>
-<html>
+<html lang='en'>
 
 <head>
     <title>Verify Email</title>

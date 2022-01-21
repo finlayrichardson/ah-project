@@ -18,7 +18,7 @@ CREATE TABLE task(
     owner_id INT NOT NULL,
     title VARCHAR(20) NOT NULL,
     description TEXT NOT NULL,
-    due DATE NOT NULL,
+    due_date DATE NOT NULL,
     created_at DATETIME NOT NULL,
     updated_at DATETIME NOT NULL,
     FOREIGN KEY (owner_id) REFERENCES user(user_id) ON DELETE CASCADE

@@ -45,13 +45,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             }
         }
     } else {
-        load('./forgot-password.php');
+        load('forgot-password.php');
     }
 }
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang='en'>
 
 <head>
     <title>Reset Password</title>

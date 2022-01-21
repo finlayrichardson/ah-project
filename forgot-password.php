@@ -32,8 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         mysqli_query($db, "INSERT INTO token VALUES ('$token', 'password', $user_id, '$expiry_time');");
 
         $mail->addAddress($email, $first_name . ' ' . $last_name);
-        $mail->Subject = "Reset Login Details";
-        $mail->Body = "<html>
+        $mail->Subject = "Reset Password";
+        $mail->Body = "<html lang='en'>
         <p>Please click the button below to reset your password.</p><br>
         <a href='http://$host/reset-password.php?token=$token' class='button'>Reset Password</a>
         </html>";
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang='en'>
 
 <head>
     <title>Forgot Password</title>

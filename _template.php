@@ -3,7 +3,7 @@ require('./auth.php');
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang='en'>
     <head>
         <title></title>
         <link rel="stylesheet" href="styles.css">

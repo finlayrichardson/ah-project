@@ -27,3 +27,7 @@ nav ul li {
 .teachers {
   width: 175px;
 }
+
+.details {
+  float: right;
+}

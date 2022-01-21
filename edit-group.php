@@ -9,7 +9,8 @@ if (empty($_REQUEST['id'])) {
 }
 // Check if group exists
 $group_result = query("SELECT * FROM `group` WHERE group_id = ?;", 'i', $group_id);
-if (mysqli_num_rows($group_result) == 0) load('./404.html');
+$group = mysqli_fetch_assoc($group_result);
+if (mysqli_num_rows($group_result) == 0) load('404.html');
 // Check if user is owner
 $owner_result = query("SELECT owner_id FROM `group` WHERE group_id = ?;", 'i', $group_id);
 $user_id = $_SESSION['user_id'];
@@ -31,14 +32,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $names = $_POST['students'];
         if (!empty($_POST['teachers'])) $names = array_merge($names, $_POST['teachers']);
     }
-    // Check all user_ids are valid
+    // Validate user_ids
     if (empty($errors)) {
         foreach($names as $user_id) {
             if (!intval($user_id)) {
                 $errors[] = "Invalid User ID: $user_id";
                 break;
             }
-            $result = query("SELECT user_id FROM user WHERE verified = true AND user_id = ?", 'i', intval($user_id));
+            $result = query("SELECT user_id FROM user WHERE verified = true AND user_id = ?;", 'i', intval($user_id));
             if (mysqli_num_rows($result) == 0) {
                 $errors[] = "User not found with ID: $user_id";
             }
@@ -66,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang='en'>
     <head>
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
@@ -82,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 });
                 <?php
                 // Populate students field
-                $result = query("SELECT user.user_id FROM group_member, user WHERE user.user_id = group_member.user_id AND user.role = 'student' AND group_id = ?", 'i', $group_id);
+                $result = query("SELECT user.user_id FROM group_member, user WHERE user.user_id = group_member.user_id AND user.role = 'student' AND group_member.group_id = ?;", 'i', $group_id);
                 $student_ids = array();
                 while ($row = mysqli_fetch_assoc($result)) {
                     $student_ids[] = strval($row['user_id']);
@@ -91,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 echo "$('.students').val([$student_ids]);";
                 echo "$('.students').trigger('change');";
                 // Populate teachers field
-                $result = query("SELECT user.user_id FROM group_member, user WHERE user.user_id = group_member.user_id AND user.role != 'student' AND group_id = ?", 'i', $group_id);
+                $result = query("SELECT user.user_id FROM group_member, user WHERE user.user_id = group_member.user_id AND user.role != 'student' AND group_member.group_id = ?;", 'i', $group_id);
                 $teacher_ids = array();
                 while ($row = mysqli_fetch_assoc($result)) {
                     $teacher_ids[] = strval($row['user_id']);
@@ -111,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <h1>Edit Group</h1>
         </div>
         <form method="POST">
-            <input type="text" name="name" required placeholder="Name" value="<?php echo mysqli_fetch_assoc($group_result)['name'];?>"><br>
+            <input type="text" name="name" required placeholder="Name" value="<?php $group['name'];?>"><br>
             <select name="students[]" class="students" multiple>
                 <?php
                 $result = mysqli_query($db, "SELECT user_id, first_name, last_name FROM user WHERE role = 'student' AND verified = true;");

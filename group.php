@@ -40,34 +40,34 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 }
 
 // Validate ID
-if (empty($_REQUEST['id'])) {
+if (empty($_GET['id'])) {
     echo "<p>No group specified</p>";
     exit();
 } else {
-    $group_id = intval(trim($_REQUEST['id']));
+    $group_id = intval(trim($_GET['id']));
 }
 // Check if group exists
 $group_result = query("SELECT * FROM `group` WHERE group_id = ?;", 'i', $group_id);
-if (mysqli_num_rows($group_result) == 0) load('./404.html');
+if (mysqli_num_rows($group_result) == 0) load('404.html');
 // Check if user is owner, member or neither
-$owner_result = query("SELECT owner_id FROM `group` WHERE group_id = ?;", 'i', $group_id);
-$user_id = $_SESSION['user_id'];
-$member_result = query("SELECT user.user_id FROM user, group_member WHERE user.user_id = group_member.user_id AND user.role = 'teacher' AND user.user_id = ?;", 'i', $user_id);
-if (mysqli_fetch_array($owner_result)[0] == $user_id || $_SESSION['role'] == "admin") {
-    // User is owner or admin
-    $owner = true;
-} elseif (mysqli_num_rows($member_result) != 0) {
-    // User is member
-    $owner = false;
-} else {
-    // User is neither
-    echo "<p>You are not part of this group</p>";
-    exit();
+$status = teacher_status($user_id, $group_id);
+switch ($status) {
+    case "owner":
+        // User is owner or admin
+        $owner = true;
+        break;
+    case "member":
+        // User is member
+        $owner = false;
+        break;
+    default:
+        // User is neither
+        load('groups.php');
 }
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang='en'>
     <head>
         <?php
         // Get group details
@@ -112,7 +112,8 @@ if (mysqli_fetch_array($owner_result)[0] == $user_id || $_SESSION['role'] == "ad
                      <input type='submit' onClick=\"javascript: return confirm('Are you sure you want to delete this group? This will also remove all tasks set to this group.');\" value='Delete'>
                  </form>
              ";
-        echo "</div>";
+        echo "</div>
+            </div>";
         ?>
     </body>
 </html>

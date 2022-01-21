@@ -4,7 +4,7 @@ if ($_SESSION['role'] == "student") load('index.php');
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang='en'>
     <head>
         <title>Groups</title>
         <link rel="stylesheet" href="styles.css">
@@ -17,8 +17,8 @@ if ($_SESSION['role'] == "student") load('index.php');
         </div>
         <?php
         $user_id = $_SESSION['user_id'];
-        $names = ($_SESSION['role'] == "admin") ? mysqli_query($db, "SELECT * FROM `group`;") : mysqli_query($db, "SELECT * FROM `group` WHERE owner_id = $user_id;");
-        while ($row = mysqli_fetch_assoc($names)) {
+        $result = ($_SESSION['role'] == "admin") ? mysqli_query($db, "SELECT * FROM `group`;") : mysqli_query($db, "SELECT * FROM `group` WHERE owner_id = $user_id OR group_id IN(SELECT group_member.group_id FROM user, group_member WHERE user.user_id = group_member.user_id AND group_member.user_id = $user_id);");
+        while ($row = mysqli_fetch_assoc($result)) {
             $name = $row['name'];
             $group_id = $row['group_id'];
             $student_nums = mysqli_query($db, "SELECT COUNT(*) FROM group_member, user WHERE group_member.user_id = user.user_id AND group_member.group_id = $group_id AND user.role = 'student';");

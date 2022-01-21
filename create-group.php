@@ -4,8 +4,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // Validate name
     if (empty($_POST['name'])) {
         $errors[] = "Please enter a name";
-    } elseif (!preg_match("/[a-zA-Z0-9äöüßÄÖÜ ]/", $_POST['name'])) {
-        $errors[] = "Name must contain only letters and numbers";
+    } elseif (!preg_match("/[-a-zA-Z0-9äöüßÄÖÜ ]/", $_POST['name'])) {
+        $errors[] = "Name must not contain special characters";
     } else {
         $name = mysqli_real_escape_string($db, trim($_POST['name']));
     }
@@ -16,14 +16,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $names = $_POST['students'];
         if (!empty($_POST['teachers'])) $names = array_merge($names, $_POST['teachers']);
     }
-    // Check all user_ids are valid
+    // Validate user_ids
     if (empty($errors)) {
         foreach($names as $user_id) {
             if (!intval($user_id)) {
-                $errors[] = "Invalid User ID";
+                $errors[] = "Invalid User ID: $user_id";
                 break;
             }
-            $result = query("SELECT user_id FROM user WHERE verified = true AND user_id = ?", 'i', intval($user_id));
+            $result = query("SELECT user_id FROM user WHERE verified = true AND user_id = ?;", 'i', intval($user_id));
             if (mysqli_num_rows($result) == 0) {
                 $errors[] = "User not found with ID: $user_id";
             }
@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang='en'>
     <head>
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
