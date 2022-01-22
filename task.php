@@ -103,7 +103,7 @@ if (mysqli_num_rows($result) == 0 && !$owner) {
              </div><br><br>";
 
         echo "<div class='buttons'>";
-        echo ($teacher) ? "<a href='/view-code.php?task_id=$task_id'>View submitted code</a>" : "<a href='/upload-code.php?task_id=$task_id'>Upload Code</a>"; // finish upload
+        echo ($teacher) ? "<a href='/view-code.php?task_id=$task_id'>View submitted code</a>" : "<a href='/upload-code.php?task_id=$task_id'>Upload Code</a>";
         if ($owner) echo "
                  <form method='POST' action=''>
                      <input type='hidden' name='action' value='delete'>
