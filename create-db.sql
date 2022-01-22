@@ -16,7 +16,7 @@ CREATE TABLE user(
 CREATE TABLE task(
     task_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     owner_id INT NOT NULL,
-    title VARCHAR(20) NOT NULL,
+    title VARCHAR(50) NOT NULL,
     description TEXT NOT NULL,
     due_date DATE NOT NULL,
     created_at DATETIME NOT NULL,

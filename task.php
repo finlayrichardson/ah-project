@@ -52,15 +52,12 @@ if (mysqli_num_rows($task_result) == 0) load('404.html');
 // Check user's permissions
 $user_id = $_SESSION['user_id'];
 // Check what role the user is
+$owner = false;
 if ($_SESSION['role'] == "student") {
     $teacher = false;
 } else {
     $teacher = true;
-    if ($task['owner_id'] == $user_id || $_SESSION['role'] == "admin") {
-        $owner = true;
-    } else {
-        $owner = false;
-    }
+    if ($task['owner_id'] == $user_id || $_SESSION['role'] == "admin") $owner = true;
 }
 $result = query("SELECT user.user_id FROM user, `group`, group_member, task_recipient WHERE user.user_id = group_member.user_id AND group_member.group_id = group.group_id AND group.group_id = task_recipient.group_id AND user.user_id = ? AND task_recipient.task_id = ?;", 'ii', $user_id, $task_id);
 if (mysqli_num_rows($result) == 0 && !$owner) {
@@ -76,7 +73,7 @@ if (mysqli_num_rows($result) == 0 && !$owner) {
         $task_id = $task['task_id'];
         $title = $task['title'];
         $description = $task['description'];
-        $due_date = $task['due'];
+        $due_date = $task['due_date'];
         $created_at = $task['created_at'];
         $updated_at = $task['updated_at'];
         echo "<title>$title</title>";

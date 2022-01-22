@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // Edit task or display errors
     if (empty($errors)) {
         $user_id = $_SESSION['user_id'];
-        query("UPDATE task SET title = ?, description = ?, due = ?, updated_at = NOW() WHERE task_id = ?;", 'sssi', $title, $description, $due_date, $task_id);
+        query("UPDATE task SET title = ?, description = ?, due_date = ?, updated_at = NOW() WHERE task_id = ?;", 'sssi', $title, $description, $due_date, $task_id);
         query("DELETE FROM task_recipient WHERE task_id = ?;", 'i', $task_id);
         foreach($groups as $group_id) {
             query("INSERT INTO task_recipient VALUES (?, ?);", 'ii', $task_id, intval($group_id));
@@ -132,7 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 }
                 ?>
             </select><br>
-            <input type="date" name="due_date" required placeholder="Due Date" value="<?php echo $task['due'];?>"><br>
+            <input type="date" name="due_date" required placeholder="Due Date" value="<?php echo $task['due_date'];?>"><br>
             <textarea name="description" placeholder="Description"><?php echo $task['description'];?></textarea><br>
         <input type="submit" value="Edit Task">
     </form>

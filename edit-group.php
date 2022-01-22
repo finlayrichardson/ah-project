@@ -112,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <h1>Edit Group</h1>
         </div>
         <form method="POST">
-            <input type="text" name="name" required placeholder="Name" value="<?php $group['name'];?>"><br>
+            <input type="text" name="name" required placeholder="Name" value="<?php echo $group['name'];?>"><br>
             <select name="students[]" class="students" multiple>
                 <?php
                 $result = mysqli_query($db, "SELECT user_id, first_name, last_name FROM user WHERE role = 'student' AND verified = true;");

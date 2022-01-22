@@ -66,7 +66,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $mail->AltBody = "Please visit http://$host/verify-email.php?token=$token to verify your email.";
     $mail->send();
 
-    echo "<p>Email sent to $email</p>";
+    echo "<p>Email sent to $email</p><br>
+          <a href='login.php'>Login</a>";
     exit();
 }
 ?>

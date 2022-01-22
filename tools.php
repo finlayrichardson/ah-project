@@ -24,3 +24,10 @@ function teacher_status($user_id, $group_id) {
     $result = query("SELECT user.user_id FROM user, group_member WHERE user.user_id = group_member.user_id AND group_member.user_id = ? and group_member.group_id = ?;", 'ii', $user_id, $group_id);
     if (mysqli_num_rows($result) == 1) return "member";
 }
+
+function count_submitted($task_id) {
+    $count = 0;
+    $files = glob("./code/$task_id/*");
+    if ($files) $count = count($files);
+    return $count;
+}

@@ -55,12 +55,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // Create task or display errors
     if (empty($errors)) {
         $user_id = $_SESSION['user_id'];
-        query("INSERT INTO task (owner_id, title, description, due, created_at, updated_at) VALUES (?, ?, ?, ?, NOW(), NOW());", 'isss', $user_id, $title, $description, $due_date);
-        $result = query("SELECT task_id FROM task WHERE title = ?;", 's', $title);
+        query("INSERT INTO task (owner_id, title, description, due_date, created_at, updated_at) VALUES (?, ?, ?, ?, NOW(), NOW());", 'isss', $user_id, $title, $description, $due_date);
+        $result = query("SELECT task_id FROM task WHERE title = ? ORDER BY created_at DESC;", 's', $title);
         $task_id = mysqli_fetch_row($result)[0];
         foreach($groups as $group_id) {
             query("INSERT INTO task_recipient VALUES (?, ?);", 'ii', $task_id, intval($group_id));
         }
+        mkdir("./code/$task_id");
         load("task.php?id=$task_id");
     } else {
         // Display errors
