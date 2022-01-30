@@ -7,6 +7,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $errors[] = "Please enter a title";
     } elseif (!preg_match("/[-a-zA-Z0-9äöüßÄÖÜ ]/", $_POST['title'])) {
         $errors[] = "Title must not contain special characters";
+    } elseif (strlen(trim($_POST['title'])) > 100) {
+        $errors[] = "Title must be max 100 characters";
     } else {
         $title = mysqli_real_escape_string($db, trim($_POST['title']));
     }
@@ -101,6 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             });
         </script>
         <title>Create Task</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
@@ -109,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <h1>Create Task</h1>
         </div>
         <form method="POST">
-            <input type="text" name="title" required autofocus placeholder="Title" value="<?php if (isset($_POST['title'])) echo $_POST['title'];?>"><br>
+            <input type="text" name="title" required autofocus pattern="[-a-zA-ZäöüßÄÖÜ ]+" maxlength="100" placeholder="Title" value="<?php if (isset($_POST['title'])) echo $_POST['title'];?>"><br>
             <select name="groups[]" class="groups" multiple>
                 <?php
                 $result = mysqli_query($db, "SELECT group_id, name FROM `group` WHERE owner_id = $user_id OR group_id IN(SELECT group_member.group_id FROM user, group_member WHERE user.user_id = group_member.user_id AND group_member.user_id = $user_id);");

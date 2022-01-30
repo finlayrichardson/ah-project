@@ -71,13 +71,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang='en'>
-
 <head>
     <title>Verify Email</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
     <?php
     echo "<h1>Verify your email</h1>";
@@ -87,5 +88,4 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <input type="submit" value="Send Verification Link">
     </form>
 </body>
-
 </html>

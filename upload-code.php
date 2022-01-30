@@ -7,6 +7,7 @@ if ($_SESSION['role'] != "student") load('index.php');
 <html lang='en'>
     <head>
         <title>Upload Code</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="styles.css">
         <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
         <script>

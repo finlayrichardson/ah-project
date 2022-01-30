@@ -8,6 +8,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $errors[] = "Please enter a first name";
     } elseif (!preg_match("/[a-zA-ZäöüßÄÖÜ ]/", $_POST['first_name'])) {
         $errors[] = "First name must contain only letters";
+    } elseif (strlen(trim($_POST['first_name'])) > 20) {
+        $errors[] = "First name must be max 20 characters";
     } else {
         $first_name = mysqli_real_escape_string($db, trim($_POST['first_name']));
     }
@@ -16,6 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $errors[] = "Please enter a last name";
     } elseif (!preg_match('/[a-zA-ZäöüßÄÖÜ ]/', $_POST['last_name'])) {
         $errors[] = "Last name must contain only letters";
+    } elseif (strlen(trim($_POST['last_name'])) > 20) {
+        $errors[] = "Last name must be max 20 characters";
     } else {
         $last_name = mysqli_real_escape_string($db, trim($_POST['last_name']));
     }
@@ -59,15 +63,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <!DOCTYPE html>
 <html lang='en'>
     <head>
-        <title></title>
+        <title>Edit Profile</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
         <?php include("includes/nav.php");?>
         <h1>Edit Profile</h1>
         <form method="POST">
-            <input type="text" name="first_name" required pattern="[a-zA-ZäöüßÄÖÜ ]+" placeholder="First Name" value="<?php echo $_SESSION['first_name'];?>"><br>
-            <input type="text" name="last_name" required pattern="[a-zA-ZäöüßÄÖÜ ]+" placeholder="Last Name" value="<?php echo $_SESSION['last_name'];?>"><br>
+            <input type="text" name="first_name" required pattern="[a-zA-ZäöüßÄÖÜ ]+" maxlength="20" placeholder="First Name" value="<?php echo $_SESSION['first_name'];?>"><br>
+            <input type="text" name="last_name" required pattern="[a-zA-ZäöüßÄÖÜ ]+" maxlength="20" placeholder="Last Name" value="<?php echo $_SESSION['last_name'];?>"><br>
             <input type="password" name="password1" placeholder="New Password" value="<?php if (isset($_POST['password1'])) echo $_POST['password1'];?>"><br>
             <input type="password" name="password2" placeholder="Confirm New Password" value="<?php if (isset($_POST['password2'])) echo $_POST['password2'];?>"><br>
             <input type="submit" value="Save Changes">

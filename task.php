@@ -78,6 +78,7 @@ if (mysqli_num_rows($result) == 0 && !$owner) {
         $updated_at = $task['updated_at'];
         echo "<title>$title</title>";
         ?>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
@@ -97,8 +98,9 @@ if (mysqli_num_rows($result) == 0 && !$owner) {
         echo "
              <div class='details'>
                  Due: $due_date<br>
-                 Created at: $created_at<br>
-                 Last edited at: $updated_at
+                 Created at: $created_at<br>";
+        if ($created_at != $updated_at) echo "Last edited at: $updated_at";
+        echo "         
              </div>
              </div><br><br>";
 

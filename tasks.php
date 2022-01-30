@@ -12,6 +12,7 @@ if (!isset($_GET['page'])) {
 <html lang='en'>
     <head>
         <title>Tasks</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>

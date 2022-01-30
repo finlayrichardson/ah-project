@@ -52,11 +52,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 <!DOCTYPE html>
 <html lang='en'>
-
 <head>
     <title>Reset Password</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
     <h1>Reset Password</h1>
     <p>Please enter your new password below to change it.</p>
@@ -66,5 +66,4 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <input type="submit" value="Reset Password">
     </form>
 </body>
-
 </html>

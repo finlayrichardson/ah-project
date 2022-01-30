@@ -6,6 +6,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $errors[] = "Please enter a name";
     } elseif (!preg_match("/[-a-zA-Z0-9äöüßÄÖÜ ]/", $_POST['name'])) {
         $errors[] = "Name must not contain special characters";
+    } elseif (strlen(trim($_POST['name'])) > 50) {
+        $errors[] = "Name must be max 50 characters";
     } else {
         $name = mysqli_real_escape_string($db, trim($_POST['name']));
     }
@@ -81,6 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             });
         </script>
         <title>Create Group</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
@@ -89,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <h1>Create Group</h1>
         </div>
         <form method="POST">
-            <input type="text" name="name" required autofocus placeholder="Name" value="<?php if (isset($_POST['name'])) echo $_POST['name'];?>"><br>
+            <input type="text" name="name" required autofocus pattern="[-a-zA-ZäöüßÄÖÜ ]+" maxlength="50" placeholder="Name" value="<?php if (isset($_POST['name'])) echo $_POST['name'];?>"><br>
             <select name="students[]" class="students" multiple>
                 <?php
                 $result = mysqli_query($db, "SELECT user_id, first_name, last_name FROM user WHERE role = 'student' AND verified = true;");

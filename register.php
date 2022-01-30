@@ -8,6 +8,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $errors[] = "Please enter a first name";
     } elseif (!preg_match("/[a-zA-ZäöüßÄÖÜ ]/", $_POST['first_name'])) {
         $errors[] = "First name must contain only letters";
+    } elseif (strlen(trim($_POST['first_name'])) > 20) {
+        $errors[] = "First name must be max 20 characters";
     } else {
         $first_name = mysqli_real_escape_string($db, trim($_POST['first_name']));
     }
@@ -16,6 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $errors[] = "Please enter a last name";
     } elseif (!preg_match('/[a-zA-ZäöüßÄÖÜ ]/', $_POST['last_name'])) {
         $errors[] = "Last name must contain only letters";
+    } elseif (strlen(trim($_POST['last_name'])) > 20) {
+        $errors[] = "Last name must be max 20 characters";
     } else {
         $last_name = mysqli_real_escape_string($db, trim($_POST['last_name']));
     }
@@ -24,6 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $errors[] = "Please enter an email";
     } elseif (!preg_match('/^.+?@esms\.org\.uk *?$/', $_POST['email'])) {
         $errors[] = "Please use your school email";
+    } elseif (strlen(trim($_POST['email'])) > 30) {
+        $errors[] = "Email must be max 30 characters";
     } else {
         $email = mysqli_real_escape_string($db, trim($_POST['email']));
     }
@@ -50,6 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         query("INSERT INTO user (email, password, first_name, last_name, role) VALUES (?, ?, ?, ?, 'student');", 'ssss', $email, $password, $first_name, $last_name);
 
         // Setup session and go to verify-email.php
+        session_name("id");
         session_start();
         $result = query("SELECT user_id FROM user WHERE email = ?;", 's', $email);
         $user_id = mysqli_fetch_row($result)[0];
@@ -73,22 +80,21 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 <!DOCTYPE html>
 <html lang='en'>
-
 <head>
     <title>Register</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
     <h1>Register</h1>
     <form method="POST">
-        <input type="text" name="first_name" required autofocus pattern="[a-zA-ZäöüßÄÖÜ ]+" placeholder="First Name" value="<?php if (isset($_POST['first_name'])) echo $_POST['first_name'];?>"><br>
-        <input type="text" name="last_name" required pattern="[a-zA-ZäöüßÄÖÜ ]+" placeholder="Last Name" value="<?php if (isset($_POST['last_name'])) echo $_POST['last_name'];?>"><br>
-        <input type="text" name="email" required pattern="^.+?@esms\.org\.uk *?$" placeholder="Email" value="<?php if (isset($_POST['email'])) echo $_POST['email'];?>"><br>
+        <input type="text" name="first_name" required autofocus pattern="[a-zA-ZäöüßÄÖÜ ]+" maxlength="20" placeholder="First Name" value="<?php if (isset($_POST['first_name'])) echo $_POST['first_name'];?>"><br>
+        <input type="text" name="last_name" required pattern="[a-zA-ZäöüßÄÖÜ ]+" maxlength="20" placeholder="Last Name" value="<?php if (isset($_POST['last_name'])) echo $_POST['last_name'];?>"><br>
+        <input type="text" name="email" required pattern="^.+?@esms\.org\.uk *?$" maxlength="30" placeholder="Email" value="<?php if (isset($_POST['email'])) echo $_POST['email'];?>"><br>
         <input type="password" name="password1" required placeholder="Password" value="<?php if (isset($_POST['password1'])) echo $_POST['password1'];?>"><br>
         <input type="password" name="password2" required placeholder="Confirm Password" value="<?php if (isset($_POST['password2'])) echo $_POST['password2'];?>"><br>
         <input type="submit" value="Register">
     </form>
     <a href="login.php" class="button">Login</a>
 </body>
-
 </html>

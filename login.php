@@ -1,4 +1,5 @@
 <?php
+session_name("id");
 session_start();
 if (isset($_SESSION['user_id'])) {
     // Logout user
@@ -66,13 +67,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang='en'>
-
 <head>
     <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
     <h1>Login</h1>
     <form method="POST">
@@ -83,5 +85,4 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     </form>
     <a href="register.php" class="button">Register</a>
 </body>
-
 </html>

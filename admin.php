@@ -62,6 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <html lang='en'>
     <head>
         <title>Admin</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>

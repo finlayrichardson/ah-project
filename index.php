@@ -6,6 +6,7 @@ require('./auth.php');
 <html lang='en'>
     <head>
         <title>Codecanopy</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
