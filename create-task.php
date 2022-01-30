@@ -1,6 +1,6 @@
 <?php
 require('./auth.php');
-if ($_SESSION['role'] == "student") load('index.php');
+if ($_SESSION['role'] == "student") load('index');
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // Validate title
     if (empty($_POST['title'])) {
@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             query("INSERT INTO task_recipient VALUES (?, ?);", 'ii', $task_id, intval($group_id));
         }
         mkdir("./code/$task_id");
-        load("task.php?id=$task_id");
+        load("task/$task_id");
     } else {
         // Display errors
         echo "<h1>Error!</h1>
@@ -104,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         </script>
         <title>Create Task</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="/resources/style.css">
     </head>
     <body>
         <?php include("includes/nav.php");?>

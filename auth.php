@@ -7,7 +7,7 @@ session_start();
 if (empty($_SESSION['user_id'])) {
     // User isn't logged in
     if ($_SERVER['SCRIPT_NAME'] != '/forgot-password.php' && $_SERVER['SCRIPT_NAME'] != '/register.php' && $_SERVER['SCRIPT_NAME'] != '/reset-password.php' && $_SERVER['SCRIPT_NAME'] != '/verify-email.php') {
-        load('login.php?return=' . basename($_SERVER['REQUEST_URI']));
+        load('login?return=' . basename($_SERVER['REQUEST_URI']));
     }
 } else {
     // User is logged in
@@ -16,9 +16,9 @@ if (empty($_SESSION['user_id'])) {
     $verified = mysqli_fetch_row($result)[0];
     if (!$verified && $_SERVER['SCRIPT_NAME'] != '/verify-email.php') {
         // User is not verified
-        load('verify-email.php');
+        load('verify-email');
     }
     if ($_SERVER['SCRIPT_NAME'] == '/register.php' || $_SERVER['SCRIPT_NAME'] == '/forgot-password.php') {
-        load('index.php');
+        load('index');
     }
 }

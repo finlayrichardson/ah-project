@@ -1,6 +1,6 @@
 <?php
 require('./auth.php');
-if ($_SESSION['role'] != "admin") load('index.php');
+if ($_SESSION['role'] != "admin") load('index');
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // Validate action
     if (empty($_POST['action'])) {
@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <head>
         <title>Admin</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="/resources/style.css">
     </head>
     <body>
         <?php include("includes/nav.php");?>

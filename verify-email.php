@@ -12,7 +12,7 @@ if (isset($_SESSION['user_id'])) {
     $verified = mysqli_fetch_row($result)[0];
     if ($verified) {
         // User is already verified
-        load('index.php');
+        load('index');
     }
 } 
 
@@ -36,9 +36,9 @@ if (isset($_GET['token'])) {
         if (isset($_SESSION['user_id']) && $user_id == $_SESSION['user_id']) {
             // Is a brand new user
             $_SESSION['role'] = "student";
-            echo "<a href='index.php'>Home</a>";
+            echo "<a href='index'>Home</a>";
         } else {
-            echo "<a href='login.php'>Login</a>";
+            echo "<a href='login'>Login</a>";
         }
         exit();
     }
@@ -61,13 +61,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $mail->Subject = "Verify Email";
     $mail->Body = "<html lang='en'>
     <p>Please click the button below to verify your email.</p><br>
-    <a href='http://$host/verify-email.php?token=$token' class='button'>Verify Email</a>
+    <a href='http://$host/verify-email/$token' class='button'>Verify Email</a>
     </html>";
-    $mail->AltBody = "Please visit http://$host/verify-email.php?token=$token to verify your email.";
+    $mail->AltBody = "Please visit http://$host/verify-email/$token to verify your email.";
     $mail->send();
 
     echo "<p>Email sent to $email</p><br>
-          <a href='login.php'>Login</a>";
+          <a href='login'>Login</a>";
     exit();
 }
 ?>
@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <head>
     <title>Verify Email</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/resources/style.css">
 </head>
 <body>
     <?php

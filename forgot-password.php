@@ -35,9 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $mail->Subject = "Reset Password";
         $mail->Body = "<html lang='en'>
         <p>Please click the button below to reset your password.</p><br>
-        <a href='http://$host/reset-password.php?token=$token' class='button'>Reset Password</a>
+        <a href='http://$host/reset-password/$token' class='button'>Reset Password</a>
         </html>";
-        $mail->AltBody = "Please visit http://$host/reset-password.php?token=$token to reset your password.";
+        $mail->AltBody = "Please visit http://$host/reset-password/$token to reset your password.";
         $mail->send();
 
         echo "<p>Email sent to $email</p>";
@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <head>
     <title>Forgot Password</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/resources/style.css">
 </head>
 <body>
     <h1>Forgot Password</h1>

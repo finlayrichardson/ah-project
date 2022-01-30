@@ -1,6 +1,6 @@
 <?php
 require('./auth.php');
-if ($_SESSION['role'] != "student") load('index.php');
+if ($_SESSION['role'] != "student") load('index');
 ?>
 
 <!DOCTYPE html>
@@ -8,7 +8,7 @@ if ($_SESSION['role'] != "student") load('index.php');
     <head>
         <title>Upload Code</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="/resources/style.css">
         <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
         <script>
             function upload(input) {
@@ -58,7 +58,7 @@ if ($_SESSION['role'] != "student") load('index.php');
             </div>
         </div>
         <div class="file-upload-content">
-            <img class="file-upload-image" src="./python.png"/>
+            <img class="file-upload-image" src="/resources/python.png"/>
             <div class="file-title-wrap">
             <button type="button" onclick="removeUpload()" class="remove-file">Remove <span class="file-title">Uploaded File</span></button>
             </div>

@@ -13,14 +13,14 @@ if (!isset($_GET['page'])) {
     <head>
         <title>Tasks</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="/resources/style.css">
     </head>
     <body>
         <?php include("includes/nav.php");?>
         <div class="title">
             <h1>Tasks</h1>
             <?php
-            if ($_SESSION['role'] != "student") echo "<a href='/create-task.php'>Create Task</a>";
+            if ($_SESSION['role'] != "student") echo "<a href='/create-task'>Create Task</a>";
             ?>
         </div>
         <?php
@@ -49,7 +49,7 @@ if (!isset($_GET['page'])) {
                 $teacher = mysqli_fetch_assoc($teacher_result)['last_name'];
             }
 
-            echo "<div class='task' onclick=\"location.href='/task.php?id=$task_id';\" style='cursor: pointer;'>
+            echo "<div class='task' onclick=\"location.href='/task/$task_id';\" style='cursor: pointer;'>
                     <p>$title</p><br>
                     <p>$groups</p><br>";
             if ($_SESSION['role'] == "student") echo "<p>$teacher</p><br>";
@@ -63,7 +63,7 @@ if (!isset($_GET['page'])) {
             echo "</div><br>";
         }
         for ($page = 1; $page <= $num_pages; $page++) {
-            echo "<a href='tasks.php?page=$page'>$page</a>";
+            echo "<a href='tasks?page=$page'>$page</a>";
           }
         ?>
     </body>

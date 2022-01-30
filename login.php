@@ -54,8 +54,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         if (isset($_GET['return'])) {
             load($_GET['return']);
         }
-        // Send user to index.php
-        load('index.php');
+        // Send user to index
+        load('index');
     } else {
         // Display errors
         echo "<h1>Error!</h1>
@@ -73,16 +73,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <head>
     <title>Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/resources/style.css">
 </head>
 <body>
     <h1>Login</h1>
     <form method="POST">
         <input type="text" name="email" required autofocus placeholder="Email" value="<?php if (isset($_POST['email'])) echo $_POST['email'];?>"><br>
         <input type="password" name="password" required placeholder="Password" value="<?php if (isset($_POST['password'])) echo $_POST['password'];?>"><br>
-        <a href="forgot-password.php<?php if (isset($_POST['email'])) echo '?email=' . $_POST['email'];?>">Forgotten your password?</a><br>
+        <a href="forgot-password<?php if (isset($_POST['email'])) echo '?email=' . $_POST['email'];?>">Forgotten your password?</a><br>
         <input type="submit" value="Login">
     </form>
-    <a href="register.php" class="button">Register</a>
+    <a href="register" class="button">Register</a>
 </body>
 </html>

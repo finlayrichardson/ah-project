@@ -14,7 +14,7 @@ if (mysqli_num_rows($group_result) == 0) load('404.html');
 // Check if user is owner
 $owner_result = query("SELECT owner_id FROM `group` WHERE group_id = ?;", 'i', $group_id);
 $user_id = $_SESSION['user_id'];
-if (mysqli_fetch_array($owner_result)[0] != $user_id && $_SESSION['role'] != "admin") load('groups.php');
+if (mysqli_fetch_array($owner_result)[0] != $user_id && $_SESSION['role'] != "admin") load('groups');
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // Validate name
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         foreach($names as $user_id) {
             query("INSERT INTO group_member VALUES (?, ?);", 'ii', intval($user_id), $group_id);
         }
-        load("group.php?id=$group_id");
+        load("group/$group_id");
     } else {
         // Display errors
         echo "<h1>Error!</h1>
@@ -107,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         </script>
         <title>Edit Group</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="/resources/style.css">
     </head>
     <body>
         <?php include("includes/nav.php");?>

@@ -1,6 +1,6 @@
 <?php
 require('./auth.php');
-if ($_SESSION['role'] == "student") load('index.php');
+if ($_SESSION['role'] == "student") load('index');
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // Validate action
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
     // Delete group
     query("DELETE FROM `group` WHERE group_id = ?;", 'i', $group_id);
-    load('groups.php');
+    load('groups');
 }
 
 // Validate ID
@@ -62,7 +62,7 @@ switch ($status) {
         break;
     default:
         // User is neither
-        load('groups.php');
+        load('groups');
 }
 ?>
 
@@ -77,7 +77,7 @@ switch ($status) {
         echo "<title>$name</title>";
         ?>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="/resources/style.css">
     </head>
     <body>
         <?php include("includes/nav.php");
@@ -85,7 +85,7 @@ switch ($status) {
              <div class='title'>
                  <h1>$name</h1>
              ";
-        if ($owner) echo "<a href='/edit-group.php?id=$group_id'>Edit Group</a>";
+        if ($owner) echo "<a href='/edit-group/$group_id'>Edit Group</a>";
         echo "</div>";
         echo "
              <div class='group'>
@@ -104,7 +104,7 @@ switch ($status) {
         }
         echo "
              <div class='buttons'>
-                 <a href='/create-task.php?group_id=$group_id'>Set Task</a>
+                 <a href='/create-task?group_id=$group_id'>Set Task</a>
              ";
         if ($owner) echo "
                  <form method='POST' action=''>

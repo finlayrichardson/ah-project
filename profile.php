@@ -11,13 +11,13 @@ $email = $_SESSION['email'];
     <head>
         <title>Profile</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="/resources/style.css">
     </head>
     <body>
         <?php include("includes/nav.php");?>
         <div class="title">
             <h1>Profile</h1>
-            <a href="/edit-profile.php">Edit Profile</a>
+            <a href="/edit-profile">Edit Profile</a>
         </div>
         <div>
         <?php

@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $_SESSION['first_name'] = $first_name;
         $_SESSION['last_name'] = $last_name;
 
-        load('profile.php');
+        load('profile');
     } else {
         // Display errors
         echo "<h1>Error!</h1>
@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <head>
         <title>Edit Profile</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="/resources/style.css">
     </head>
     <body>
         <?php include("includes/nav.php");?>

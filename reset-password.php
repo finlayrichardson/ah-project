@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 // Change password
                 mysqli_query($db, "UPDATE user SET password = '$password' WHERE user_id = $user_id;");
                 echo "<p>Password successfully changed!</p><br>";
-                echo "<a href='login.php'>Login</a>";
+                echo "<a href='login'>Login</a>";
                 exit();
             } else {
                 // Display errors
@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             }
         }
     } else {
-        load('forgot-password.php');
+        load('forgot-password');
     }
 }
 ?>
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <head>
     <title>Reset Password</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/resources/style.css">
 </head>
 <body>
     <h1>Reset Password</h1>

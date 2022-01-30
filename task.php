@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
     // Delete group
     query("DELETE FROM task WHERE task_id = ?;", 'i', $task_id);
-    load('tasks.php');
+    load('tasks');
 }
 
 // Validate ID
@@ -61,7 +61,7 @@ if ($_SESSION['role'] == "student") {
 }
 $result = query("SELECT user.user_id FROM user, `group`, group_member, task_recipient WHERE user.user_id = group_member.user_id AND group_member.group_id = group.group_id AND group.group_id = task_recipient.group_id AND user.user_id = ? AND task_recipient.task_id = ?;", 'ii', $user_id, $task_id);
 if (mysqli_num_rows($result) == 0 && !$owner) {
-    load('tasks.php');
+    load('tasks');
 }
 ?>
 
@@ -79,7 +79,7 @@ if (mysqli_num_rows($result) == 0 && !$owner) {
         echo "<title>$title</title>";
         ?>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="/resources/style.css">
     </head>
     <body>
         <?php include("includes/nav.php");
@@ -87,7 +87,7 @@ if (mysqli_num_rows($result) == 0 && !$owner) {
              <div class='title'>
                  <h1>$title</h1>
              ";
-        if ($owner) echo "<a href='/edit-task.php?id=$task_id'>Edit Task</a>";
+        if ($owner) echo "<a href='/edit-task/$task_id'>Edit Task</a>";
         echo "</div>";
         echo "
              <div class='task'>
@@ -105,7 +105,7 @@ if (mysqli_num_rows($result) == 0 && !$owner) {
              </div><br><br>";
 
         echo "<div class='buttons'>";
-        echo ($teacher) ? "<a href='/view-code.php?task_id=$task_id'>View submitted code</a>" : "<a href='/upload-code.php?task_id=$task_id'>Upload Code</a>";
+        echo ($teacher) ? "<a href='/view-code/$task_id'>View submitted code</a>" : "<a href='/upload-code/$task_id'>Upload Code</a>";
         if ($owner) echo "
                  <form method='POST' action=''>
                      <input type='hidden' name='action' value='delete'>

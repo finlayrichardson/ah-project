@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         foreach($names as $user_id) {
             query("INSERT INTO group_member VALUES (?, ?);", 'ii', intval($user_id), $group_id);
         }
-        load("group.php?id=$group_id");
+        load("group/$group_id");
     } else {
         // Display errors
         echo "<h1>Error!</h1>
@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         </script>
         <title>Create Group</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="/resources/style.css">
     </head>
     <body>
         <?php include("includes/nav.php");?>

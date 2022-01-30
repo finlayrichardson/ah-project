@@ -14,7 +14,7 @@ if (mysqli_num_rows($task_result) == 0) load('404.html');
 // Check if user is owner
 $owner_result = query("SELECT owner_id FROM task WHERE task_id = ?;", 'i', $task_id);
 $user_id = $_SESSION['user_id'];
-if (mysqli_fetch_array($owner_result)[0] != $user_id && $_SESSION['role'] != "admin") load('groups.php');
+if (mysqli_fetch_array($owner_result)[0] != $user_id && $_SESSION['role'] != "admin") load('groups');
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // Validate title
@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         foreach($groups as $group_id) {
             query("INSERT INTO task_recipient VALUES (?, ?);", 'ii', $task_id, intval($group_id));
         }
-        load("task.php?id=$task_id");;
+        load("task/$task_id");;
     } else {
         // Display errors
         echo "<h1>Error!</h1>
@@ -116,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         </script>
         <title>Edit Task</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="/resources/style.css">
     </head>
     <body>
         <?php include("includes/nav.php");?>

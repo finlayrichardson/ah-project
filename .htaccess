@@ -1,6 +1,46 @@
 RewriteEngine On
 RewriteBase /
 
+# Rewrite verify email token
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^verify-email/([^/]+)$ verify-email.php?token=$1
+
+# Rewrite reset password token
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^reset-password/([^/]+)$ reset-password.php?token=$1
+
+# Rewrite group id
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^group/([^/]+)$ group.php?id=$1
+
+# Rewrite edit-group id
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^edit-group/([^/]+)$ edit-group.php?id=$1
+
+# Rewrite task id
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^task/([^/]+)$ task.php?id=$1
+
+# Rewrite edit-task id
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^edit-task/([^/]+)$ edit-task.php?id=$1
+
+# Rewrite upload-code id
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^upload-code/([^/]+)$ upload-code.php?id=$1
+
+# Rewrite view-code ids (fix this)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^view-code/([^/]+)/([^/]+)$ view-code.php?task_id=$1&user_id=$2
+
 # Remove .php file extension
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([^\.]+)$ $1.php [NC,L]

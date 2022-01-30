@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         // Insert user into database
         query("INSERT INTO user (email, password, first_name, last_name, role) VALUES (?, ?, ?, ?, 'student');", 'ssss', $email, $password, $first_name, $last_name);
 
-        // Setup session and go to verify-email.php
+        // Setup session and go to verify-email
         session_name("id");
         session_start();
         $result = query("SELECT user_id FROM user WHERE email = ?;", 's', $email);
@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $_SESSION['first_name'] = $first_name;
         $_SESSION['last_name'] = $last_name;
 
-        load('verify-email.php');
+        load('verify-email');
     } else {
         // Display errors
         echo "<h1>Error!</h1>
@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <head>
     <title>Register</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/resources/style.css">
 </head>
 <body>
     <h1>Register</h1>
@@ -95,6 +95,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <input type="password" name="password2" required placeholder="Confirm Password" value="<?php if (isset($_POST['password2'])) echo $_POST['password2'];?>"><br>
         <input type="submit" value="Register">
     </form>
-    <a href="login.php" class="button">Login</a>
+    <a href="login" class="button">Login</a>
 </body>
 </html>
