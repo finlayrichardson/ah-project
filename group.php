@@ -91,13 +91,13 @@ switch ($status) {
              <div class='group'>
                  <h2>Pupils: </h2>
              ";
-        $result = query("SELECT first_name, last_name FROM user, group_member WHERE user.user_id = group_member.user_id AND user.role = 'student' AND group_member.group_id = ?;", 'i', $group_id);
+        $result = query("SELECT first_name, last_name FROM user, group_member WHERE user.user_id = group_member.user_id AND role = 'student' AND group_member.group_id = ?;", 'i', $group_id);
         while ($row = mysqli_fetch_assoc($result)) {
             $name = $row['first_name'] . " " . $row['last_name'];
             echo "<p>$name</p><br>";
         }
         echo "<h2>Other teacher(s): </h2>";
-        $result = query("SELECT first_name, last_name FROM user, group_member WHERE user.user_id = group_member.user_id AND user.role = 'teacher' AND user.user_id != ? AND group_member.group_id = ?;", 'ii', $user_id, $group_id);
+        $result = query("SELECT first_name, last_name FROM user, group_member WHERE user.user_id = group_member.user_id AND role = 'teacher' AND user.user_id != ? AND group_member.group_id = ?;", 'ii', $user_id, $group_id);
         while ($row = mysqli_fetch_assoc($result)) {
             $name = $row['first_name'] . " " . $row['last_name'];
             echo "<p>$name</p><br>";

@@ -85,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 });
                 <?php
                 // Populate students field
-                $result = query("SELECT user.user_id FROM group_member, user WHERE user.user_id = group_member.user_id AND user.role = 'student' AND group_member.group_id = ?;", 'i', $group_id);
+                $result = query("SELECT user.user_id FROM group_member, user WHERE user.user_id = group_member.user_id AND role = 'student' AND group_member.group_id = ?;", 'i', $group_id);
                 $student_ids = array();
                 while ($row = mysqli_fetch_assoc($result)) {
                     $student_ids[] = strval($row['user_id']);
@@ -94,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 echo "$('.students').val([$student_ids]);";
                 echo "$('.students').trigger('change');";
                 // Populate teachers field
-                $result = query("SELECT user.user_id FROM group_member, user WHERE user.user_id = group_member.user_id AND user.role != 'student' AND group_member.group_id = ?;", 'i', $group_id);
+                $result = query("SELECT user.user_id FROM group_member, user WHERE user.user_id = group_member.user_id AND role != 'student' AND group_member.group_id = ?;", 'i', $group_id);
                 $teacher_ids = array();
                 while ($row = mysqli_fetch_assoc($result)) {
                     $teacher_ids[] = strval($row['user_id']);

@@ -3,7 +3,7 @@ require('./auth.php');
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (isset($_REQUEST['token'])) {
-        $token = $_REQUEST['token'];
+        $token = trim($_REQUEST['token']);
         $result = mysqli_fetch_assoc(query("SELECT * FROM token WHERE token = ?;", 's', $token));
         $type = $result['type'];
         $user_id = $result['user_id'];

@@ -56,7 +56,7 @@ if (!isset($_GET['page'])) {
             echo "<p>Due date: $due_date</p><br>";
             if ($_SESSION['role'] != "student") {
                 $count = count_submitted($task_id);
-                $num_result = mysqli_query($db, "SELECT COUNT(user.user_id) FROM user, `group`, group_member, task_recipient WHERE task_recipient.group_id = group.group_id AND group_member.user_id = user.user_id AND group_member.group_id = group.group_id AND task_id = $task_id AND user.role = 'student' GROUP BY user.user_id;"); // maybe fix this awful query
+                $num_result = mysqli_query($db, "SELECT COUNT(user.user_id) FROM user, `group`, group_member, task_recipient WHERE task_recipient.group_id = group.group_id AND group_member.user_id = user.user_id AND group_member.group_id = group.group_id AND task_id = $task_id AND role = 'student' GROUP BY user.user_id;"); // maybe fix this awful query
                 $num = mysqli_fetch_array($num_result)[0];
                 echo "<p>$count/$num Submitted</p>";
             }
