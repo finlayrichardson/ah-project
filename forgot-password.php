@@ -56,17 +56,17 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 <!DOCTYPE html>
 <html lang='en'>
-<head>
-    <title>Forgot Password</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/resources/style.css">
-</head>
-<body>
-    <h1>Forgot Password</h1>
-    <p>Please enter your email below and a link will be sent to change your password.</p>
-    <form method="POST">
-        <input type="text" name="email" required autofocus placeholder="Email" value="<?php if (isset($_GET['email'])) echo $_GET['email']; ?>"><br>
-        <input type="submit" value="Send Reset Link">
-    </form>
-</body>
+    <head>
+        <title>Forgot Password</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/resources/style.css">
+    </head>
+    <body>
+        <h1>Forgot Password</h1>
+        <p>Please enter your email below and a link will be sent to change your password.</p>
+        <form method="POST">
+            <input type="text" name="email" required autofocus placeholder="Email" value="<?php if (isset($_GET['email'])) echo $_GET['email']; ?>"><br>
+            <input type="submit" value="Send Reset Link">
+        </form>
+    </body>
 </html>

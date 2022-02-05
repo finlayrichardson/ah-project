@@ -70,19 +70,19 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 <!DOCTYPE html>
 <html lang='en'>
-<head>
-    <title>Login</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/resources/style.css">
-</head>
-<body>
-    <h1>Login</h1>
-    <form method="POST">
-        <input type="text" name="email" required autofocus placeholder="Email" value="<?php if (isset($_POST['email'])) echo $_POST['email'];?>"><br>
-        <input type="password" name="password" required placeholder="Password" value="<?php if (isset($_POST['password'])) echo $_POST['password'];?>"><br>
-        <a href="forgot-password<?php if (isset($_POST['email'])) echo '?email=' . $_POST['email'];?>">Forgotten your password?</a><br>
-        <input type="submit" value="Login">
-    </form>
-    <a href="register" class="button">Register</a>
-</body>
+    <head>
+        <title>Login</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/resources/style.css">
+    </head>
+    <body>
+        <h1>Login</h1>
+        <form method="POST">
+            <input type="text" name="email" required autofocus placeholder="Email" value="<?php if (isset($_POST['email'])) echo $_POST['email'];?>"><br>
+            <input type="password" name="password" required placeholder="Password" value="<?php if (isset($_POST['password'])) echo $_POST['password'];?>"><br>
+            <a href="forgot-password<?php if (isset($_POST['email'])) echo '?email=' . $_POST['email'];?>">Forgotten your password?</a><br>
+            <input type="submit" value="Login">
+        </form>
+        <a href="register" class="button">Register</a>
+    </body>
 </html>

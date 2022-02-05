@@ -137,7 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             </select><br>
             <input type="date" name="due_date" required placeholder="Due Date" value="<?php echo $task['due_date'];?>"><br>
             <textarea name="description" placeholder="Description"><?php echo $task['description'];?></textarea><br>
-        <input type="submit" value="Edit Task">
-    </form>
+            <input type="submit" value="Edit Task">
+        </form>
     </body>
 </html>

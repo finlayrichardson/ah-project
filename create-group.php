@@ -114,7 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 }
                 ?>
             </select><br>
-        <input type="submit" value="Create Group">
-    </form>
+            <input type="submit" value="Create Group">
+        </form>
     </body>
 </html>

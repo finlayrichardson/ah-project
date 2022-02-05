@@ -42,7 +42,7 @@ if (isset($_GET['sort'])) {
         $num_results = mysqli_num_rows($result);
         $num_pages = ceil($num_results / 10);
         $first_result = ($page - 1) * 10;
-        $result = ($_SESSION['role'] == "admin") ? mysqli_query($db, "SELECT * FROM task ORDER BY due_date $sort LIMIT $first_result, 10;") : mysqli_query($db, "SELECT * FROM task WHERE owner_id = $user_id OR task_id IN(SELECT task_recipient.task_id FROM user, `group`, group_member, task_recipient WHERE user.user_id = group_member.user_id AND group_member.group_id = group.group_id AND group.group_id = task_recipient.group_id AND user.user_id = $user_id) ORDER BY due_date $sort LIMIT $first_result, 5;");
+        $result = ($_SESSION['role'] == "admin") ? mysqli_query($db, "SELECT * FROM task ORDER BY due_date $sort LIMIT $first_result, 10;") : mysqli_query($db, "SELECT * FROM task WHERE owner_id = $user_id OR task_id IN(SELECT task_recipient.task_id FROM user, `group`, group_member, task_recipient WHERE user.user_id = group_member.user_id AND group_member.group_id = group.group_id AND group.group_id = task_recipient.group_id AND user.user_id = $user_id) ORDER BY due_date $sort LIMIT $first_result, 10;");
 
         while ($row = mysqli_fetch_assoc($result)) {
             $title = $row['title'];
@@ -69,7 +69,7 @@ if (isset($_GET['sort'])) {
             echo "<p>Due date: $due_date</p><br>";
             if ($_SESSION['role'] != "student") {
                 $count = count_submitted($task_id);
-                $num_result = mysqli_query($db, "SELECT COUNT(user.user_id) FROM user, `group`, group_member, task_recipient WHERE task_recipient.group_id = group.group_id AND group_member.user_id = user.user_id AND group_member.group_id = group.group_id AND task_id = $task_id AND role = 'student' GROUP BY user.user_id;"); // maybe fix this awful query
+                $num_result = mysqli_query($db, "SELECT COUNT(user.user_id) FROM user, `group`, group_member, task_recipient WHERE task_recipient.group_id = group.group_id AND group_member.user_id = user.user_id AND group_member.group_id = group.group_id AND task_id = $task_id AND role = 'student' GROUP BY user.user_id;");
                 $num = mysqli_fetch_array($num_result)[0];
                 echo "<p>$count/$num Submitted</p>";
             }

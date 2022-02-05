@@ -80,21 +80,21 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 <!DOCTYPE html>
 <html lang='en'>
-<head>
-    <title>Register</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/resources/style.css">
-</head>
-<body>
-    <h1>Register</h1>
-    <form method="POST">
-        <input type="text" name="first_name" required autofocus pattern="[a-zA-ZäöüßÄÖÜ ]+" maxlength="20" placeholder="First Name" value="<?php if (isset($_POST['first_name'])) echo $_POST['first_name'];?>"><br>
-        <input type="text" name="last_name" required pattern="[a-zA-ZäöüßÄÖÜ ]+" maxlength="20" placeholder="Last Name" value="<?php if (isset($_POST['last_name'])) echo $_POST['last_name'];?>"><br>
-        <input type="text" name="email" required pattern="^.+?@esms\.org\.uk *?$" maxlength="30" placeholder="Email" value="<?php if (isset($_POST['email'])) echo $_POST['email'];?>"><br>
-        <input type="password" name="password1" required placeholder="Password" value="<?php if (isset($_POST['password1'])) echo $_POST['password1'];?>"><br>
-        <input type="password" name="password2" required placeholder="Confirm Password" value="<?php if (isset($_POST['password2'])) echo $_POST['password2'];?>"><br>
-        <input type="submit" value="Register">
-    </form>
-    <a href="login" class="button">Login</a>
-</body>
+    <head>
+        <title>Register</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/resources/style.css">
+    </head>
+    <body>
+        <h1>Register</h1>
+        <form method="POST">
+            <input type="text" name="first_name" required autofocus pattern="[a-zA-ZäöüßÄÖÜ ]+" maxlength="20" placeholder="First Name" value="<?php if (isset($_POST['first_name'])) echo $_POST['first_name'];?>"><br>
+            <input type="text" name="last_name" required pattern="[a-zA-ZäöüßÄÖÜ ]+" maxlength="20" placeholder="Last Name" value="<?php if (isset($_POST['last_name'])) echo $_POST['last_name'];?>"><br>
+            <input type="text" name="email" required pattern="^.+?@esms\.org\.uk *?$" maxlength="30" placeholder="Email" value="<?php if (isset($_POST['email'])) echo $_POST['email'];?>"><br>
+            <input type="password" name="password1" required placeholder="Password" value="<?php if (isset($_POST['password1'])) echo $_POST['password1'];?>"><br>
+            <input type="password" name="password2" required placeholder="Confirm Password" value="<?php if (isset($_POST['password2'])) echo $_POST['password2'];?>"><br>
+            <input type="submit" value="Register">
+        </form>
+        <a href="login" class="button">Login</a>
+    </body>
 </html>

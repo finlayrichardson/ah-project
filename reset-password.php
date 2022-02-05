@@ -52,18 +52,18 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 <!DOCTYPE html>
 <html lang='en'>
-<head>
-    <title>Reset Password</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/resources/style.css">
-</head>
-<body>
-    <h1>Reset Password</h1>
-    <p>Please enter your new password below to change it.</p>
-    <form method="POST">
-        <input type="password" name="password1" required placeholder="Password" value="<?php if (isset($_POST['password1'])) echo $_POST['password1']; ?>"><br>
-        <input type="password" name="password2" required placeholder="Confirm Password" value="<?php if (isset($_POST['password2'])) echo $_POST['password2']; ?>"><br>
-        <input type="submit" value="Reset Password">
-    </form>
-</body>
+    <head>
+        <title>Reset Password</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/resources/style.css">
+    </head>
+    <body>
+        <h1>Reset Password</h1>
+        <p>Please enter your new password below to change it.</p>
+        <form method="POST">
+            <input type="password" name="password1" required placeholder="Password" value="<?php if (isset($_POST['password1'])) echo $_POST['password1']; ?>"><br>
+            <input type="password" name="password2" required placeholder="Confirm Password" value="<?php if (isset($_POST['password2'])) echo $_POST['password2']; ?>"><br>
+            <input type="submit" value="Reset Password">
+        </form>
+    </body>
 </html>
