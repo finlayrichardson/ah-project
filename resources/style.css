@@ -1,3 +1,7 @@
+:root {
+  --font: Arial, Helvetica, sans-serif;
+}
+
 nav ul {
   list-style-type: none;
   margin: 10px;
@@ -157,4 +161,59 @@ nav ul li {
   float: left;
   width: 750px;
   height: 1000px;
+}
+
+body {
+  background-color: dodgerblue;
+  font-family: var(--font);
+}
+
+input {
+  margin: 10px;
+  margin-left: 0px;
+}
+
+input[type="submit"] {
+  color: white;
+  padding: 7px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border: none;
+  background-color: dodgerblue;
+  font-size: 18px;
+  height: 50px;
+  width: 30%;
+}
+
+input::placeholder {
+  font-family: var(--font);
+}
+
+input:-ms-input-placeholder {
+  font-family: var(--font);
+}
+
+input::-ms-input-placeholder {
+  font-family: var(--font);
+}
+
+.user-form {
+  background-color: white;
+  border-radius: 20px;
+  padding: 20px;
+  /* position: fixed;
+  left: 50%; */
+  margin: auto;
+  width: 50%;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+}
+
+.user-form h1 {
+  margin-top: 0px;
+}
+
+input {
+  width: 50%;
+  height: 30px;
+  border-radius: 5px;
 }
