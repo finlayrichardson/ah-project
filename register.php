@@ -89,6 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <body>
         <div class="user-form">
             <h1>Register</h1>
+            <hr>
             <form method="POST">
                 <input type="text" name="first_name" required autofocus pattern="[a-zA-ZäöüßÄÖÜ ]+" maxlength="20" placeholder="First Name" value="<?php if (isset($_POST['first_name'])) echo $_POST['first_name'];?>"><br>
                 <input type="text" name="last_name" required pattern="[a-zA-ZäöüßÄÖÜ ]+" maxlength="20" placeholder="Last Name" value="<?php if (isset($_POST['last_name'])) echo $_POST['last_name'];?>"><br>
@@ -97,7 +98,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <input type="password" name="password2" required placeholder="Confirm Password" value="<?php if (isset($_POST['password2'])) echo $_POST['password2'];?>"><br>
                 <input type="submit" value="Register">
             </form>
-            <a href="login" class="button">Login</a>
+            <hr>
+            <span>Have an account?<a href="login" class="button">Login</a></span>
         </div>
     </body>
 </html>
