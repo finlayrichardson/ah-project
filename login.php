@@ -74,6 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <title>Login</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="/resources/style.css">
+        <script type="text/javascript" src="https://livejs.com/live.js"></script>
     </head>
     <body>
         <div class="user-form">

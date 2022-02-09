@@ -1,7 +1,6 @@
 <nav>
+    <div id="logo"><a href="/"><img src="/resources/logo.svg"></a><a href="/" style="margin-top: 10px;">| Codecanopy</a></div>
     <ul>
-        <li><a href="/">Codecanopy</a></li>
-        <!-- Maybe change to logo/image -->
         <li><a href="/">Home</a></li>
         <li><a href="/tasks">Tasks</a></li>
         <?php if ($_SESSION['role'] == "teacher" || $_SESSION['role'] == "admin") echo "<li><a href='/groups'>Groups</a></li>"?>
