@@ -13,14 +13,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     // Check an email has been entered
     if (empty($_POST['email'])) {
-        $errors[] = "Please enter an email";
+        $errors['email'] = "⚠ Please enter an email";
     } else {
         $email = mysqli_real_escape_string($db, trim($_POST['email']));
     }
 
     // Check a password has been entered
     if (empty($_POST['password'])) {
-        $errors[] = "Please enter a password";
+        $errors['password'] = "⚠ Please enter a password";
     } else {
         $password = trim($_POST['password']);
     }
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $user = mysqli_fetch_assoc($result);
         // Check if user is in database
         if (mysqli_num_rows($result) == 0) {
-            $errors[] = "User does not exist";
+            $errors['email'] = "⚠ User does not exist";
         }
     }
 
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         // Check if password is correct
         if (!password_verify($password, $user['password'])) {
             // Password is incorrect
-            $errors[] = "Incorrect password";
+            $errors['password'] = "⚠ Incorrect password";
         }
     }
 
@@ -56,14 +56,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         }
         // Send user to index
         load('index');
-    } else {
-        // Display errors
-        echo "<h1>Error!</h1>
-        <p>The following error(s) occured:<br>";
-        foreach ($errors as $error) {
-            echo "- $error<br>";
-        }
-        echo "<p>Please try again.</p>";
     }
 }
 ?>
@@ -80,14 +72,53 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <div class="user-form">
             <h1>Login</h1>
             <hr>
-            <form method="POST">
-                <input type="email" name="email" required autofocus placeholder="Email" value="<?php if (isset($_POST['email'])) echo $_POST['email'];?>"><br>
+            <form method="POST" novalidate>
+                <input type="email" name="email" required autofocus placeholder="Email" value="<?php if (isset($_POST['email'])) echo $_POST['email'];?>">
+                <?php
+                if (isset($errors['email'])) {
+                    $error = $errors['email'];
+                    echo "<p class='error'>$error</p>";
+                }
+                ?>
                 <input type="password" name="password" required placeholder="Password" value="<?php if (isset($_POST['password'])) echo $_POST['password'];?>"><br>
+                <?php
+                if (isset($errors['password'])) {
+                    $error = $errors['password'];
+                    echo "<p class='error'>$error</p>";
+                }
+                ?>
                 <a href="forgot-password<?php if (isset($_POST['email'])) echo '?email=' . $_POST['email'];?>">Forgotten your password?</a><br>
                 <input type="submit" value="Login">
             </form>
             <hr>
-            <span>Don't have an account?<a href="register" class="button">Register</a></span>
+            <span>Don't have an account? <a href="register" class="button">Register</a></span>
         </div>
+        <script>
+            function validate() {
+                // Remove existing errors
+                while (document.getElementsByClassName('error')[0]) {
+                    document.getElementsByClassName('error')[0].remove();
+                }
+
+                let valid = true;
+                const email = document.getElementsByTagName("input")['email'];
+                const password = document.getElementsByTagName("input")['password'];
+
+                // Validate email
+                if (email.validity.valueMissing) {
+                    email.insertAdjacentHTML('afterend', '<p class="error">⚠ Please enter an email</p>');
+                    valid = false;
+                }
+
+                // Validate password
+                if (password.validity.valueMissing) {
+                    password.insertAdjacentHTML('afterend', '<p class="error">⚠ Please enter a password</p>');
+                    valid = false;
+                }
+                return valid;
+            }
+
+            document.getElementsByTagName('form')[0].onsubmit = validate;
+        </script>
     </body>
 </html>

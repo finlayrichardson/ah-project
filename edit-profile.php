@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // Validate First Name
     if (empty($_POST['first_name'])) {
         $errors[] = "Please enter a first name";
-    } elseif (!preg_match("/[a-zA-ZäöüßÄÖÜ ]/", $_POST['first_name'])) {
+    } elseif (!preg_match('/^[a-zA-ZäöüßÄÖÜ ]+$/', $_POST['first_name'])) {
         $errors[] = "First name must contain only letters";
     } elseif (strlen(trim($_POST['first_name'])) > 20) {
         $errors[] = "First name must be max 20 characters";
@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // Validate Last Name
     if (empty($_POST['last_name'])) {
         $errors[] = "Please enter a last name";
-    } elseif (!preg_match('/[a-zA-ZäöüßÄÖÜ ]/', $_POST['last_name'])) {
+    } elseif (!preg_match('/^[a-zA-ZäöüßÄÖÜ ]+$/', $_POST['last_name'])) {
         $errors[] = "Last name must contain only letters";
     } elseif (strlen(trim($_POST['last_name'])) > 20) {
         $errors[] = "Last name must be max 20 characters";

@@ -4,7 +4,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // Validate name
     if (empty($_POST['name'])) {
         $errors[] = "Please enter a name";
-    } elseif (!preg_match("/[-a-zA-Z0-9äöüßÄÖÜ ]/", $_POST['name'])) {
+    } elseif (!preg_match('/^[-a-zA-Z0-9äöüßÄÖÜ ]+$/', $_POST['name'])) {
         $errors[] = "Name must not contain special characters";
     } elseif (strlen(trim($_POST['name'])) > 50) {
         $errors[] = "Name must be max 50 characters";

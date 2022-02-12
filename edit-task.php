@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // Validate title
     if (empty($_POST['title'])) {
         $errors[] = "Please enter a title";
-    } elseif (!preg_match("/[-a-zA-Z0-9äöüßÄÖÜ ]/", $_POST['title'])) {
+    } elseif (!preg_match('/^[-a-zA-Z0-9äöüßÄÖÜ ]+$/', $_POST['title'])) {
         $errors[] = "Title must not contain special characters";
     } elseif (strlen(trim($_POST['title'])) > 100) {
         $errors[] = "Title must be max 100 characters";
@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // Validate due date
     if (empty($_POST['due_date'])) {
         $errors[] = "Please enter a due date";
-    } elseif (!preg_match("/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/", $_POST['due_date'])) {
+    } elseif (!preg_match('/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $_POST['due_date'])) {
         $errors[] = "Please enter a valid date";
     } else {
         $due_date = mysqli_real_escape_string($db, trim($_POST['due_date']));
