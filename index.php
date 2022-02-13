@@ -54,13 +54,14 @@ require('./auth.php');
             echo "</div>";
 
             echo "
-            <div class='info middle'>
-                <div id='progress-bar'>
-                    <div style='width: $width%'></div>
-                </div>
-                <p>Due date: $due_date</p>
+            <div class='info middle'>";
+            if ($_SESSION['role'] != "student") echo "
+            <div id='progress-bar'>
+                <div style='width: $width%'></div>
             </div>";
-            // put in da progress bar here
+            echo "
+            <p>Due date: $due_date</p>
+            </div>";
             echo "
             <div class='info right'>";
             if ($_SESSION['role'] != "student") {

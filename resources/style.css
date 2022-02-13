@@ -294,27 +294,37 @@ hr {
 }
 
 .title {
+  margin-top: 10px;
   width: 100%;
   height: 100px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+
+.title div {
+  width: calc(50% + 125px);
+  display: flex;
+  align-items: center;
+}
+
+.title select {
+  float: right;
 }
 
 .title h1 {
   float: left;
   margin: 20px;
   margin-right: auto;
+  margin-left: 30px;
   font-size: 40px;
-}
-
-.title select {
-  margin-right: auto;
 }
 
 .title a {
   text-decoration: none;
   float: right;
   margin: 20px 30px;
+  margin-left: 0;
   color: black;
   background-color: white;
   font-size: 18px;
@@ -407,6 +417,8 @@ hr {
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 10px rgba(0, 0, 0, 0.24);
 }
 
+/* fix this for smaller screen */
+
 #progress-bar {
   margin-bottom: 10px;
   width: 600px;
@@ -420,4 +432,21 @@ hr {
   width: 0;
   border-radius: 10px;
   background-color: rgb(66, 177, 247);
+}
+
+#page-nums {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+#page-nums a {
+  margin: 10px;
+  margin-top: 0;
+  text-decoration: none;
+  color: black;
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px 15px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 10px rgba(0, 0, 0, 0.24);
 }

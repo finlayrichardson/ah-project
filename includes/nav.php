@@ -8,4 +8,4 @@
         <li><a href="/profile">Profile</a></li>
         <li id="logout"><a href="/login">Logout</a></li>
     </ul>
-</nav><br>
+</nav>

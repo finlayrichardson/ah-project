@@ -24,11 +24,13 @@ if (isset($_GET['sort'])) {
     <body>
         <?php include("includes/nav.php");?>
         <div class="title">
-            <h1>Tasks</h1>
-            <select id='sort' onchange='window.location="tasks?sort="+this.value;'>
-                <option value='desc'>Sort by due date (descending)</option>
-                <option value='asc'>Sort by due date (ascending)</option>
-            </select>
+            <div>
+                <h1>Tasks</h1>
+                <select id='sort' onchange='window.location="tasks?sort="+this.value;'>
+                    <option value='desc'>Sort by due date (descending)</option>
+                    <option value='asc'>Sort by due date (ascending)</option>
+                </select>
+            </div>
             <?php
             if ($_SESSION['role'] != "student") echo "<a href='/create-task'>Create Task</a>";
             echo "
@@ -77,13 +79,14 @@ if (isset($_GET['sort'])) {
             echo "</div>";
 
             echo "
-            <div class='info middle'>
-                <div id='progress-bar'>
-                    <div style='width: $width%'></div>
-                </div>
-                <p>Due date: $due_date</p>
+            <div class='info middle'>";
+            if ($_SESSION['role'] != "student") echo "
+            <div id='progress-bar'>
+                <div style='width: $width%'></div>
             </div>";
-            // put in da progress bar here
+            echo "
+            <p>Due date: $due_date</p>
+            </div>";
             echo "
             <div class='info right'>";
             if ($_SESSION['role'] != "student") {
@@ -94,9 +97,12 @@ if (isset($_GET['sort'])) {
             
             echo "</div></div>";
         }
-        for ($page = 1; $page <= $num_pages; $page++) {
-            echo "<a href='tasks?page=$page&sort=$sort'>$page</a>";
-          }
+        $page_nums = pagination($num_results, 10, $page, 4);
+        echo "<div id='page-nums'>";
+        foreach ($page_nums as $page_num) {
+            echo "<a href='tasks?page=$page_num&sort=$sort'>$page_num</a>";
+        }
+        echo "</div>";
         ?>
     </body>
 </html>
