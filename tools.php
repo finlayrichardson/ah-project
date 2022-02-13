@@ -27,7 +27,7 @@ function teacher_status($user_id, $group_id) {
 
 function count_submitted($task_id) {
     $count = 0;
-    $files = glob("/code/$task_id/*");
+    $files = glob("./code/$task_id/*");
     if ($files) $count = count($files);
     return $count;
 }

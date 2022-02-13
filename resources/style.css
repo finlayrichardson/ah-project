@@ -44,13 +44,27 @@ nav ul {
 nav ul li {
   padding: 10px;
   float: left;
-  background-color: white;
 }
 
 nav ul li a,
 #logo a {
   text-decoration: none;
   color: black;
+}
+
+#logout {
+  padding: 0;
+  border: none;
+  background-color: rgb(66, 177, 247);
+  border-radius: 10px;
+  margin-left: 40px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+#logout a {
+  padding: 10px 12px;
+  color: white;
+  display: block;
 }
 
 .group {
@@ -283,25 +297,30 @@ hr {
   width: 100%;
   height: 100px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+}
+
+.title h1 {
+  float: left;
+  margin: 20px;
+  margin-right: auto;
+  font-size: 40px;
+}
+
+.title select {
+  margin-right: auto;
 }
 
 .title a {
   text-decoration: none;
   float: right;
-  margin: 20px;
+  margin: 20px 30px;
   color: black;
   background-color: white;
   font-size: 18px;
   border-radius: 10px;
   padding: 15px;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 10px rgba(0, 0, 0, 0.24);
-}
-
-.title h1 {
-  float: left;
-  margin: 20px;
 }
 
 #sort {
@@ -313,4 +332,92 @@ hr {
 
 #sort select option {
   padding: 100px;
+}
+
+.task {
+  width: calc(100% - 40px);
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 20px;
+  border-radius: 20px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 10px rgba(0, 0, 0, 0.24);
+}
+
+.info {
+  width: 200px;
+  height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin: 0 25px;
+}
+
+.info.middle {
+  width: 600px;
+  justify-content: center;
+}
+
+.info.right {
+  align-items: center;
+}
+
+.info p {
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.info a {
+  width: 100px;
+  float: right;
+  padding: 15px;
+  color: white;
+  text-decoration: none;
+  background-color: rgb(66, 177, 247);
+  border-radius: 10px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.left {
+  text-align: left;
+}
+
+.middle {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
+#more-tasks {
+  text-align: center;
+  margin-top: 40px;
+}
+
+#more-tasks a {
+  text-decoration: none;
+  color: black;
+  background-color: white;
+  font-size: 18px;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 10px rgba(0, 0, 0, 0.24);
+}
+
+#progress-bar {
+  margin-bottom: 10px;
+  width: 600px;
+  height: 20px;
+  background-color: lightgray;
+  border-radius: 10px;
+}
+
+#progress-bar div {
+  height: 20px;
+  width: 0;
+  border-radius: 10px;
+  background-color: rgb(66, 177, 247);
 }

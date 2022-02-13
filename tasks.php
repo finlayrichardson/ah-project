@@ -56,6 +56,11 @@ if (isset($_GET['sort'])) {
                     $groups[] = $group['name'];
                 }
                 $groups = implode(', ', $groups);
+
+                $count = count_submitted($task_id);
+                $num_result = mysqli_query($db, "SELECT COUNT(user.user_id) FROM user, `group`, group_member, task_recipient WHERE task_recipient.group_id = group.group_id AND group_member.user_id = user.user_id AND group_member.group_id = group.group_id AND task_id = $task_id AND role = 'student' GROUP BY user.user_id;");
+                $num = mysqli_fetch_array($num_result)[0];
+                $width = $count / $num * 100;
             } else {
                 $group_result = mysqli_query($db, "SELECT name FROM user, `group`, group_member, task_recipient WHERE user.user_id = group_member.user_id AND group_member.group_id = group.group_id AND group.group_id = task_recipient.group_id AND user.user_id = $user_id AND task_recipient.task_id = $task_id;");
                 $groups = mysqli_fetch_assoc($group_result)['name'];
@@ -63,18 +68,31 @@ if (isset($_GET['sort'])) {
                 $teacher = mysqli_fetch_assoc($teacher_result)['last_name'];
             }
 
-            echo "<div class='task' onclick='location.href=\"/task/$task_id\";' style='cursor: pointer;'>
-                    <p>$title</p><br>
-                    <p>$groups</p><br>";
-            if ($_SESSION['role'] == "student") echo "<p>$teacher</p><br>";
-            echo "<p>Due date: $due_date</p><br>";
+            echo "
+            <div class='task' onclick='location.href=\"/task/$task_id\";' style='cursor: pointer;'>
+                <div class='info left'>
+                    <p>$title</p>
+                    <p>$groups</p>";
+            if ($_SESSION['role'] == "student") echo "<p>Mr $teacher</p>"; // figure out something with title
+            echo "</div>";
+
+            echo "
+            <div class='info middle'>
+                <div id='progress-bar'>
+                    <div style='width: $width%'></div>
+                </div>
+                <p>Due date: $due_date</p>
+            </div>";
+            // put in da progress bar here
+            echo "
+            <div class='info right'>";
             if ($_SESSION['role'] != "student") {
-                $count = count_submitted($task_id);
-                $num_result = mysqli_query($db, "SELECT COUNT(user.user_id) FROM user, `group`, group_member, task_recipient WHERE task_recipient.group_id = group.group_id AND group_member.user_id = user.user_id AND group_member.group_id = group.group_id AND task_id = $task_id AND role = 'student' GROUP BY user.user_id;");
-                $num = mysqli_fetch_array($num_result)[0];
                 echo "<p>$count/$num Submitted</p>";
+            } else {
+                echo "<a href='/upload-code/$task_id'>Upload Code</a>";
             }
-            echo "</div><br>";
+            
+            echo "</div></div>";
         }
         for ($page = 1; $page <= $num_pages; $page++) {
             echo "<a href='tasks?page=$page&sort=$sort'>$page</a>";
