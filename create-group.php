@@ -92,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <h1>Create Group</h1>
         </div>
         <form method="POST">
-            <input type="text" name="name" required autofocus pattern="[-a-zA-ZäöüßÄÖÜ ]+" maxlength="50" placeholder="Name" value="<?php if (isset($_POST['name'])) echo $_POST['name'];?>"><br>
+            <input type="text" name="name" required autofocus pattern="[-a-zA-Z0-9äöüßÄÖÜ ]+" maxlength="50" placeholder="Name" value="<?php if (isset($_POST['name'])) echo $_POST['name'];?>"><br>
             <select name="students[]" class="students" multiple>
                 <?php
                 $result = mysqli_query($db, "SELECT user_id, first_name, last_name FROM user WHERE role = 'student' AND verified = true;");

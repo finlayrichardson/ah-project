@@ -9,7 +9,6 @@ if ($_SESSION['role'] == "student") load('index');
         <title>Groups</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="/resources/style.css">
-        <script type="text/javascript" src="https://livejs.com/live.js"></script>
     </head>
     <body>
         <?php include("includes/nav.php");?>
@@ -28,7 +27,7 @@ if ($_SESSION['role'] == "student") load('index');
                 $student_num = $student_nums ? mysqli_fetch_array($student_nums)[0] : 0;
 
                 echo "<div class='group' onclick='location.href=\"/group/$group_id\";' style='cursor: pointer;'>
-                        <p>Name: $name</p><br>
+                        <p>$name</p>
                         <p>Students: $student_num</p>
                     </div>";
             }

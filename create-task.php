@@ -112,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <h1>Create Task</h1>
         </div>
         <form method="POST">
-            <input type="text" name="title" required autofocus pattern="[-a-zA-ZäöüßÄÖÜ ]+" maxlength="100" placeholder="Title" value="<?php if (isset($_POST['title'])) echo $_POST['title'];?>"><br>
+            <input type="text" name="title" required autofocus pattern="[-a-zA-Z0-9äöüßÄÖÜ ]+" maxlength="100" placeholder="Title" value="<?php if (isset($_POST['title'])) echo $_POST['title'];?>"><br>
             <select name="groups[]" class="groups" multiple>
                 <?php
                 $result = ($_SESSION['role'] == "admin") ? mysqli_query($db, "SELECT group_id, name FROM `group`;") : mysqli_query($db, "SELECT group_id, name FROM `group` WHERE owner_id = $user_id OR group_id IN(SELECT group_member.group_id FROM user, group_member WHERE user.user_id = group_member.user_id AND group_member.user_id = $user_id);");

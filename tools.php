@@ -34,7 +34,7 @@ function count_submitted($task_id) {
 
 function pagination($data, $limit = null, $current = null, $adjacents = null) {
     $result = array();
-    if (isset($data, $limit) === true) {
+    if (isset($data, $limit) === true && $data != 0) {
         $result = range(1, ceil($data / $limit));
         if (isset($current, $adjacents) === true) {
             if (($adjacents = floor($adjacents / 2) * 2 + 1) >= 1) {

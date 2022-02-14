@@ -89,7 +89,7 @@ switch ($status) {
         echo "</div>";
         echo "
              <div class='group'>
-                 <h2>Pupils: </h2>
+                 <h2>Students: </h2>
              ";
         $result = query("SELECT first_name, last_name FROM user, group_member WHERE user.user_id = group_member.user_id AND role = 'student' AND group_member.group_id = ?;", 'i', $group_id);
         while ($row = mysqli_fetch_assoc($result)) {
@@ -107,7 +107,7 @@ switch ($status) {
                  <a href='/create-task?group_id=$group_id'>Set Task</a>
              ";
         if ($owner) echo "
-                 <form method='POST' action=''>
+                 <form method='POST'>
                      <input type='hidden' name='action' value='delete'>
                      <input type='hidden' name='group_id' value=$group_id>
                      <input type='submit' onClick=\"javascript: return confirm('Are you sure you want to delete this group? This will also remove all tasks set to this group.');\" value='Delete'>

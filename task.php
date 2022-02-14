@@ -80,6 +80,7 @@ if (mysqli_num_rows($result) == 0 && !$owner) {
         ?>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="/resources/style.css">
+        <script type="text/javascript" src="https://livejs.com/live.js"></script>
     </head>
     <body>
         <?php include("includes/nav.php");
@@ -90,27 +91,28 @@ if (mysqli_num_rows($result) == 0 && !$owner) {
         if ($owner) echo "<a href='/edit-task/$task_id'>Edit Task</a>";
         echo "</div>";
         echo "
-             <div class='task'>
-                 <div class='info'>
-                 <h2>Description: </h2>
+             <div class='task-box'>
+                 <div>
+                     <div class='description'>
+                     <h2>Description: </h2>
              ";
-        echo $description;
+        echo "<p>$description</p>";
+        echo "</div>";
         echo "
              <div class='details'>
-                 Due: $due_date<br>
-                 Created at: $created_at<br>";
-        if ($created_at != $updated_at) echo "Last edited at: $updated_at";
+                 <p>Due: $due_date</p>
+                 <p>Created at: $created_at</p>";
+        if ($created_at != $updated_at) echo "<p>Last edited at: $updated_at</p>";
         echo "         
-             </div>
-             </div><br><br>";
+             </div></div>";
 
         echo "<div class='buttons'>";
         echo ($teacher) ? "<a href='/view-code/$task_id'>View submitted code</a>" : "<a href='/upload-code/$task_id'>Upload Code</a>";
         if ($owner) echo "
-                 <form method='POST' action=''>
+                 <form method='POST'>
                      <input type='hidden' name='action' value='delete'>
                      <input type='hidden' name='task_id' value=$task_id>
-                     <input type='submit' onClick=\"javascript: return confirm('Are you sure you want to delete this task? This will also remove all submitted solutions.');\" value='Delete'>
+                     <input type='submit' id='delete' onClick=\"javascript: return confirm('Are you sure you want to delete this task? This will also remove all submitted solutions.');\" value='Delete'>
                  </form>
              ";
         echo "</div>
