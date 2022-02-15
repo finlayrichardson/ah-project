@@ -1,6 +1,6 @@
 <?php
 function load($page = 'login') {
-    $url = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']);
+    $url = "http://" . $_SERVER['HTTP_HOST'];
     $url = rtrim($url, '/\\');
     $url .= "/" . $page;
     header("Location: $url");

@@ -78,6 +78,7 @@ switch ($status) {
         ?>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="/resources/style.css">
+        <script type="text/javascript" src="https://livejs.com/live.js"></script>
     </head>
     <body>
         <?php include("includes/nav.php");
@@ -88,20 +89,24 @@ switch ($status) {
         if ($owner) echo "<a href='/edit-group/$group_id'>Edit Group</a>";
         echo "</div>";
         echo "
-             <div class='group'>
-                 <h2>Students: </h2>
+             <div class='group-box'>
+                 <div class='names'>
+                     <h2>Students: </h2>
              ";
         $result = query("SELECT first_name, last_name FROM user, group_member WHERE user.user_id = group_member.user_id AND role = 'student' AND group_member.group_id = ?;", 'i', $group_id);
         while ($row = mysqli_fetch_assoc($result)) {
             $name = $row['first_name'] . " " . $row['last_name'];
-            echo "<p>$name</p><br>";
+            echo "<p>$name</p>";
         }
+        echo "</div>";
+        echo "<div class='names'>";
         echo "<h2>Other teacher(s): </h2>";
         $result = query("SELECT first_name, last_name FROM user, group_member WHERE user.user_id = group_member.user_id AND role = 'teacher' AND user.user_id != ? AND group_member.group_id = ?;", 'ii', $user_id, $group_id);
         while ($row = mysqli_fetch_assoc($result)) {
             $name = $row['first_name'] . " " . $row['last_name'];
-            echo "<p>$name</p><br>";
+            echo "<p>$name</p>";
         }
+        echo "</div>";
         echo "
              <div class='buttons'>
                  <a href='/create-task?group_id=$group_id'>Set Task</a>
@@ -110,7 +115,7 @@ switch ($status) {
                  <form method='POST'>
                      <input type='hidden' name='action' value='delete'>
                      <input type='hidden' name='group_id' value=$group_id>
-                     <input type='submit' onClick=\"javascript: return confirm('Are you sure you want to delete this group? This will also remove all tasks set to this group.');\" value='Delete'>
+                     <input type='submit' id='delete' onClick=\"javascript: return confirm('Are you sure you want to delete this group? This will also remove all tasks set to this group.');\" value='Delete'>
                  </form>
              ";
         echo "</div>

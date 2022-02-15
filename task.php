@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         echo "<p>You do not have permissions to delete this group</p>";
         exit();
     }
-    // Delete group
+    // Delete task
     query("DELETE FROM task WHERE task_id = ?;", 'i', $task_id);
     load('tasks');
 }
@@ -80,10 +80,20 @@ if (mysqli_num_rows($result) == 0 && !$owner) {
         ?>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="/resources/style.css">
-        <script type="text/javascript" src="https://livejs.com/live.js"></script>
     </head>
     <body>
         <?php include("includes/nav.php");
+        if ($_SESSION['role'] != "student") {
+            $groups = array();
+            $group_result = mysqli_query($db, "SELECT name FROM `group`, task_recipient WHERE group.group_id = task_recipient.group_id AND task_recipient.task_id = $task_id;");
+            while ($group = mysqli_fetch_assoc($group_result)) {
+                $groups[] = $group['name'];
+            }
+            $groups = implode(', ', $groups);
+        } else {
+            $group_result = mysqli_query($db, "SELECT name FROM user, `group`, group_member, task_recipient WHERE user.user_id = group_member.user_id AND group_member.group_id = group.group_id AND group.group_id = task_recipient.group_id AND user.user_id = $user_id AND task_recipient.task_id = $task_id;");
+            $groups = mysqli_fetch_assoc($group_result)['name'];
+        }
         echo "
              <div class='title'>
                  <h1>$title</h1>
@@ -98,11 +108,18 @@ if (mysqli_num_rows($result) == 0 && !$owner) {
              ";
         echo "<p>$description</p>";
         echo "</div>";
-        echo "
-             <div class='details'>
-                 <p>Due: $due_date</p>
-                 <p>Created at: $created_at</p>";
-        if ($created_at != $updated_at) echo "<p>Last edited at: $updated_at</p>";
+        echo "<div class='details'>";
+        echo ($teacher) ? "<p><strong>Group</strong>: $groups" : "<p><strong>Group(s)</strong>: $groups";
+        echo "<p><strong>Due</strong>: $due_date</p>";
+        if ($teacher) {
+            $count = count_submitted($task_id);
+            $num_result = mysqli_query($db, "SELECT COUNT(DISTINCT(user.user_id)) FROM user, `group`, group_member, task_recipient WHERE task_recipient.group_id = group.group_id AND group_member.user_id = user.user_id AND group_member.group_id = group.group_id AND task_id = $task_id AND role = 'student';");
+            $num = mysqli_fetch_array($num_result)[0];
+            echo "<p><strong>Submitted</strong>: $count/$num</p>";
+        }
+
+        echo "<p><strong>Created at</strong>: $created_at</p>";
+        if ($created_at != $updated_at) echo "<p><strong>Last edited at</strong>: $updated_at</p>";
         echo "         
              </div></div>";
 

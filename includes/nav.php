@@ -1,5 +1,5 @@
 <nav>
-    <div id="logo"><a href="/"><img src="/resources/logo.svg"></a><a href="/" style="margin-top: 10px;">| Codecanopy</a></div>
+    <div id="logo"><a href="/"><img src="/resources/logo.svg" alt="Logo"></a><a href="/" style="margin-top: 10px;">| Codecanopy</a></div>
     <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/tasks">Tasks</a></li>
