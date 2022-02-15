@@ -2,6 +2,8 @@
   --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
     "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
+
+  --button-colour: rgba(2, 115, 231, 255);
 }
 
 * {
@@ -10,14 +12,13 @@
 
 body,
 html {
-  background-color: dodgerblue;
-  /* background: rgb(2, 0, 36);
+  background: rgb(2, 0, 36);
   background: linear-gradient(
-    170deg,
+    340deg,
     rgba(2, 0, 36, 1) 0%,
-    rgba(9, 9, 121, 1) 13%,
-    rgba(0, 212, 255, 1) 100%
-  ); */
+    rgba(9, 9, 121, 1) 20%,
+    rgba(0, 138, 255, 1) 100%
+  );
   min-height: 100vh;
   width: 100%;
   margin: 0;
@@ -70,7 +71,7 @@ nav ul li a,
 #logout {
   padding: 0;
   border: none;
-  background-color: rgb(66, 177, 247);
+  background-color: var(--button-colour);
   border-radius: 10px;
   margin-left: 40px;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
@@ -254,7 +255,7 @@ input[type="submit"] {
   padding-top: 5px;
   padding-bottom: 5px;
   border: none;
-  background-color: rgb(66, 177, 247);
+  background-color: var(--button-colour);
   font-size: 18px;
   text-indent: 0;
   height: 50px;
@@ -303,7 +304,7 @@ input:focus {
 hr {
   height: 0;
   border: 0;
-  border-top: 4px solid dodgerblue;
+  border-top: 4px solid var(--button-colour);
   border-radius: 5px;
 }
 
@@ -410,7 +411,7 @@ hr {
   padding: 15px;
   color: white;
   text-decoration: none;
-  background-color: rgb(66, 177, 247);
+  background-color: var(--button-colour);
   border-radius: 10px;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
@@ -455,7 +456,7 @@ hr {
   height: 20px;
   width: 0;
   border-radius: 10px;
-  background-color: rgb(66, 177, 247);
+  background-color: var(--button-colour);
 }
 
 #page-nums {
@@ -533,7 +534,7 @@ hr {
   padding: 15px;
   color: white;
   text-decoration: none;
-  background-color: rgb(66, 177, 247);
+  background-color: var(--button-colour);
   border-radius: 10px;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
