@@ -12,6 +12,7 @@ $email = $_SESSION['email'];
         <title>Profile</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="/resources/style.css">
+        <script type="text/javascript" src="https://livejs.com/live.js"></script>
     </head>
     <body>
         <?php include("includes/nav.php");?>
@@ -38,10 +39,14 @@ $email = $_SESSION['email'];
         }
         $groups = implode(', ', $groups);
         echo "
-        <p>First Name: $first_name</p><br>
-        <p>Last Name: $last_name</p><br>
-        <p>Email: $email</p><br>
-        <p>Groups: $groups</p>
+        <div class='box'>
+            <div id='profile'>
+                <p><strong>First Name</strong>: $first_name</p>
+                <p><strong>Last Name</strong>: $last_name</p>
+                <p><strong>Email</strong>: $email</p>
+                <p><strong>Group(s)</strong>: $groups</p>
+            </div>
+        </div>
         ";
         ?>
         </div>

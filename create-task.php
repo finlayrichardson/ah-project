@@ -85,19 +85,20 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
         <script>
             $(document).ready(function() {
-                $('.groups').select2({
-                    placeholder: "Group(s)"
+                $('.multi-input').select2({
+                    placeholder: "Group(s)",
+                    width: "resolve"
                 });
                 <?php
                 if (isset($_POST['groups'])) {
                     $group_ids = implode(", ", $_POST['groups']);
-                    echo "$('.groups').val([$group_ids]);";
-                    echo "$('.groups').trigger('change');";
+                    echo "$('.multi-input').val([$group_ids]);";
+                    echo "$('.multi-input').trigger('change');";
                 }
                 if (isset($_GET['group_id'])) {
                     $group_id = intval($_GET['group_id']);
-                    echo "$('.groups').val($group_id);";
-                    echo "$('.groups').trigger('change');";
+                    echo "$('.multi-input').val($group_id);";
+                    echo "$('.multi-input').trigger('change');";
                 }
                 ?>
             });
@@ -105,27 +106,30 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <title>Create Task</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="/resources/style.css">
+        <script type="text/javascript" src="https://livejs.com/live.js"></script>
     </head>
     <body>
         <?php include("includes/nav.php");?>
         <div class='title'>
             <h1>Create Task</h1>
         </div>
-        <form method="POST">
-            <input type="text" name="title" required autofocus pattern="[-a-zA-Z0-9äöüßÄÖÜ ]+" maxlength="100" placeholder="Title" value="<?php if (isset($_POST['title'])) echo $_POST['title'];?>"><br>
-            <select name="groups[]" class="groups" multiple>
-                <?php
-                $result = ($_SESSION['role'] == "admin") ? mysqli_query($db, "SELECT group_id, name FROM `group`;") : mysqli_query($db, "SELECT group_id, name FROM `group` WHERE owner_id = $user_id OR group_id IN(SELECT group_member.group_id FROM user, group_member WHERE user.user_id = group_member.user_id AND group_member.user_id = $user_id);");
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $group_id = $row['group_id'];
-                    $name = $row['name'];
-                    echo "<option value=$group_id>$name</option>";
-                }
-                ?>
-            </select><br>
-            <input type="date" name="due_date" required placeholder="Due Date" value="<?php if (isset($_POST['due_date'])) echo $_POST['due_date'];?>"><br>
-            <textarea name="description" placeholder="Description" value="<?php if (isset($_POST['description'])) echo $_POST['description'];?>"></textarea><br>
-            <input type="submit" value="Create Task">
-        </form>
+        <div class='box'>
+            <form method="POST">
+                <input type="text" name="title" required autofocus pattern="[-a-zA-Z0-9äöüßÄÖÜ ]+" maxlength="100" placeholder="Title" value="<?php if (isset($_POST['title'])) echo $_POST['title'];?>">
+                <select name="groups[]" class="multi-input" multiple>
+                    <?php
+                    $result = ($_SESSION['role'] == "admin") ? mysqli_query($db, "SELECT group_id, name FROM `group`;") : mysqli_query($db, "SELECT group_id, name FROM `group` WHERE owner_id = $user_id OR group_id IN(SELECT group_member.group_id FROM user, group_member WHERE user.user_id = group_member.user_id AND group_member.user_id = $user_id);");
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $group_id = $row['group_id'];
+                        $name = $row['name'];
+                        echo "<option value=$group_id>$name</option>";
+                    }
+                    ?>
+                </select>
+                <input type="date" name="due_date" required placeholder="Due Date" value="<?php if (isset($_POST['due_date'])) echo $_POST['due_date'];?>">
+                <textarea name="description" placeholder="Description" value="<?php if (isset($_POST['description'])) echo $_POST['description'];?>"></textarea>
+                <input type="submit" value="Create Task">
+            </form>
+        </div>
     </body>
 </html>

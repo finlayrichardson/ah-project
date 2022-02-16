@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <h1>Forgot Password</h1>
         <p>Please enter your email below and a link will be sent to change your password.</p>
         <form method="POST">
-            <input type="email" name="email" required autofocus placeholder="Email" value="<?php if (isset($_GET['email'])) echo $_GET['email']; ?>"><br>
+            <input type="email" name="email" required autofocus placeholder="Email" value="<?php if (isset($_GET['email'])) echo $_GET['email']; ?>">
             <input type="submit" value="Send Reset Link">
         </form>
     </body>

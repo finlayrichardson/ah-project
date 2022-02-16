@@ -78,7 +78,6 @@ switch ($status) {
         ?>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="/resources/style.css">
-        <script type="text/javascript" src="https://livejs.com/live.js"></script>
     </head>
     <body>
         <?php include("includes/nav.php");
@@ -89,7 +88,7 @@ switch ($status) {
         if ($owner) echo "<a href='/edit-group/$group_id'>Edit Group</a>";
         echo "</div>";
         echo "
-             <div class='group-box'>
+             <div class='box'>
                  <div class='names'>
                      <h2>Students: </h2>
              ";

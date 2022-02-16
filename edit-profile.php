@@ -69,13 +69,17 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     </head>
     <body>
         <?php include("includes/nav.php");?>
-        <h1>Edit Profile</h1>
-        <form method="POST">
-            <input type="text" name="first_name" required pattern="[a-zA-ZäöüßÄÖÜ ]+" maxlength="20" placeholder="First Name" value="<?php echo $_SESSION['first_name'];?>"><br>
-            <input type="text" name="last_name" required pattern="[a-zA-ZäöüßÄÖÜ ]+" maxlength="20" placeholder="Last Name" value="<?php echo $_SESSION['last_name'];?>"><br>
-            <input type="password" name="password1" placeholder="New Password" value="<?php if (isset($_POST['password1'])) echo $_POST['password1'];?>"><br>
-            <input type="password" name="password2" placeholder="Confirm New Password" value="<?php if (isset($_POST['password2'])) echo $_POST['password2'];?>"><br>
-            <input type="submit" value="Save Changes">
-        </form>
+        <div class='title'>
+            <h1>Edit Profile</h1>
+        </div>
+        <div class='box'>
+            <form method="POST">
+                <input type="text" name="first_name" required pattern="[a-zA-ZäöüßÄÖÜ ]+" maxlength="20" placeholder="First Name" value="<?php echo $_SESSION['first_name'];?>">
+                <input type="text" name="last_name" required pattern="[a-zA-ZäöüßÄÖÜ ]+" maxlength="20" placeholder="Last Name" value="<?php echo $_SESSION['last_name'];?>">
+                <input type="password" name="password1" placeholder="New Password" value="<?php if (isset($_POST['password1'])) echo $_POST['password1'];?>">
+                <input type="password" name="password2" placeholder="Confirm New Password" value="<?php if (isset($_POST['password2'])) echo $_POST['password2'];?>">
+                <input type="submit" value="Save Changes">
+            </form>
+        </div>
     </body>
 </html>

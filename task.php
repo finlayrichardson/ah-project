@@ -101,7 +101,7 @@ if (mysqli_num_rows($result) == 0 && !$owner) {
         if ($owner) echo "<a href='/edit-task/$task_id'>Edit Task</a>";
         echo "</div>";
         echo "
-             <div class='task-box'>
+             <div class='box'>
                  <div>
                      <div class='description'>
                      <h2>Description: </h2>

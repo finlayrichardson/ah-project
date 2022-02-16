@@ -67,46 +67,50 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     </head>
     <body>
         <?php include("includes/nav.php");?>
-        <h1>Users</h1>
-        <table>
-            <tr><th>User ID</th><th>Email</th><th>First Name</th><th>Last Name</th><th>Role</th><th>Verified</th><th></th><th></th><th></th></tr>
-        <?php
-        $user_id = $_SESSION['user_id'];
-        $result = mysqli_query($db, "SELECT * FROM user WHERE user_id != $user_id ORDER BY FIELD(role,'admin','teacher','student'), user_id;");
-        while ($row = mysqli_fetch_assoc($result)) {
-            $user_id = $row['user_id'];
-            $email = $row['email'];
-            $first_name = $row['first_name'];
-            $last_name = $row['last_name'];
-            $role = $row['role'];
-            $verified = $row['verified'] == 1 ? "Yes" : "No";
+        <div class='title'>
+            <h1>Users</h1>
+        </div>
+        <div class='box'>
+            <table>
+                <tr><th>User ID</th><th>Email</th><th>First Name</th><th>Last Name</th><th>Role</th><th>Verified</th><th></th><th></th><th></th></tr>
+            <?php
+            $user_id = $_SESSION['user_id'];
+            $result = mysqli_query($db, "SELECT * FROM user WHERE user_id != $user_id ORDER BY FIELD(role,'admin','teacher','student'), user_id;");
+            while ($row = mysqli_fetch_assoc($result)) {
+                $user_id = $row['user_id'];
+                $email = $row['email'];
+                $first_name = $row['first_name'];
+                $last_name = $row['last_name'];
+                $role = $row['role'];
+                $verified = $row['verified'] == 1 ? "Yes" : "No";
 
-            echo "
-            <tr>
-                <td>$user_id</td>
-                <td>$email</td>
-                <td>$first_name</td>
-                <td>$last_name</td>
-                <td>$role</td>
-                <td>$verified</td>
-            ";
-            echo ($role != "admin") ? "<td><form method='POST'>
-                                                <input type='hidden' name='action' value='promote'>
-                                                <input type='hidden' name='user_id' value=$user_id>
-                                                <input type='submit' value='Promote'>
-                                       </form></td>" : "<td></td>";
-            echo ($role != "student") ? "<td><form method='POST'>
-                                                <input type='hidden' name='action' value='demote'>
-                                                <input type='hidden' name='user_id' value=$user_id>
-                                                <input type='submit' value='Demote'>
-                                       </form></td>" : "<td></td>";
-            echo "<td><form method='POST'>
-                        <input type='hidden' name='action' value='delete'>
-                        <input type='hidden' name='user_id' value=$user_id>
-                        <input type='submit' onClick=\"javascript: return confirm('Are you sure you want to delete this account? This will remove them from all groups they are part of and delete all tasks they own.');\" value='Delete'>
-                  </form></td>";
-        }
-        ?>
-        </table>
+                echo "
+                <tr>
+                    <td>$user_id</td>
+                    <td>$email</td>
+                    <td>$first_name</td>
+                    <td>$last_name</td>
+                    <td>$role</td>
+                    <td>$verified</td>
+                ";
+                echo ($role != "admin") ? "<td><form method='POST'>
+                                                    <input type='hidden' name='action' value='promote'>
+                                                    <input type='hidden' name='user_id' value=$user_id>
+                                                    <input type='submit' value='Promote'>
+                                        </form></td>" : "<td></td>";
+                echo ($role != "student") ? "<td><form method='POST'>
+                                                    <input type='hidden' name='action' value='demote'>
+                                                    <input type='hidden' name='user_id' value=$user_id>
+                                                    <input type='submit' value='Demote'>
+                                        </form></td>" : "<td></td>";
+                echo "<td><form method='POST'>
+                            <input type='hidden' name='action' value='delete'>
+                            <input type='hidden' name='user_id' value=$user_id>
+                            <input type='submit' onClick=\"javascript: return confirm('Are you sure you want to delete this account? This will remove them from all groups they are part of and delete all tasks they own.');\" value='Delete'>
+                    </form></td>";
+            }
+            ?>
+            </table>
+        </div>
     </body>
 </html>
