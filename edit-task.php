@@ -99,7 +99,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <script>
             $(document).ready(function() {
                 $('.groups').select2({
-                    placeholder: "Group(s)"
+                    placeholder: "Group(s)",
+                    width: "calc(50% + 8px)"
                 });
                 <?php
                 // Populate groups field

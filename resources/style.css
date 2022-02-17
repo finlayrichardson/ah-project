@@ -330,21 +330,15 @@ hr {
 }
 
 .title div {
-  width: calc(50% + 125px);
+  width: calc(50% + 117.5px);
   display: flex;
   align-items: center;
-}
-
-.title select {
-  float: right;
+  justify-content: space-between;
 }
 
 .title h1 {
   color: white;
-  /* font-weight: 700; */
-  float: left;
   margin: 20px;
-  margin-right: auto;
   margin-left: 30px;
   font-size: 40px;
 }
@@ -470,6 +464,8 @@ hr {
 }
 
 #page-nums a {
+  width: 11px;
+  text-align: center;
   margin: 10px;
   margin-top: 0;
   text-decoration: none;
@@ -559,17 +555,30 @@ hr {
   margin: 20px;
 }
 
-.box input:not([type="submit"]),
-.multi-input {
+.box input:not([type="submit"]) {
   width: 50%;
 }
 
 /* select 2 waffle */
 
+.select2-container {
+  border: 2px solid rgb(133, 133, 133) !important;
+  border-radius: 7px;
+  padding: 1px 2px !important;
+  height: 50px !important;
+}
+
 .select2-selection {
-  border: 2px;
-  padding: 1px 2px;
+  padding: 0 !important;
+  border: 0 !important;
   width: 100%;
+  height: 44px !important;
+}
+
+.select2-search__field {
+  margin: 0 !important;
+  height: 44px !important;
+  padding-top: 13px !important;
 }
 
 input[type="date"] {
@@ -577,6 +586,7 @@ input[type="date"] {
   text-align: right;
   position: relative;
   padding: 1px 10px 1px 2px;
+  font-size: medium;
 }
 
 input[type="date"]:before {

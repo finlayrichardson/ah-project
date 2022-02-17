@@ -77,11 +77,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <script>
             $(document).ready(function() {
                 $('.students').select2({
-                    placeholder: "Students"
+                    placeholder: "Students",
+                    width: "calc(50% + 8px)"
                 });
 
                 $('.teachers').select2({
-                    placeholder: "Other Teacher(s)"
+                    placeholder: "Other Teacher(s)",
+                    width: "calc(50% + 8px)"
                 });
                 <?php
                 // Populate students field

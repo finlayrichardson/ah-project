@@ -120,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <input type="submit" value="Register">
             </form>
             <hr>
-            <span>Have an account? <a href="login" class="button">Login</a></span>
+            <span>Have an account? <a href="/login" class="button">Login</a></span>
         </div>
         <script>
             function validate() {

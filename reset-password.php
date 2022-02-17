@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 // Change password
                 mysqli_query($db, "UPDATE user SET password = '$password' WHERE user_id = $user_id;");
                 echo "<p>Password successfully changed!</p><br>";
-                echo "<a href='login'>Login</a>";
+                echo "<a href='/login'>Login</a>";
                 exit();
             } else {
                 // Display errors

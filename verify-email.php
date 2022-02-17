@@ -36,9 +36,9 @@ if (isset($_GET['token'])) {
         if (isset($_SESSION['user_id']) && $user_id == $_SESSION['user_id']) {
             // Is a brand new user
             $_SESSION['role'] = "student";
-            echo "<a href='index'>Home</a>";
+            echo "<a href='/index'>Home</a>";
         } else {
-            echo "<a href='login'>Login</a>";
+            echo "<a href='/login'>Login</a>";
         }
         exit();
     }
@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $mail->send();
 
     echo "<p>Email sent to $email</p><br>
-          <a href='login'>Login</a>";
+          <a href='/login'>Login</a>";
     exit();
 }
 ?>

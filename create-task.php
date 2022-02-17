@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $(document).ready(function() {
                 $('.multi-input').select2({
                     placeholder: "Group(s)",
-                    width: "resolve"
+                    width: "calc(50% + 8px)"
                 });
                 <?php
                 if (isset($_POST['groups'])) {
