@@ -1,5 +1,5 @@
 <?php
-require('./resources/auth.php');
+require('./utils/auth.php');
 if ($_SESSION['role'] == "student") load('index');
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {

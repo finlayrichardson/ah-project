@@ -1,5 +1,5 @@
 <?php
-require('./resources/auth.php');
+require('./utils/auth.php');
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // Validate name
     if (empty($_POST['name'])) {

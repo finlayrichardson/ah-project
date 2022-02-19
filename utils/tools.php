@@ -8,7 +8,7 @@ function load($page = 'login') {
 }
 
 function query($sql, $types,  ...$variables) {
-    require('./resources/connect-db.php');
+    require('./utils/connect-db.php');
     $stmt = mysqli_prepare($db, $sql);
     mysqli_stmt_bind_param($stmt, $types, ...$variables);
     mysqli_stmt_execute($stmt);
@@ -16,7 +16,7 @@ function query($sql, $types,  ...$variables) {
 }
 
 function teacher_status($user_id, $group_id) {
-    require('./resources/connect-db.php');
+    require('./utils/connect-db.php');
     // Check if owner
     $result = query("SELECT owner_id FROM `group` WHERE group_id = ?;", 'i', $group_id);
     if (mysqli_fetch_array($result)[0] == $user_id || $_SESSION['role'] == "admin") return "owner";

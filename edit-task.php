@@ -1,5 +1,5 @@
 <?php
-require('./resources/auth.php');
+require('./utils/auth.php');
 // Validate ID
 if (empty($_REQUEST['id'])) {
     echo "<p>No task specified</p>";

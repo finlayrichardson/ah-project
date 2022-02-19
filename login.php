@@ -7,8 +7,8 @@ if (isset($_SESSION['user_id'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    require('./resources/connect-db.php');
-    require('./resources/tools.php');
+    require('./utils/connect-db.php');
+    require('./utils/tools.php');
     $errors = array();
 
     // Check an email has been entered

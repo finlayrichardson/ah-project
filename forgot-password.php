@@ -1,8 +1,8 @@
 <?php
-require('resources/auth.php');
+require('utils/auth.php');
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    require('./resources/connect-db.php');
+    require('./utils/connect-db.php');
     $errors = array();
     // Check an email has been entered
     if (empty($_POST['email'])) {
@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
     // No errors
     if (empty($errors)) {
-        require('./resources/email.php');
+        require('./utils/email.php');
         // Set user details
         $user_id = $user['user_id'];
         $first_name = $user['first_name'];

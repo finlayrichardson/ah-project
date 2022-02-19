@@ -1,5 +1,5 @@
 <?php
-require('./resources/auth.php');
+require('./utils/auth.php');
 
 if (isset($_SESSION['user_id'])) {
     // User has session variables
@@ -50,7 +50,7 @@ if (empty($_SESSION['user_id']) && empty($_GET['token'])) {
 
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    require('./resources/email.php');
+    require('./utils/email.php');
 
     $host = $_SERVER['HTTP_HOST'];
     $token = md5(random_bytes(10));
