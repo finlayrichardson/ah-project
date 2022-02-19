@@ -1,5 +1,5 @@
 <?php
-require('./auth.php');
+require('./resources/auth.php');
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // Validate action
@@ -72,7 +72,7 @@ if (mysqli_num_rows($result) == 0 && !$owner) {
         // Get task details
         $task_id = $task['task_id'];
         $title = $task['title'];
-        $description = $task['description'];
+        $description = htmlspecialchars($task['description']);
         $due_date = $task['due_date'];
         $created_at = $task['created_at'];
         $updated_at = $task['updated_at'];

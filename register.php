@@ -1,5 +1,5 @@
 <?php
-require('./auth.php');
+require('./resources/auth.php');
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $errors = array();
@@ -96,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     echo "<p class='error'>$error</p>";
                 }
                 ?>
-                <input type="email" name="email" required pattern="^.+?@esms\.org\.uk *?$" maxlength="30" placeholder="Email" value="<?php if (isset($_POST['email'])) echo $_POST['email'];?>">
+                <input type="text" autocorrect="off" autocapitalize="none" name="email" required pattern="^.+?@esms\.org\.uk *?$" maxlength="30" placeholder="Email" value="<?php if (isset($_POST['email'])) echo $_POST['email'];?>">
                 <?php
                 if (isset($errors['email'])) {
                     $error = $errors['email'];

@@ -1,12 +1,12 @@
 <?php
-require('auth.php');
+require('resources/auth.php');
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    require('connect-db.php');
+    require('./resources/connect-db.php');
     $errors = array();
     // Check an email has been entered
     if (empty($_POST['email'])) {
-        $errors[] = "Please enter an email";
+        $errors['email'] = "⚠ Please enter an email";
     } else {
         $email = mysqli_real_escape_string($db, trim($_POST['email']));
     }
@@ -15,12 +15,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $result = query("SELECT * FROM user WHERE email = ?;", 's', $email);
         $user = mysqli_fetch_assoc($result);
         if (mysqli_num_rows($result) == 0) {
-            $errors[] = "User does not exist";
+            $errors['email'] = "⚠ User does not exist";
         }
     }
     // No errors
     if (empty($errors)) {
-        require('./email.php');
+        require('./resources/email.php');
         // Set user details
         $user_id = $user['user_id'];
         $first_name = $user['first_name'];
@@ -42,14 +42,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         echo "<p>Email sent to $email</p>";
         exit();
-    } else {
-        // Display errors
-        echo "<h1>Error!</h1>
-        <p>The following error(s) occured:<br>";
-        foreach ($errors as $error) {
-            echo "- $error<br>";
-        }
-        echo "<p>Please try again.</p>";
     }
 }
 ?>
@@ -64,9 +56,35 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <body>
         <h1>Forgot Password</h1>
         <p>Please enter your email below and a link will be sent to change your password.</p>
-        <form method="POST">
-            <input type="email" name="email" required autofocus placeholder="Email" value="<?php if (isset($_GET['email'])) echo $_GET['email']; ?>">
+        <form method="POST" novalidate>
+            <input type="text" autocorrect="off" autocapitalize="none" name="email" required autofocus placeholder="Email" value="<?php if (isset($_GET['email'])) echo $_GET['email']; ?>">
+            <?php
+            if (isset($errors['email'])) {
+                $error = $errors['email'];
+                echo "<p class='error'>$error</p>";
+            }
+            ?>
             <input type="submit" value="Send Reset Link">
         </form>
+        <script>
+            function validate() {
+                // Remove existing errors
+                while (document.getElementsByClassName('error')[0]) {
+                    document.getElementsByClassName('error')[0].remove();
+                }
+
+                let valid = true;
+                const email = document.getElementsByTagName("input")['email'];
+
+                // Validate email
+                if (email.validity.valueMissing) {
+                    email.insertAdjacentHTML('afterend', '<p class="error">⚠ Please enter an email</p>');
+                    valid = false;
+                }
+                return valid;
+            }
+
+            document.getElementsByTagName('form')[0].onsubmit = validate;
+        </script>
     </body>
 </html>

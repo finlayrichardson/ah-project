@@ -1,5 +1,5 @@
 <?php
-require('./auth.php');
+require('./resources/auth.php');
 
 if (!isset($_GET['page'])) {
     $page = 1;

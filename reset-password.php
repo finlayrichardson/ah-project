@@ -1,5 +1,5 @@
 <?php
-require('./auth.php');
+require('./resources/auth.php');
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (isset($_REQUEST['token'])) {
@@ -18,11 +18,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         } else { // Token is valid
             // Validate password
             if (empty($_POST['password1'])) {
-                $errors[] = "Please enter a password";
+                $errors['password1'] = "Please enter a password";
             } elseif (empty($_POST['password2'])) {
-                $errors[] = "Please confirm password";
+                $errors['password2'] = "Please confirm password";
             } elseif ($_POST['password1'] !== $_POST['password2']) {
-                $errors[] = "Passwords must match";
+                $errors['password2'] = "Passwords must match";
             } else {
                 $password = password_hash(trim($_POST['password1']), PASSWORD_BCRYPT);
             }
@@ -34,14 +34,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 echo "<p>Password successfully changed!</p><br>";
                 echo "<a href='/login'>Login</a>";
                 exit();
-            } else {
-                // Display errors
-                echo "<h1>Error!</h1>
-                <p>The following error(s) occured:<br>";
-                foreach ($errors as $error) {
-                    echo "- $error<br>";
-                }
-                echo "<p>Please try again.</p>";
             }
         }
     } else {
@@ -60,10 +52,49 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <body>
         <h1>Reset Password</h1>
         <p>Please enter your new password below to change it.</p>
-        <form method="POST">
+        <form method="POST" novalidate>
             <input type="password" name="password1" required placeholder="Password" value="<?php if (isset($_POST['password1'])) echo $_POST['password1']; ?>">
+            <?php
+                if (isset($errors['password1'])) {
+                    $error = $errors['password1'];
+                    echo "<p class='error'>$error</p>";
+                }
+                ?>
             <input type="password" name="password2" required placeholder="Confirm Password" value="<?php if (isset($_POST['password2'])) echo $_POST['password2']; ?>">
+            <?php
+                if (isset($errors['password2'])) {
+                    $error = $errors['password2'];
+                    echo "<p class='error'>$error</p>";
+                }
+                ?>
             <input type="submit" value="Reset Password">
         </form>
+        <script>
+            function validate() {
+                // Remove existing errors
+                while (document.getElementsByClassName('error')[0]) {
+                    document.getElementsByClassName('error')[0].remove();
+                }
+
+                let valid = true;
+                const password1 = document.getElementsByTagName("input")['password1'];
+                const password2 = document.getElementsByTagName("input")['password2'];
+
+                // Validate password
+                if (password1.validity.valueMissing) {
+                    password1.insertAdjacentHTML('afterend', '<p class="error">⚠ Please enter a password</p>');
+                    valid = false;
+                } else if (password2.validity.valueMissing) {
+                    password2.insertAdjacentHTML('afterend', '<p class="error">⚠ Please confirm password</p>');
+                    valid = false;
+                } else if (password1.value !== password2.value) {
+                    password2.insertAdjacentHTML('afterend', '<p class="error">⚠ Passwords must match</p>');
+                    valid = false;
+                }
+                return valid;
+            }
+
+            document.getElementsByTagName('form')[0].onsubmit = validate;
+        </script>
     </body>
 </html>

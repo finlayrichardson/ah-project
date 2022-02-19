@@ -7,8 +7,8 @@ if (isset($_SESSION['user_id'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    require('./connect-db.php');
-    require('./tools.php');
+    require('./resources/connect-db.php');
+    require('./resources/tools.php');
     $errors = array();
 
     // Check an email has been entered
@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <h1>Login</h1>
             <hr>
             <form method="POST" novalidate>
-                <input type="email" name="email" required autofocus placeholder="Email" value="<?php if (isset($_POST['email'])) echo $_POST['email'];?>">
+                <input type="text" autocorrect="off" autocapitalize="none" name="email" required autofocus placeholder="Email" value="<?php if (isset($_POST['email'])) echo $_POST['email'];?>">
                 <?php
                 if (isset($errors['email'])) {
                     $error = $errors['email'];

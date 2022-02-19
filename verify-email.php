@@ -1,5 +1,5 @@
 <?php
-require('./auth.php');
+require('./resources/auth.php');
 
 if (isset($_SESSION['user_id'])) {
     // User has session variables
@@ -50,14 +50,14 @@ if (empty($_SESSION['user_id']) && empty($_GET['token'])) {
 
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    require('./email.php');
+    require('./resources/email.php');
 
     $host = $_SERVER['HTTP_HOST'];
     $token = md5(random_bytes(10));
     $expiry_time = date('Y-m-d H:i:s', strtotime('+4 hours'));
     mysqli_query($db, "INSERT INTO token VALUES ('$token', 'email', $user_id, '$expiry_time');");
 
-    $mail->addAddress($email, $first_name . '' . $last_name);
+    $mail->addAddress($email, $first_name . ' ' . $last_name);
     $mail->Subject = "Verify Email";
     $mail->Body = "<html lang='en'>
     <p>Please click the button below to verify your email.</p><br>

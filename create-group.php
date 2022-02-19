@@ -1,19 +1,19 @@
 <?php
-require('./auth.php');
+require('./resources/auth.php');
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // Validate name
     if (empty($_POST['name'])) {
-        $errors[] = "Please enter a name";
+        $errors['name'] = "⚠ Please enter a name";
     } elseif (!preg_match('/^[-a-zA-Z0-9äöüßÄÖÜ ]+$/', $_POST['name'])) {
-        $errors[] = "Name must not contain special characters";
+        $errors['name'] = "⚠ Name must not contain special characters";
     } elseif (strlen(trim($_POST['name'])) > 50) {
-        $errors[] = "Name must be max 50 characters";
+        $errors['name'] = "⚠ Name must be max 50 characters";
     } else {
         $name = mysqli_real_escape_string($db, trim($_POST['name']));
     }
     // Validate users
     if (empty($_POST['students'])) {
-        $errors[] = "Please enter at least 1 student";
+        $errors['students'] = "⚠ Please enter at least 1 student";
     } else {
         $names = $_POST['students'];
         if (!empty($_POST['teachers'])) $names = array_merge($names, $_POST['teachers']);
@@ -22,12 +22,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (empty($errors)) {
         foreach($names as $user_id) {
             if (!intval($user_id)) {
-                $errors[] = "Invalid User ID: $user_id";
+                $errors['students'] = "⚠ Invalid User ID: $user_id";
                 break;
             }
             $result = query("SELECT user_id FROM user WHERE verified = true AND user_id = ?;", 'i', intval($user_id));
             if (mysqli_num_rows($result) == 0) {
-                $errors[] = "User not found with ID: $user_id";
+                $errors['students'] = "⚠ User not found with ID: $user_id";
             }
         }
     }
@@ -41,14 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             query("INSERT INTO group_member VALUES (?, ?);", 'ii', intval($user_id), $group_id);
         }
         load("group/$group_id");
-    } else {
-        // Display errors
-        echo "<h1>Error!</h1>
-        <p>The following error(s) occured:<br>";
-        foreach ($errors as $error) {
-            echo "- $error<br>";
-        }
-        echo "<p>Please try again.</p>";
     }
 }
 ?>
@@ -94,9 +86,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <h1>Create Group</h1>
         </div>
         <div class='box'>
-            <form method="POST">
+            <form method="POST" novalidate>
                 <input type="text" name="name" required autofocus pattern="[-a-zA-Z0-9äöüßÄÖÜ ]+" maxlength="50" placeholder="Name" value="<?php if (isset($_POST['name'])) echo $_POST['name'];?>">
-                <select name="students[]" class="students" multiple>
+                <?php
+                if (isset($errors['name'])) {
+                    $error = $errors['name'];
+                    echo "<p class='error'>$error</p>";
+                }
+                ?>
+                <select name="students[]" required class="students" multiple>
                     <?php
                     $result = mysqli_query($db, "SELECT user_id, first_name, last_name FROM user WHERE role = 'student' AND verified = true;");
                     while ($row = mysqli_fetch_assoc($result)) {
@@ -106,6 +104,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     }
                     ?>
                 </select>
+                <?php
+                if (isset($errors['students'])) {
+                    $error = $errors['students'];
+                    echo "<p class='error'>$error</p>";
+                }
+                ?>
                 <select name="teachers[]" class="teachers" multiple>
                     <?php
                     $user_id = $_SESSION['user_id'];
@@ -120,5 +124,39 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <input type="submit" value="Create Group">
             </form>
         </div>
+        <script>
+            function validate() {
+                // Remove existing errors
+                while (document.getElementsByClassName('error')[0]) {
+                    document.getElementsByClassName('error')[0].remove();
+                }
+
+                let valid = true;
+                const name = document.getElementsByTagName("input")['name'];
+                const students = document.getElementsByClassName("students")[0];
+                const students_input = document.getElementsByClassName('select2-container')[0];
+                
+                // Validate name
+                if (name.validity.valueMissing) {
+                    name.insertAdjacentHTML('afterend', '<p class="error">⚠ Please enter a title</p>');
+                    valid = false;
+                } else if (name.validity.patternMismatch) {
+                    name.insertAdjacentHTML('afterend', '<p class="error">⚠ Name must not contain special characters</p>');
+                    valid = false;
+                } else if (name.validity.rangeOverflow) {
+                    name.insertAdjacentHTML('afterend', '<p class="error">⚠ Name must be max 50 characters</p>');
+                    valid = false;
+                }
+
+                // Validate students
+                if (students.validity.valueMissing) {
+                    students_input.insertAdjacentHTML('afterend', '<p class="error">⚠ Please enter at least 1 student</p>');
+                    valid = false;
+                }
+                return valid;
+            }
+
+            document.getElementsByTagName('form')[0].onsubmit = validate;
+        </script>
     </body>
 </html>

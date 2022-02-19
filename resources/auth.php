@@ -1,6 +1,6 @@
 <?php
-require('./tools.php');
-require('./connect-db.php');
+require('./resources/tools.php');
+require('./resources/connect-db.php');
 session_name("id");
 session_start();
 

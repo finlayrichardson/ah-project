@@ -1,5 +1,5 @@
 <?php
-require('./auth.php');
+require('./resources/auth.php');
 if ($_SESSION['role'] != "student") load('index');
 
 $user_id = $_SESSION['user_id'];
@@ -116,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <div class="file-upload">
         <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger('click')">Upload Code</button>
         <div class="file-upload-wrap">
-            <input class="file-upload-input" type='file' onchange="upload(this);" accept="text/*" />
+            <input class="file-upload-input" type='file' onchange="upload(this);"/>
             <div class="drag-text">
             <h3>Drag and drop a file or select upload code</h3>
             </div>

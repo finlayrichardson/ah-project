@@ -318,6 +318,7 @@ hr {
   color: red;
   margin: 0;
   margin-bottom: 5px;
+  clear: both;
 }
 
 .title {
@@ -552,7 +553,7 @@ hr {
 .select2-container {
   clear: both;
   float: left;
-  margin: 20px;
+  margin: 10px 20px 10px 0;
 }
 
 .box input:not([type="submit"]) {

@@ -1,5 +1,5 @@
 <?php
-require('./auth.php');
+require('./resources/auth.php');
 if ($_SESSION['role'] == "student") load('index');
 
 $task_id = $_GET['task_id'];
