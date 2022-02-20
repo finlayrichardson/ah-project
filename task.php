@@ -71,11 +71,14 @@ if (mysqli_num_rows($result) == 0 && !$owner) {
         <?php
         // Get task details
         $task_id = $task['task_id'];
+        $owner_id = $task['owner_id'];
         $title = $task['title'];
         $description = htmlspecialchars($task['description']);
         $due_date = $task['due_date'];
         $created_at = $task['created_at'];
         $updated_at = $task['updated_at'];
+        $result = mysqli_query($db, "SELECT first_name, last_name FROM user WHERE user_id = $owner_id;");
+        $owner_name = implode(' ', mysqli_fetch_assoc($result));
         echo "<title>$title</title>";
         ?>
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -109,24 +112,25 @@ if (mysqli_num_rows($result) == 0 && !$owner) {
         echo "<p>$description</p>";
         echo "</div>";
         echo "<div class='details'>";
-        echo ($teacher) ? "<p><strong>Group</strong>: $groups" : "<p><strong>Group(s)</strong>: $groups";
-        echo "<p><strong>Due</strong>: $due_date</p>";
+        echo "<p><b>Owner</b>: $owner_name</p>";
+        echo ($teacher) ? "<p><b>Group</b>: $groups" : "<p><b>Group(s)</b>: $groups";
+        echo "<p><b>Due</b>: $due_date</p>";
         if ($teacher) {
             $count = count_submitted($task_id);
             $num_result = mysqli_query($db, "SELECT COUNT(DISTINCT(user.user_id)) FROM user, `group`, group_member, task_recipient WHERE task_recipient.group_id = group.group_id AND group_member.user_id = user.user_id AND group_member.group_id = group.group_id AND task_id = $task_id AND role = 'student';");
             $num = mysqli_fetch_array($num_result)[0];
-            echo "<p><strong>Submitted</strong>: $count/$num</p>";
+            echo "<p><b>Submitted</b>: $count/$num</p>";
         }
 
-        echo "<p><strong>Created at</strong>: $created_at</p>";
-        if ($created_at != $updated_at) echo "<p><strong>Last edited at</strong>: $updated_at</p>";
+        echo "<p><b>Created at</b>: $created_at</p>";
+        if ($created_at != $updated_at) echo "<p><b>Last edited at</b>: $updated_at</p>";
         echo "         
              </div></div>";
 
         echo "<div class='buttons'>";
         echo ($teacher) ? "<a href='/view-code/$task_id'>View submitted code</a>" : "<a href='/upload-code/$task_id'>Upload Code</a>";
         if ($owner) echo "
-                 <form method='POST'>
+                 <form method='POST' id='action'>
                      <input type='hidden' name='action' value='delete'>
                      <input type='hidden' name='task_id' value=$task_id>
                      <input type='submit' id='delete' onClick=\"javascript: return confirm('Are you sure you want to delete this task? This will also remove all submitted solutions.');\" value='Delete'>

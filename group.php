@@ -73,7 +73,10 @@ switch ($status) {
         // Get group details
         $group = mysqli_fetch_assoc($group_result);
         $group_id = $group['group_id'];
+        $owner_id = $group['owner_id'];
         $name = $group['name'];
+        $result = mysqli_query($db, "SELECT first_name, last_name FROM user WHERE user_id = $owner_id;");
+        $owner_name = implode(' ', mysqli_fetch_assoc($result));
         echo "<title>$name</title>";
         ?>
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -89,6 +92,7 @@ switch ($status) {
         echo "</div>";
         echo "
              <div class='box'>
+                 <p id='owner'><b>Owner</b>: $owner_name</p>
                  <div class='names'>
                      <h2>Students: </h2>
              ";
@@ -97,8 +101,6 @@ switch ($status) {
             $name = $row['first_name'] . " " . $row['last_name'];
             echo "<p>$name</p>";
         }
-        echo "</div>";
-        echo "<div class='names'>";
         echo "<h2>Other teacher(s): </h2>";
         $result = query("SELECT first_name, last_name FROM user, group_member WHERE user.user_id = group_member.user_id AND role = 'teacher' AND user.user_id != ? AND group_member.group_id = ?;", 'ii', $user_id, $group_id);
         while ($row = mysqli_fetch_assoc($result)) {
@@ -111,7 +113,7 @@ switch ($status) {
                  <a href='/create-task?group_id=$group_id'>Set Task</a>
              ";
         if ($owner) echo "
-                 <form method='POST'>
+                 <form method='POST' id='action'>
                      <input type='hidden' name='action' value='delete'>
                      <input type='hidden' name='group_id' value=$group_id>
                      <input type='submit' id='delete' onClick=\"javascript: return confirm('Are you sure you want to delete this group? This will also remove all tasks set to this group.');\" value='Delete'>

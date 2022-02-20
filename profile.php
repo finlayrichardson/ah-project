@@ -41,10 +41,10 @@ $email = $_SESSION['email'];
         echo "
         <div class='box'>
             <div id='profile'>
-                <p><strong>First Name</strong>: $first_name</p>
-                <p><strong>Last Name</strong>: $last_name</p>
-                <p><strong>Email</strong>: $email</p>
-                <p><strong>Group(s)</strong>: $groups</p>
+                <p><b>First Name</b>: $first_name</p>
+                <p><b>Last Name</b>: $last_name</p>
+                <p><b>Email</b>: $email</p>
+                <p><b>Group(s)</b>: $groups</p>
             </div>
         </div>
         ";

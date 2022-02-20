@@ -77,20 +77,20 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
         <script>
             $(document).ready(function() {
-                $('.multi-input').select2({
+                $('.groups').select2({
                     placeholder: "Group(s)",
-                    width: "calc(50% + 8px)"
+                    width: "calc(50% + 8px)",
                 });
                 <?php
                 if (isset($_POST['groups'])) {
                     $group_ids = implode(", ", $_POST['groups']);
-                    echo "$('.multi-input').val([$group_ids]);";
-                    echo "$('.multi-input').trigger('change');";
+                    echo "$('.groups').val([$group_ids]);";
+                    echo "$('.groups').trigger('change');";
                 }
                 if (isset($_GET['group_id'])) {
                     $group_id = intval($_GET['group_id']);
-                    echo "$('.multi-input').val($group_id);";
-                    echo "$('.multi-input').trigger('change');";
+                    echo "$('.groups').val($group_id);";
+                    echo "$('.groups').trigger('change');";
                 }
                 ?>
             });
@@ -114,7 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     echo "<p class='error'>$error</p>";
                 }
                 ?>
-                <select name="groups[]" required class="multi-input" multiple>
+                <select name="groups[]" required class="groups" multiple>
                     <?php
                     $result = ($_SESSION['role'] == "admin") ? mysqli_query($db, "SELECT group_id, name FROM `group`;") : mysqli_query($db, "SELECT group_id, name FROM `group` WHERE owner_id = $user_id OR group_id IN(SELECT group_member.group_id FROM user, group_member WHERE user.user_id = group_member.user_id AND group_member.user_id = $user_id);");
                     while ($row = mysqli_fetch_assoc($result)) {
