@@ -74,9 +74,9 @@ if (mysqli_num_rows($result) == 0 && !$owner) {
         $owner_id = $task['owner_id'];
         $title = $task['title'];
         $description = htmlspecialchars($task['description']);
-        $due_date = $task['due_date'];
-        $created_at = $task['created_at'];
-        $updated_at = $task['updated_at'];
+        $due_date = date('d/m/y', strtotime($task['due_date']));
+        $created_at = date('d/m/y H:i', strtotime($task['created_at']));
+        $updated_at = date('d/m/y H:i', strtotime($task['updated_at']));
         $result = mysqli_query($db, "SELECT first_name, last_name FROM user WHERE user_id = $owner_id;");
         $owner_name = implode(' ', mysqli_fetch_assoc($result));
         echo "<title>$title</title>";

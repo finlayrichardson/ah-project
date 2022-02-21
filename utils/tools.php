@@ -44,3 +44,13 @@ function pagination($data, $limit = null, $current = null, $adjacents = null) {
     }
     return $result;
 }
+
+function info($title, $info, $link = null) {
+    include('./includes/info.php');
+    exit();
+}
+
+function error($title, $error, $link = null) {
+    include('./includes/error.php');
+    exit();
+}

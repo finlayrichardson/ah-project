@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
                 echo "
                 <tr>
-                    <td>$user_id</td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;$user_id</td>
                     <td>$email</td>
                     <td>$first_name</td>
                     <td>$last_name</td>

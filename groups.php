@@ -12,7 +12,7 @@ if ($_SESSION['role'] == "student") load('index');
     </head>
     <body>
         <?php include("includes/nav.php");?>
-        <div class="title">
+        <div class='title'>
             <h1>Groups</h1>
             <a href="/create-group">Create Group</a>
         </div>

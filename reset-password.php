@@ -50,25 +50,28 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <link rel="stylesheet" href="/resources/style.css">
     </head>
     <body>
-        <h1>Reset Password</h1>
-        <p>Please enter your new password below to change it.</p>
-        <form method="POST" novalidate>
-            <input type="password" name="password1" required placeholder="Password" value="<?php if (isset($_POST['password1'])) echo $_POST['password1']; ?>">
-            <?php
-                if (isset($errors['password1'])) {
-                    $error = $errors['password1'];
-                    echo "<p class='error'>$error</p>";
-                }
-                ?>
-            <input type="password" name="password2" required placeholder="Confirm Password" value="<?php if (isset($_POST['password2'])) echo $_POST['password2']; ?>">
-            <?php
-                if (isset($errors['password2'])) {
-                    $error = $errors['password2'];
-                    echo "<p class='error'>$error</p>";
-                }
-                ?>
-            <input type="submit" value="Reset Password">
-        </form>
+        <div class='user-form'>
+            <h1>Reset Password</h1>
+            <hr>
+            <p>Please enter your new password below to change it.</p>
+            <form method="POST" novalidate>
+                <input type="password" name="password1" required placeholder="Password" value="<?php if (isset($_POST['password1'])) echo $_POST['password1']; ?>">
+                <?php
+                    if (isset($errors['password1'])) {
+                        $error = $errors['password1'];
+                        echo "<p class='error'>$error</p>";
+                    }
+                    ?>
+                <input type="password" name="password2" required placeholder="Confirm Password" value="<?php if (isset($_POST['password2'])) echo $_POST['password2']; ?>">
+                <?php
+                    if (isset($errors['password2'])) {
+                        $error = $errors['password2'];
+                        echo "<p class='error'>$error</p>";
+                    }
+                    ?>
+                <input type="submit" value="Reset Password">
+            </form>
+        </div>
         <script>
             function validate() {
                 // Remove existing errors

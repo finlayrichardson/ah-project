@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <link rel="stylesheet" href="/resources/style.css">
     </head>
     <body>
-        <div class="user-form">
+        <div class='user-form'>
             <h1>Register</h1>
             <hr>
             <form method="POST" novalidate>
@@ -120,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <input type="submit" value="Register">
             </form>
             <hr>
-            <span>Have an account? <a href="/login" class="button">Login</a></span>
+            <span>Have an account? <a href='/login' class='button'>Login</a></span>
         </div>
         <script>
             function validate() {

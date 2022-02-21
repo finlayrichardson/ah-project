@@ -63,9 +63,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <!DOCTYPE html>
 <html lang='en'>
     <head>
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
+        <script src="/resources/jquery.min.js"></script>
+        <script src="/resources/select2.min.js"></script>
+        <link href="/resources/select2.min.css" rel="stylesheet">
         <script>
             $(document).ready(function() {
                 $('.students').select2({
@@ -117,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     echo "<p class='error'>$error</p>";
                 }
                 ?>
-                <select name="students[]" required class="students" multiple>
+                <select name="students[]" required class='students' multiple>
                     <?php
                     $result = mysqli_query($db, "SELECT user_id, first_name, last_name FROM user WHERE role = 'student' AND verified = true;");
                     while ($row = mysqli_fetch_assoc($result)) {
@@ -133,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     echo "<p class='error'>$error</p>";
                 }
                 ?>
-                <select name="teachers[]" class="teachers" multiple>
+                <select name="teachers[]" class='teachers' multiple>
                     <?php
                     $user_id = $_SESSION['user_id'];
                     $result = mysqli_query($db, "SELECT user_id, first_name, last_name FROM user WHERE role != 'student' AND verified = true AND user.user_id != $user_id;");

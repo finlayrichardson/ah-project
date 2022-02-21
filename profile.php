@@ -16,7 +16,7 @@ $email = $_SESSION['email'];
     </head>
     <body>
         <?php include("includes/nav.php");?>
-        <div class="title">
+        <div class='title'>
             <h1>Profile</h1>
             <a href="/edit-profile">Edit Profile</a>
         </div>

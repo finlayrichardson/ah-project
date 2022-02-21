@@ -54,18 +54,21 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <link rel="stylesheet" href="/resources/style.css">
     </head>
     <body>
-        <h1>Forgot Password</h1>
-        <p>Please enter your email below and a link will be sent to change your password.</p>
-        <form method="POST" novalidate>
-            <input type="text" autocorrect="off" autocapitalize="none" name="email" required autofocus placeholder="Email" value="<?php if (isset($_GET['email'])) echo $_GET['email']; ?>">
-            <?php
-            if (isset($errors['email'])) {
-                $error = $errors['email'];
-                echo "<p class='error'>$error</p>";
-            }
-            ?>
-            <input type="submit" value="Send Reset Link">
-        </form>
+        <div class='user-form'>
+            <h1>Forgot Password</h1>
+            <hr>
+            <p>Please enter your email below and a link will be sent to change your password.</p>
+            <form method="POST" novalidate>
+                <input type="text" autocorrect="off" autocapitalize="none" name="email" required autofocus placeholder="Email" value="<?php if (isset($_GET['email'])) echo $_GET['email']; ?>">
+                <?php
+                if (isset($errors['email'])) {
+                    $error = $errors['email'];
+                    echo "<p class='error'>$error</p>";
+                }
+                ?>
+                <input type="submit" value="Send Reset Link">
+            </form>
+        </div>
         <script>
             function validate() {
                 // Remove existing errors

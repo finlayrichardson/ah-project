@@ -22,7 +22,7 @@ if (isset($_GET['sort'])) {
     </head>
     <body>
         <?php include("includes/nav.php");?>
-        <div class="title">
+        <div class='title'>
             <div>
                 <h1>Tasks</h1>
                 <select id='sort' onchange='window.location="tasks?sort="+this.value;'>
@@ -49,7 +49,7 @@ if (isset($_GET['sort'])) {
         while ($row = mysqli_fetch_assoc($result)) {
             $title = $row['title'];
             $task_id = $row['task_id'];
-            $due_date = $row['due_date'];
+            $due_date = date('d/m/y', strtotime($row['due_date']));
             if ($_SESSION['role'] != "student") {
                 $groups = array();
                 $group_result = mysqli_query($db, "SELECT name FROM `group`, task_recipient WHERE group.group_id = task_recipient.group_id AND task_recipient.task_id = $task_id;");

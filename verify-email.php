@@ -80,12 +80,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <link rel="stylesheet" href="/resources/style.css">
     </head>
     <body>
-        <?php
-        echo "<h1>Verify your email</h1>";
-        echo "<p>Welcome $first_name $last_name, please click the button below to send a verification link to your email address.</p><br>";
-        ?>
-        <form method="POST">
-            <input type="submit" value="Send Verification Link">
-        </form>
+        <div class='user-form'>
+            <h1>Verify your email</h1>
+            <hr>
+            <?php
+            echo "<p>Welcome $first_name $last_name, please click the button below to send a verification link to your email address.</p><br>";
+            ?>
+            <form method="POST">
+                <input type="submit" value="Send Verification Link">
+            </form>
+        </div>
     </body>
 </html>

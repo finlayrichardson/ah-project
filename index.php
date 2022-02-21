@@ -11,7 +11,7 @@ require('./utils/auth.php');
     </head>
     <body>
         <?php include("includes/nav.php");?>
-        <div class="title">
+        <div class='title'>
             <h1>Tasks</h1>
             <?php
             if ($_SESSION['role'] != "student") echo "<a href='/create-task'>Create Task</a>";
@@ -24,7 +24,7 @@ require('./utils/auth.php');
         while ($row = mysqli_fetch_assoc($result)) {
             $title = $row['title'];
             $task_id = $row['task_id'];
-            $due_date = $row['due_date'];
+            $due_date = date('d/m/y', strtotime($row['due_date']));
             if ($_SESSION['role'] != "student") {
                 $groups = array();
                 $group_result = mysqli_query($db, "SELECT name FROM `group`, task_recipient WHERE group.group_id = task_recipient.group_id AND task_recipient.task_id = $task_id;");

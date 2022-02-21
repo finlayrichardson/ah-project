@@ -72,9 +72,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <!DOCTYPE html>
 <html lang='en'>
     <head>
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
+        <script src="/resources/jquery.min.js"></script>
+        <script src="/resources/select2.min.js"></script>
+        <link href="/resources/select2.min.css" rel="stylesheet">
         <script>
             $(document).ready(function() {
                 $('.groups').select2({
@@ -114,7 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     echo "<p class='error'>$error</p>";
                 }
                 ?>
-                <select name="groups[]" required class="groups" multiple>
+                <select name="groups[]" required class='groups' multiple>
                     <?php
                     $result = ($_SESSION['role'] == "admin") ? mysqli_query($db, "SELECT group_id, name FROM `group`;") : mysqli_query($db, "SELECT group_id, name FROM `group` WHERE owner_id = $user_id OR group_id IN(SELECT group_member.group_id FROM user, group_member WHERE user.user_id = group_member.user_id AND group_member.user_id = $user_id);");
                     while ($row = mysqli_fetch_assoc($result)) {
