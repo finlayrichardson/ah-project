@@ -4,26 +4,22 @@ if ($_SESSION['role'] != "admin") load('index');
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // Validate action
     if (empty($_POST['action'])) {
-        echo "<p>You must specify an action</p>";
-        exit();
+        info("error", "Admin", "You must specify an action");
     } elseif (!in_array($_POST['action'], array('promote', 'demote', 'delete'))) {
         // Action is wrong
-        echo "<p>Invalid action</p>";
-        exit();
+        info("error", "Admin", "Invalid action");
     } else {
         $action = mysqli_real_escape_string($db, trim($_POST['action']));
     }
     // Validate user_id
     if (empty($_POST['user_id'])) {
-        echo "<p>You must specify a User ID</p>";
-        exit();
+        info("error", "Admin", "You must specify a User ID");
     } else {
         $user_id = intval(trim($_POST['user_id']));
     }
     $result = query("SELECT user_id FROM user WHERE user_id = ?;", 'i', $user_id);
     if (mysqli_num_rows($result) == 0) {
-        echo "<p>User not found</p>";
-        exit();
+        info("error", "Admin", "User not found");
     } 
     // Do action
     switch($_POST['action']) {

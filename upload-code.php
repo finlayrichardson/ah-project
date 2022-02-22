@@ -5,8 +5,7 @@ if ($_SESSION['role'] != "student") load('index');
 $user_id = $_SESSION['user_id'];
 // Validate ID
 if (empty($_GET['id'])) {
-    echo "<p>No task specified</p>";
-    exit();
+    info("error", "Upload Code", "No task specified", "tasks");
 } else {
     $task_id = intval(trim($_GET['id']));
 }

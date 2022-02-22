@@ -10,11 +10,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $expiry_time = $result['expires'];
         // Check token is valid
         if ($type != "password") {
-            echo "<p>Token is invalid</p>";
-            exit();
+            info("error", "Reset Password", "Invalid token");
         } elseif (strtotime($expiry_time) < strtotime('now')) {
-            echo "<p>Token has expired</p>";
-            exit();
+            info("error", "Reset Password", "Token has expired");
         } else { // Token is valid
             // Validate password
             if (empty($_POST['password1'])) {
@@ -31,9 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             if (empty($errors)) {
                 // Change password
                 mysqli_query($db, "UPDATE user SET password = '$password' WHERE user_id = $user_id;");
-                echo "<p>Password successfully changed!</p><br>";
-                echo "<a href='/login'>Login</a>";
-                exit();
+                info("success", "Reset Password", "Password successfully changed!", "login");
             }
         }
     } else {
@@ -50,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <link rel="stylesheet" href="/resources/style.css">
     </head>
     <body>
-        <div class='user-form'>
+        <div class='centre-box'>
             <h1>Reset Password</h1>
             <hr>
             <p>Please enter your new password below to change it.</p>

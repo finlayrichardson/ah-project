@@ -24,23 +24,14 @@ if (isset($_GET['token'])) {
     $expiry_time = $result['expires'];
     // Check token is valid
     if ($type != "email") {
-        echo "<p>Token is invalid</p>";
-        exit();
+        info("error", "Verify Email", "Invalid token");
     } elseif (strtotime($expiry_time) < strtotime('now')) {
-        echo "<p>Token has expired</p>";
-        exit();
+        info("error", "Verify Email", "Token has expired");
     } else {
         // Token is valid
         mysqli_query($db, "UPDATE user SET verified = true WHERE user_id = $user_id;");
-        echo "<p>Email validated!</p><br>";
-        if (isset($_SESSION['user_id']) && $user_id == $_SESSION['user_id']) {
-            // Is a brand new user
-            $_SESSION['role'] = "student";
-            echo "<a href='/index'>Home</a>";
-        } else {
-            echo "<a href='/login'>Login</a>";
-        }
-        exit();
+        $link = (isset($_SESSION['user_id']) && $user_id == $_SESSION['user_id']) ? "index" : "login";
+        info("success", "Verify Email", "Email validated!", $link);
     }
 }
 // User with no token and not logged in gets sent to login
@@ -66,9 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $mail->AltBody = "Please visit http://$host/verify-email/$token to verify your email.";
     $mail->send();
 
-    echo "<p>Email sent to $email</p><br>
-          <a href='/login'>Login</a>";
-    exit();
+    info("success", "Verify Email", "Email sent to $email", "login");
 }
 ?>
 
@@ -80,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <link rel="stylesheet" href="/resources/style.css">
     </head>
     <body>
-        <div class='user-form'>
+        <div class='centre-box'>
             <h1>Verify your email</h1>
             <hr>
             <?php

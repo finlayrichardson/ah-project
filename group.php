@@ -5,34 +5,29 @@ if ($_SESSION['role'] == "student") load('index');
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // Validate action
     if (empty($_POST['action'])) {
-        echo "<p>You must specify an action</p>";
-        exit();
+        info("error", "Group", "You must specify an action");
     } elseif ($_POST['action'] != "delete") {
         // Action is wrong
-        echo "<p>Invalid action</p>";
-        exit();
+        info("error", "Group", "Invalid action");
     } else {
         $action = "delete";
     }
     // Validate group_id
     if (empty($_POST['group_id'])) {
-        echo "<p>You must specify a Group ID</p>";
-        exit();
+        info("error", "Group", "You must specify a Group ID");
     } else {
         $group_id = mysqli_real_escape_string($db, trim($_POST['group_id']));
     }
     // Check group exists
     $result = query("SELECT group_id FROM `group` WHERE group_id = ?;", 'i', $group_id);
     if (mysqli_num_rows($result) == 0) {
-        echo "<p>Group not found</p>";
-        exit();
+        info("error", "Group", "Group not found");
     }
     // Check user has permissions
     $result = query("SELECT owner_id FROM `group` WHERE group_id = ?;", 'i', $group_id);
     $user_id = $_SESSION['user_id'];
     if (mysqli_fetch_array($result)[0] != $user_id && $_SESSION['role'] != "admin") {
-        echo "<p>You do not have permissions to delete this group</p>";
-        exit();
+        info("error", "Group", "You do not have permissions to delete this group");
     }
     // Delete group
     query("DELETE FROM `group` WHERE group_id = ?;", 'i', $group_id);
@@ -41,8 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 // Validate ID
 if (empty($_GET['id'])) {
-    echo "<p>No group specified</p>";
-    exit();
+    info("error", "Group", "No group specified");
 } else {
     $group_id = intval(trim($_GET['id']));
 }

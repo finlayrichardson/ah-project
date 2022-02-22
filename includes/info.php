@@ -6,12 +6,12 @@
         <link rel="stylesheet" href="/resources/style.css">
     </head>
     <body>
-        <div class='user-form'>
-            <img src="/resources/info.svg">
-            <p><?php echo $info;?></p>
+        <div class='centre-box' id="info">
+            <img src="<?php echo "/resources/$type.svg"?>" alt="<?php echo $type?>">
+            <p><?php echo $message;?></p>
             <?php
             if (isset($link)) {
-                $link_name = ucfirst($link);
+                $link_name = ($link = "index") ? "Home" : ucfirst($link);
                 echo "<a href='/$link'>$link_name</a>";
             }
             ?>

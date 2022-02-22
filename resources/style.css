@@ -269,7 +269,7 @@ input[type="submit"] {
   font-size: medium;
 }
 
-.user-form {
+.centre-box {
   background-color: white;
   border-radius: 20px;
   padding: 20px;
@@ -281,12 +281,12 @@ input[type="submit"] {
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 20px rgba(0, 0, 0, 0.24);
 }
 
-.user-form h1 {
+.centre-box h1 {
   margin-top: 0px;
   font-size: 40px; /*50 for big one*/
 }
 
-.user-form img {
+.centre-box img {
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -316,7 +316,7 @@ hr {
   border-radius: 5px;
 }
 
-.user-form a {
+.centre-box a {
   color: dodgerblue;
   border-radius: 5px;
 }
@@ -552,7 +552,8 @@ hr {
   justify-content: space-between;
 }
 
-.buttons a {
+.buttons a,
+#info a {
   float: left;
   margin: 30px;
   padding: 15px;
@@ -706,4 +707,18 @@ th {
 
 td form {
   padding: 0;
+}
+
+#info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#info p {
+  font-size: 20px;
+}
+
+#info a {
+  margin: 10px 0;
 }

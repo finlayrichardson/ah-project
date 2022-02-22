@@ -2,8 +2,7 @@
 require('./utils/auth.php');
 // Validate ID
 if (empty($_REQUEST['id'])) {
-    echo "<p>No group specified</p>";
-    exit();
+    info("error", "Edit Group", "No group specified");
 } else {
     $group_id = intval(trim($_REQUEST['id']));
 }

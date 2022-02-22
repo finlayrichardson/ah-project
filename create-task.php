@@ -35,8 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $user_id = $_SESSION['user_id'];
         foreach($groups as $group_id) {
             if (!teacher_status($user_id, $group_id)) {
-                echo "<p>You don't have permission to set a task to this group";
-                exit();
+                info("error", "Create Task", "You don't have permission to set a task to this group");
             }
         }
     }

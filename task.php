@@ -4,34 +4,29 @@ require('./utils/auth.php');
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // Validate action
     if (empty($_POST['action'])) {
-        echo "<p>You must specify an action</p>";
-        exit();
+        info("error", "Task", "You must specify an action");
     } elseif ($_POST['action'] != "delete") {
         // Action is wrong
-        echo "<p>Invalid action</p>";
-        exit();
+        info("error", "Task", "Invalid action");
     } else {
         $action = "delete";
     }
     // Validate task_id
     if (empty($_POST['task_id'])) {
-        echo "<p>You must specify a Task ID</p>";
-        exit();
+        info("error", "Task", "You must specify a Task ID");
     } else {
         $task_id = mysqli_real_escape_string($db, trim($_POST['task_id']));
     }
     // Check task exists
     $result = query("SELECT task_id FROM task WHERE task_id = ?;", 'i', $task_id);
     if (mysqli_num_rows($result) == 0) {
-        echo "<p>Task not found</p>";
-        exit();
+        info("error", "Task", "Task not found");
     }
     // Check user has permissions
     $result = query("SELECT owner_id FROM task WHERE task_id = ?;", 'i', $task_id);
     $user_id = $_SESSION['user_id'];
     if (mysqli_fetch_array($result)[0] != $user_id && $_SESSION['role'] != "admin") {
-        echo "<p>You do not have permissions to delete this group</p>";
-        exit();
+        info("error", "Task", "You do not have permissions to delete this task");
     }
     // Delete task
     query("DELETE FROM task WHERE task_id = ?;", 'i', $task_id);
@@ -40,8 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 // Validate ID
 if (empty($_GET['id'])) {
-    echo "<p>No task specified</p>";
-    exit();
+    info("error", "Task", "No task specified", "tasks");
 } else {
     $task_id = intval(trim($_GET['id']));
 }

@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <link rel="stylesheet" href="/resources/style.css">
     </head>
     <body>
-        <div class='user-form'>
+        <div class='centre-box'>
             <h1>Register</h1>
             <hr>
             <form method="POST" novalidate>

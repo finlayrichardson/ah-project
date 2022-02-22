@@ -40,8 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $mail->AltBody = "Please visit http://$host/reset-password/$token to reset your password.";
         $mail->send();
 
-        echo "<p>Email sent to $email</p>";
-        exit();
+        info("success", "Forgot Password", "Email sent to $email");
     }
 }
 ?>
@@ -54,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <link rel="stylesheet" href="/resources/style.css">
     </head>
     <body>
-        <div class='user-form'>
+        <div class='centre-box'>
             <h1>Forgot Password</h1>
             <hr>
             <p>Please enter your email below and a link will be sent to change your password.</p>
