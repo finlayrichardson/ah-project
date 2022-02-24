@@ -54,7 +54,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <title>Upload Code</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="/resources/style.css">
-        <script type="text/javascript" src="https://livejs.com/live.js"></script>
         <script src="/resources/jquery.min.js"></script>
         <script>
             function upload(input) {

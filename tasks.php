@@ -25,7 +25,7 @@ if (isset($_GET['sort'])) {
         <div class='title'>
             <div>
                 <h1>Tasks</h1>
-                <select id='sort' onchange='window.location="tasks?sort="+this.value;'>
+                <select class='dropdown' onchange='window.location="tasks?sort="+this.value;'>
                     <option value='desc'>Sort by due date (descending)</option>
                     <option value='asc'>Sort by due date (ascending)</option>
                 </select>
@@ -34,7 +34,7 @@ if (isset($_GET['sort'])) {
             if ($_SESSION['role'] != "student") echo "<a href='/create-task'>Create Task</a>";
             echo "
                     <script>
-                        document.getElementById('sort').value = '$sort';
+                        document.getElementsByClassName('dropdown')[0].value = '$sort';
                     </script>";
             ?>
         </div>
