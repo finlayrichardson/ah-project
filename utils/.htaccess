@@ -1,3 +1,2 @@
-Order Deny, ALlow
-Deny from ALl
-Allow from 127.0.0.1
+Require all denied
+ErrorDocument 403 /403.php

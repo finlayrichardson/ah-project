@@ -54,13 +54,18 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <title>Upload Code</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="/resources/style.css">
+        <script type="text/javascript" src="https://livejs.com/live.js"></script>
         <script src="/resources/jquery.min.js"></script>
         <script>
             function upload(input) {
                 if (input.files && input.files[0]) {
                     $('.file-upload-btn').hide();
                     $('.file-upload-wrap').hide();
-                    $('.file-upload-image').show();
+                    if (input.files[0].name.endsWith('.py')) {
+                        $('.file-upload-image').show();
+                    } else {
+                        $('.file-upload-image').hide();
+                    }
                     $('.file-upload-content').show();
                     $('.file-title').html(input.files[0].name);
 
@@ -106,6 +111,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                          $('.file-upload-content').show();
                          $('.file-title').html('$file_name');
                      });";
+            } else {
+                echo "
+                $(document).ready(function() {
+                    $('.file-upload-content').hide();
+                });";
             }
             ?>
         </script>
@@ -113,19 +123,20 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <body>
         <?php include("includes/nav.php");?>
         <div class="file-upload">
-        <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger('click')">Upload Code</button>
-        <div class="file-upload-wrap">
-            <input class="file-upload-input" type='file' onchange="upload(this);"/>
-            <div class="drag-text">
-            <h3>Drag and drop a file or select upload code</h3>
+            <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger('click')">Upload Code</button>
+            <div class="file-upload-wrap">
+                <input class="file-upload-input" type='file' onchange="upload(this);"/>
+                <div class="drag-text">
+                    <h3>Drag and drop a file or select upload code</h3>
+                </div>
             </div>
-        </div>
-        <div class="file-upload-content">
-            <img class="file-upload-image" src="/resources/python.png"/>
-            <div class="file-title-wrap">
-            <button type="button" onclick="removeUpload()" class="remove-file">Remove <span class="file-title">Uploaded File</span></button>
+            <div class="file-upload-content">
+                <div class="file-name">
+                    <img class="file-upload-image" src="/resources/python.svg"/>
+                    <span class="file-title">Uploaded File</span>
+                </div>
+                <button type="button" onclick="removeUpload()" class="remove-file">Remove File</button>
             </div>
-        </div>
         </div>
     </body>
 </html>
