@@ -7,7 +7,7 @@
     </head>
     <body>
         <div class='centre-box' id="info">
-            <img src="<?php echo "/resources/$type.svg"?>" alt="<?php echo $type?>">
+            <img src="<?php echo "/resources/$type.svg";?>" alt="<?php echo $type;?>">
             <p><?php echo $message;?></p>
             <?php
             if (isset($link)) {

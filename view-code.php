@@ -50,7 +50,7 @@ function line_number() {
 }
 
 if (!empty(glob("./code/$task_id/$student_id/*"))) {
-    $code = "  1  " . preg_replace_callback("(\r\n|\r|\n)", "line_number", rtrim(file_get_contents(glob("./code/$task_id/$student_id/*")[0])));
+    $code = htmlspecialchars("  1  " . preg_replace_callback("(\r\n|\r|\n)", "line_number", rtrim(file_get_contents(glob("./code/$task_id/$student_id/*")[0]))));
 }
 ?>
 

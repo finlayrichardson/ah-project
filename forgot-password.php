@@ -28,15 +28,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         // Send email
         $host = $_SERVER['HTTP_HOST'];
         $token = md5(random_bytes(10));
+        $type = "password";
         $expiry_time = date('Y-m-d H:i:s', strtotime('+4 hours'));
         mysqli_query($db, "INSERT INTO token VALUES ('$token', 'password', $user_id, '$expiry_time');");
 
         $mail->addAddress($email, $first_name . ' ' . $last_name);
         $mail->Subject = "Reset Password";
-        $mail->Body = "<html lang='en'>
-        <p>Please click the button below to reset your password.</p><br>
-        <a href='http://$host/reset-password/$token' class='button'>Reset Password</a>
-        </html>";
+        ob_start();
+        include('./includes/email-template.php');
+        $mail->Body = ob_get_clean();
         $mail->AltBody = "Please visit http://$host/reset-password/$token to reset your password.";
         $mail->send();
 
