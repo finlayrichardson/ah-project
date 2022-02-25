@@ -39,7 +39,7 @@ RewriteRule ^upload-code/([^/]+)$ upload-code.php?id=$1
 # Rewrite view-code ids
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^view-code/([^/]+)/([^/]+)$ view-code.php?task_id=$1&user_id=$2
+RewriteRule ^view-code/([^/]*)/?(.*)$ view-code.php?task_id=$1&student_id=$2
 
 # Remove .php file extension
 RewriteCond %{REQUEST_FILENAME} !-f
