@@ -49,3 +49,23 @@ function info($type, $title, $message, $link = null) {
     include('./includes/info.php');
     exit();
 }
+
+function send_email($type, $email, $first_name, $last_name, $token) {
+    require('./utils/email.php');
+    $host = $_SERVER['HTTP_HOST'];
+    $mail->addAddress($email, $first_name . ' ' . $last_name);
+    switch ($type) {
+        case "email":
+            $mail->Subject = "Verify Email";
+            $mail->AltBody =  "Please visit http://$host/verify-email/$token to verify your email.";
+            break;
+        case "password":
+            $mail->Subject = "Reset Password";
+            $mail->AltBody = "Please visit http://$host/reset-password/$token to reset your password.";
+            break;
+    }
+    ob_start();
+    include('./includes/email-template.php');
+    $mail->Body = ob_get_clean();
+    $mail->send();
+}

@@ -91,6 +91,7 @@ nav ul li a,
     justify-content: space-between;
     grid-template-columns: repeat(5, auto);
     grid-template-rows: 200px;
+    /* more per row for big screens */
 }
 
 .group {
@@ -744,4 +745,18 @@ td form {
     height: 100%;
     border-radius: 10px;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 10px rgba(0, 0, 0, 0.24);
+}
+
+#no-code {
+    width: 30%;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 10px rgba(0, 0, 0, 0.24);
+    padding: 30px;
+    margin: 20px;
+    text-align: center;
+}
+
+#no-code p {
+    font-size: 25px;
 }

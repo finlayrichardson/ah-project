@@ -43,20 +43,11 @@ if (empty($_SESSION['user_id']) && empty($_GET['token'])) {
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     require('./utils/email.php');
 
-    $host = $_SERVER['HTTP_HOST'];
     $token = md5(random_bytes(10));
-    $type = "email";
     $expiry_time = date('Y-m-d H:i:s', strtotime('+4 hours'));
     mysqli_query($db, "INSERT INTO token VALUES ('$token', 'email', $user_id, '$expiry_time');");
 
-    $mail->addAddress($email, $first_name . ' ' . $last_name);
-    $mail->Subject = "Verify Email";
-    ob_start();
-    include('./includes/email-template.php');
-    $mail->Body = ob_get_clean();
-    $mail->AltBody = "Please visit http://$host/verify-email/$token to verify your email.";
-    $mail->send();
-
+    send_email("email", $email, $first_name, $last_name, $token);
     info("success", "Verify Email", "Email sent to $email", "login");
 }
 ?>
@@ -76,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             echo "<p>Welcome $first_name $last_name, please click the button below to send a verification link to your email address.</p><br>";
             ?>
             <form method="POST">
-                <input type="submit" value="Send Verification Link">
+                <input type="submit" value="Send Verification Link" onclick="this.form.submit(); this.disabled=true; this.value='Sending…';">
             </form>
         </div>
     </body>
