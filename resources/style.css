@@ -76,6 +76,7 @@ nav ul li a,
     border-radius: 10px;
     margin-left: 40px;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: transform 0.5s;
 }
 
 #logout a {
@@ -105,6 +106,7 @@ nav ul li a,
     width: 170px;
     height: 150px;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 10px rgba(0, 0, 0, 0.24);
+    transition: transform 0.5s;
 }
 
 .group p {
@@ -142,6 +144,7 @@ nav ul li a,
     border-radius: 7px;
     font-weight: 700;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 10px rgba(0, 0, 0, 0.24);
+    transition: transform 0.5s;
 }
 
 .file-upload-wrap {
@@ -161,6 +164,7 @@ nav ul li a,
     outline: none;
     opacity: 0;
     cursor: pointer;
+    transition: transform 0.5s;
 }
 
 .drag-text {
@@ -206,6 +210,7 @@ nav ul li a,
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 10px rgba(0, 0, 0, 0.24);
     font-weight: 700;
     font-size: medium;
+    transition: transform 0.5s;
 }
 
 input[type="submit"] {
@@ -220,6 +225,28 @@ input[type="submit"] {
     cursor: pointer;
     border-radius: 10px;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 10px rgba(0, 0, 0, 0.24);
+    transition: transform 0.5s;
+}
+
+input[type="submit"]:hover,
+.file-upload-btn:hover,
+.file-upload-input:hover,
+.remove-file:hover,
+#logout:hover,
+.title a:hover,
+.submissions-options a:hover,
+.info a:hover,
+#more-tasks a:hover,
+#page-nums a:hover,
+.buttons a:hover,
+#info a:hover,
+.submissions-options a:hover {
+    transform: scale(1.05);
+}
+
+.task:hover,
+.group:hover {
+    transform: scale(1.005);
 }
 
 ::placeholder {
@@ -320,6 +347,7 @@ hr {
     border-radius: 10px;
     padding: 15px;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 10px rgba(0, 0, 0, 0.24);
+    transition: transform 0.5s;
 }
 
 .dropdown {
@@ -344,6 +372,8 @@ hr {
     margin: 30px 20px;
     border-radius: 20px;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 10px rgba(0, 0, 0, 0.24);
+    transition: transform 0.5s;
+    backface-visibility: hidden;
 }
 
 .info {
@@ -380,6 +410,7 @@ hr {
     background-color: var(--colour);
     border-radius: 10px;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: transform 0.5s;
 }
 
 .left {
@@ -400,6 +431,7 @@ hr {
 }
 
 #more-tasks a {
+    display: inline-block;
     text-decoration: none;
     color: black;
     background-color: white;
@@ -407,6 +439,7 @@ hr {
     border-radius: 10px;
     padding: 15px;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 10px rgba(0, 0, 0, 0.24);
+    transition: transform 0.5s;
 }
 
 #progress-bar {
@@ -442,6 +475,7 @@ hr {
     border-radius: 10px;
     padding: 10px 15px;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 10px rgba(0, 0, 0, 0.24);
+    transition: transform 0.5s;
 }
 
 .box {
@@ -523,6 +557,7 @@ hr {
     background-color: var(--colour);
     border-radius: 10px;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: transform 0.5s;
 }
 
 #delete {

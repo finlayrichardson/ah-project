@@ -8,9 +8,7 @@ if (isset($_SESSION['user_id'])) {
     $first_name = $_SESSION['first_name'];
     $last_name = $_SESSION['last_name'];
 
-    $result = mysqli_query($db, "SELECT verified FROM user WHERE user_id = $user_id;");
-    $verified = mysqli_fetch_row($result)[0];
-    if ($verified) {
+    if ($_SESSION['verified']) {
         // User is already verified
         load('index');
     }
@@ -30,6 +28,7 @@ if (isset($_GET['token'])) {
     } else {
         // Token is valid
         mysqli_query($db, "UPDATE user SET verified = true WHERE user_id = $user_id;");
+        $_SESSION['verified'] = true;
         $link = (isset($_SESSION['user_id']) && $user_id == $_SESSION['user_id']) ? "index" : "login";
         info("success", "Verify Email", "Email validated!", $link);
     }

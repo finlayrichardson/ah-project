@@ -96,6 +96,7 @@ switch ($status) {
             echo "<p>$name</p>";
         }
         echo "<h2>Other teacher(s): </h2>";
+        $user_id = $_SESSION['user_id'];
         $result = query("SELECT first_name, last_name FROM user, group_member WHERE user.user_id = group_member.user_id AND role = 'teacher' AND user.user_id != ? AND group_member.group_id = ?;", 'ii', $user_id, $group_id);
         while ($row = mysqli_fetch_assoc($result)) {
             $name = $row['first_name'] . " " . $row['last_name'];

@@ -11,10 +11,7 @@ if (empty($_SESSION['user_id'])) {
     }
 } else {
     // User is logged in
-    $user_id = $_SESSION['user_id'];
-    $result = mysqli_query($db, "SELECT verified FROM user WHERE user_id = $user_id;");
-    $verified = mysqli_fetch_row($result)[0];
-    if (!$verified && $_SERVER['SCRIPT_NAME'] != '/verify-email.php') {
+    if (!$_SESSION['verified'] && $_SERVER['SCRIPT_NAME'] != '/verify-email.php') {
         // User is not verified
         load('verify-email');
     }
