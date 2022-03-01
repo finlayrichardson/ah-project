@@ -9,7 +9,7 @@ if (empty($_REQUEST['id'])) {
 // Check if group exists
 $group_result = query("SELECT * FROM `group` WHERE group_id = ?;", 'i', $group_id);
 $group = mysqli_fetch_assoc($group_result);
-if (mysqli_num_rows($group_result) == 0) load('404.html');
+if (mysqli_num_rows($group_result) == 0) info("error", "Edit Group", "Group doesn't exist", "groups");
 // Check if user is owner
 $owner_result = query("SELECT owner_id FROM `group` WHERE group_id = ?;", 'i', $group_id);
 $user_id = $_SESSION['user_id'];

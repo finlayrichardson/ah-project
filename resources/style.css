@@ -241,12 +241,12 @@ input[type="submit"]:hover,
 .buttons a:hover,
 #info a:hover,
 .submissions-options a:hover {
-    transform: scale(1.05);
+    transform: perspective(1px) scale(1.05);
 }
 
 .task:hover,
 .group:hover {
-    transform: scale(1.005);
+    transform: perspective(1px) scale(1.005);
 }
 
 ::placeholder {
@@ -782,7 +782,7 @@ td form {
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 10px rgba(0, 0, 0, 0.24);
 }
 
-#no-code {
+.no-content {
     width: 30%;
     background-color: white;
     border-radius: 20px;
@@ -792,6 +792,6 @@ td form {
     text-align: center;
 }
 
-#no-code p {
+.no-content p {
     font-size: 25px;
 }

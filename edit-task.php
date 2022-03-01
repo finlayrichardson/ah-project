@@ -9,7 +9,7 @@ if (empty($_REQUEST['id'])) {
 // Check if task exists
 $task_result = query("SELECT * FROM task WHERE task_id = ?;", 'i', $task_id);
 $task = mysqli_fetch_assoc($task_result);
-if (mysqli_num_rows($task_result) == 0) load('404.html');
+if (mysqli_num_rows($task_result) == 0) info("error", "Edit Task", "Task doesn't exist", "tasks");
 // Check if user is owner
 $owner_result = query("SELECT owner_id FROM task WHERE task_id = ?;", 'i', $task_id);
 $user_id = $_SESSION['user_id'];

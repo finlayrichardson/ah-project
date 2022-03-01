@@ -42,7 +42,7 @@ if (empty($_GET['id'])) {
 }
 // Check if group exists
 $group_result = query("SELECT * FROM `group` WHERE group_id = ?;", 'i', $group_id);
-if (mysqli_num_rows($group_result) == 0) load('404.html');
+if (mysqli_num_rows($group_result) == 0) info("error", "Group", "Group doesn't exist", "groups");
 // Check if user is owner, member or neither
 $status = teacher_status($user_id, $group_id);
 switch ($status) {

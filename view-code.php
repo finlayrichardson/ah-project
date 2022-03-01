@@ -119,7 +119,7 @@ if (!empty(glob("./code/$task_id/$student_id/*"))) {
                 ";
             } else {
                 echo "
-                <div id='no-code'>
+                <div class='no-content'>
                     <p>No code submitted</p>
                 </div>
                 ";

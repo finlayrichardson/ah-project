@@ -42,5 +42,7 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^view-code/([^/]*)/?(.*)$ view-code.php?task_id=$1&student_id=$2
 
 # Remove .php file extension
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^([^\.]+)$ $1.php [NC,L]
+RewriteCond %{DOCUMENT_ROOT}/$1.php -f
+RewriteRule ^([^.]+)$ $1.php [L]
+
+ErrorDocument 404 /404.php

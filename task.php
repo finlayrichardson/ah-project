@@ -42,7 +42,7 @@ if (empty($_GET['id'])) {
 // Check if task exists
 $task_result = query("SELECT * FROM task WHERE task_id = ?;", 'i', $task_id);
 $task = mysqli_fetch_assoc($task_result);
-if (mysqli_num_rows($task_result) == 0) load('404.html');
+if (mysqli_num_rows($task_result) == 0) info("error", "Task", "Task doesn't exist", "tasks");
 // Check user's permissions
 $user_id = $_SESSION['user_id'];
 // Check what role the user is
