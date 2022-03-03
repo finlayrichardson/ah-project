@@ -41,6 +41,8 @@ if (empty($_GET['student_id'])) {
     $current_index = array_search($student_id, $student_ids);
 }
 
+shell_exec("./utils/script.sh $task_id $student_id");
+
 // $count = 0;
 function line_number() {
     static $count = 1;

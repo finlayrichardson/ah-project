@@ -1,15 +1,13 @@
-# interpret task and student id from args
-# move the specified file into the synced folder
-# change the .replit to have that file name
-  # replit has language and run that syncs from github and runs file
-# commit and push
-# potentially introduce multiple so teachers using at same time don't mess it up
+#!/bin/bash
 
-$task_id = $1;
-$student_id = $2;
-$file = `ls ../code/$task_id/$student_id`;
-rm -rf ../current-code/{*,.*};
-mv ../code/$task_id/$student_id/$file ../current-code/;
-echo "language=python3
-      run=git pull;
-      python3 $file;" > ../current-code/.replit;
+task_id=$1
+student_id=$2
+file=`ls ../code/$task_id/$student_id`
+rm -rf ../current-code/{*,.*} 2>/dev/null
+cp ../code/$task_id/$student_id/$file ../current-code/;
+echo -e "language=python3\nrun=git pull;\npython3 $file;" > ../current-code/.replit
+cd ../current-code
+git pull
+git add .
+git commit -m "Change current file"
+git push https://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@github.com/codecanopy-csprojects/current-code.git
