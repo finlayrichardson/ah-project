@@ -41,7 +41,7 @@ if (empty($_GET['student_id'])) {
     $current_index = array_search($student_id, $student_ids);
 }
 
-shell_exec("./utils/script.sh $task_id $student_id");
+exec("cd utils && ./script.sh $task_id $student_id");
 
 // $count = 0;
 function line_number() {
@@ -65,7 +65,6 @@ if (!empty(glob("./code/$task_id/$student_id/*"))) {
         <title>View Code</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="/resources/style.css">
-        <script type="text/javascript" src="https://livejs.com/live.js"></script>
     </head>
     <body>
         <?php include("includes/nav.php");?>
@@ -116,7 +115,7 @@ if (!empty(glob("./code/$task_id/$student_id/*"))) {
                     <pre><code class='language-python'>$code</code></pre>
                 </div>
                 <div id='terminal'>
-                    <iframe frameborder='0' width='500px' height='500px' src='https://replit.com/@richarfc/grade-calc?lite=true&outputonly=true#grade.py'></iframe>
+                    <iframe frameborder='0' src='https://replit.com/@codecanopy-cspr/current-code?lite=true&outputonly=true'></iframe>
                 </div>
                 ";
             } else {

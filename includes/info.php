@@ -11,7 +11,7 @@
             <p><?php echo $message;?></p>
             <?php
             if (isset($link)) {
-                $link_name = ($link == "index") ? "Home" : ucfirst($link);
+                $link_name = ($link == "") ? "Home" : ucfirst($link);
                 echo "<a href='/$link'>$link_name</a>";
             }
             ?>

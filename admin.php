@@ -102,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 echo "<td><form method='POST' id='action'>
                             <input type='hidden' name='action' value='delete'>
                             <input type='hidden' name='user_id' value=$user_id>
-                            <input type='submit' onClick=\"javascript: return confirm('Are you sure you want to delete this account? This will remove them from all groups they are part of and delete all tasks they own.');\" value='Delete'>
+                            <input type='submit' onclick=\"javascript: return confirm('Are you sure you want to delete this account? This will remove them from all groups they are part of and delete all tasks they own.');\" value='Delete'>
                     </form></td></tr>";
             }
             ?>

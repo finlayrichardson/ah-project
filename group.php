@@ -111,7 +111,7 @@ switch ($status) {
                  <form method='POST' id='action'>
                      <input type='hidden' name='action' value='delete'>
                      <input type='hidden' name='group_id' value=$group_id>
-                     <input type='submit' id='delete' onClick=\"javascript: return confirm('Are you sure you want to delete this group? This will also remove all tasks set to this group.');\" value='Delete'>
+                     <input type='submit' id='delete' onclick=\"javascript: return confirm('Are you sure you want to delete this group? This will also remove all tasks set to this group.');\" value='Delete'>
                  </form>
              ";
         echo "</div>

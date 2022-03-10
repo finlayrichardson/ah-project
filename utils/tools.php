@@ -32,6 +32,11 @@ function count_submitted($task_id) {
     return $count;
 }
 
+function is_completed($task_id, $user_id) {
+    if (glob("./code/$task_id/$user_id")) return true;
+    return false;
+}
+
 function pagination($data, $limit = null, $current = null, $adjacents = null) {
     $result = array();
     if (isset($data, $limit) === true && $data != 0) {

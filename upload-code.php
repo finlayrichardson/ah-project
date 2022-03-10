@@ -16,13 +16,10 @@ if (mysqli_num_rows($result) != 1) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $errors = array();
     if (isset($_FILES['file'])) {
-        if (is_dir("./code/$task_id/$user_id")) {
-            $errors[] = "File already uploaded";
-        } else {
-            mkdir("./code/$task_id/$user_id");
-            $upload_file = "./code/$task_id/$user_id/" . basename( $_FILES['file']['name']);
+        if (!is_dir("./code/$task_id/$user_id")) {
+            mkdir("./code/$task_id/$user_id", 0777, true);
+            $upload_file = "./code/$task_id/$user_id/" . ltrim(basename( $_FILES['file']['name']), '.');
             if (!move_uploaded_file($_FILES['file']['tmp_name'], $upload_file)) $errors[] = "Cannot upload file";
         }
     }
@@ -31,19 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         if (is_dir("./code/$task_id/$user_id")) {
             array_map('unlink', glob("./code/$task_id/$user_id/*.*"));
             rmdir("./code/$task_id/$user_id");
-        } else {
-            $errors[] = "File doesn't exist";
         }
-    }
-
-    if (!empty($errors)) {
-        // Display errors
-        echo "<h1>Error!</h1>
-        <p>The following error(s) occured:<br>";
-        foreach ($errors as $error) {
-            echo "- $error<br>";
-        }
-        echo "<p>Please try again.</p>";
     }
 }
 ?>

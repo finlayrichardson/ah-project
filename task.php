@@ -69,8 +69,8 @@ if (mysqli_num_rows($result) == 0 && !$owner) {
         $title = $task['title'];
         $description = htmlspecialchars($task['description']);
         $due_date = date('d/m/y', strtotime($task['due_date']));
-        $created_at = date('d/m/y H:i', strtotime($task['created_at']));
-        $updated_at = date('d/m/y H:i', strtotime($task['updated_at']));
+        $created_at = date('H:i d/m/y', strtotime($task['created_at']));
+        $updated_at = date('H:i d/m/y', strtotime($task['updated_at']));
         $result = mysqli_query($db, "SELECT first_name, last_name FROM user WHERE user_id = $owner_id;");
         $owner_name = implode(' ', mysqli_fetch_assoc($result));
         echo "<title>$title</title>";
@@ -107,7 +107,7 @@ if (mysqli_num_rows($result) == 0 && !$owner) {
         echo "</div>";
         echo "<div class='details'>";
         echo "<p><b>Owner</b>: $owner_name</p>";
-        echo ($teacher) ? "<p><b>Group</b>: $groups" : "<p><b>Group(s)</b>: $groups";
+        echo ($teacher) ? "<p><b>Group(s)</b>: $groups" : "<p><b>Group</b>: $groups";
         echo "<p><b>Due</b>: $due_date</p>";
         if ($teacher) {
             $count = count_submitted($task_id);
@@ -127,7 +127,7 @@ if (mysqli_num_rows($result) == 0 && !$owner) {
                  <form method='POST' id='action'>
                      <input type='hidden' name='action' value='delete'>
                      <input type='hidden' name='task_id' value=$task_id>
-                     <input type='submit' id='delete' onClick=\"javascript: return confirm('Are you sure you want to delete this task? This will also remove all submitted solutions.');\" value='Delete'>
+                     <input type='submit' id='delete' onclick=\"javascript: return confirm('Are you sure you want to delete this task? This will also remove all submitted solutions.');\" value='Delete'>
                  </form>
              ";
         echo "</div>
