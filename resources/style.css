@@ -413,6 +413,7 @@ input:checked + .slider:before {
 }
 
 .title h1 {
+    text-align: center;
     color: white;
     margin: 20px;
     margin-left: 30px;
@@ -746,6 +747,7 @@ input:checked + .slider:before {
 }
 
 input[type="date"] {
+    background-color: white;
     width: calc(50% - 8px) !important;
     text-align: right;
     position: relative;
