@@ -101,9 +101,9 @@ if (isset($_GET['show_completed'])) {
                     }
         
                     echo "
-                    <div class='task' onclick='location.href=\"/task/$task_id\";' style='cursor: pointer;'>
+                    <div class='task' onclick='location.href=\"/task/$task_id\";'>
                         <div class='info left'>
-                            <p>$title</p>
+                            <p class='entity-title'><b>$title</b></p>
                             <p>$groups</p>";
                     if ($_SESSION['role'] == "student") echo "<p>Mr $teacher</p>"; // figure out something with title
                     echo "</div>";

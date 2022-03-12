@@ -29,7 +29,7 @@ if (isset($_GET['token'])) {
         // Token is valid
         mysqli_query($db, "UPDATE user SET verified = true WHERE user_id = $user_id;");
         $_SESSION['verified'] = true;
-        $link = (isset($_SESSION['user_id']) && $user_id == $_SESSION['user_id']) ? "index" : "login";
+        $link = (isset($_SESSION['user_id']) && $user_id == $_SESSION['user_id']) ? "" : "login";
         info("success", "Verify Email", "Email validated!", $link);
     }
 }

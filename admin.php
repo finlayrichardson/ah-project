@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <div class='title'>
             <h1>Users</h1>
         </div>
-        <div class='box'>
+        <div class='box' id='admin'>
             <table>
                 <tr><th>User ID</th><th>Email</th><th>First Name</th><th>Last Name</th><th>Role</th><th>Verified</th><th></th><th></th><th></th></tr>
             <?php

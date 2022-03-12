@@ -27,8 +27,8 @@ if ($_SESSION['role'] == "student") load('index');
                 $student_nums = mysqli_query($db, "SELECT COUNT(*) FROM group_member, user WHERE group_member.user_id = user.user_id AND group_member.group_id = $group_id AND role = 'student';");
                 $student_num = $student_nums ? mysqli_fetch_array($student_nums)[0] : 0;
 
-                echo "<div class='group' onclick='location.href=\"/group/$group_id\";' style='cursor: pointer;'>
-                        <p>$name</p>
+                echo "<div class='group' onclick='location.href=\"/group/$group_id\";'>
+                        <p class='entity-title'><b>$name</b></p>
                         <p>Students: $student_num</p>
                     </div>";
             }

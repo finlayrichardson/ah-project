@@ -99,7 +99,7 @@ if (mysqli_num_rows($result) == 0 && !$owner) {
         echo "</div>";
         echo "
              <div class='box'>
-                 <div>
+                 <div id='content'>
                      <div class='description'>
                      <h2>Description: </h2>
              ";
