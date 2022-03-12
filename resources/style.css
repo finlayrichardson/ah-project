@@ -1,6 +1,3 @@
-/* The thing for testing css
-<script type="text/javascript" src="https://livejs.com/live.js"></script> */
-
 @import url("https://rsms.me/inter/inter.css");
 
 :root {
@@ -100,7 +97,6 @@ nav ul li a,
     grid-gap: 50px;
     grid-template-columns: repeat(auto-fill, 170px);
     grid-template-rows: 200px;
-    /* more per row for big screens */
 }
 
 .group {
@@ -274,7 +270,7 @@ input[type="submit"]:hover,
 
 .centre-box h1 {
     margin-top: 0px;
-    font-size: 40px; /*50 for big one*/
+    font-size: 40px;
 }
 
 .centre-box img {
@@ -356,21 +352,20 @@ hr {
     font-size: medium;
 }
 
-/* The switch - the box around the slider */
+/* Styling for the switch */
+
 .switch {
     position: relative;
     width: 50px;
     height: 30px;
 }
 
-/* Hide default HTML checkbox */
 .switch input {
     opacity: 0;
     width: 0;
     height: 0;
 }
 
-/* The slider */
 .slider {
     position: absolute;
     cursor: pointer;
@@ -409,7 +404,6 @@ input:checked + .slider:before {
     transform: translateX(19px);
 }
 
-/* Rounded sliders */
 .slider.round {
     border-radius: 26px;
 }
@@ -441,6 +435,7 @@ input:checked + .slider:before {
 }
 
 .dropdown {
+    background-color: white;
     text-align: center;
     font-size: medium;
     height: 52px;

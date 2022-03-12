@@ -38,6 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // Check if errors should be displayed or user should be updated
     if (empty($errors)) {
         // Update user details
+        $user_id = $_SESSION['user_id'];
         if (isset($password)) {
             query("UPDATE user SET first_name = ?, last_name = ?, password = ? WHERE user_id = ?;", 'sssi', $first_name, $last_name, $password, $user_id);
         } else {
