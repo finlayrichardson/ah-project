@@ -63,8 +63,8 @@ if (isset($_GET['show_completed'])) {
         </div>
         <?php
         $user_id = $_SESSION['user_id'];
-        $result = ($_SESSION['role'] == "admin") ? mysqli_query($db, "SELECT * FROM task;") : mysqli_query($db, "SELECT * FROM task WHERE owner_id = $user_id OR task_id IN(SELECT task_recipient.task_id FROM user, `group`, group_member, task_recipient WHERE user.user_id = group_member.user_id AND group_member.group_id = group.group_id AND group.group_id = task_recipient.group_id AND user.user_id = $user_id);");
-        $num_results = mysqli_num_rows($result);
+        $result = ($_SESSION['role'] == "admin") ? mysqli_query($db, "SELECT COUNT(*) FROM task;") : mysqli_query($db, "SELECT COUNT(*) FROM task WHERE owner_id = $user_id OR task_id IN(SELECT task_recipient.task_id FROM user, `group`, group_member, task_recipient WHERE user.user_id = group_member.user_id AND group_member.group_id = group.group_id AND group.group_id = task_recipient.group_id AND user.user_id = $user_id);");
+        $num_results = mysqli_fetch_array($result)[0];
         $num_pages = ceil($num_results / 10);
         $first_result = ($page - 1) * 10;
         $result = ($_SESSION['role'] == "admin") ? mysqli_query($db, "SELECT * FROM task ORDER BY due_date $sort LIMIT $first_result, 10;") : mysqli_query($db, "SELECT * FROM task WHERE owner_id = $user_id OR task_id IN(SELECT task_recipient.task_id FROM user, `group`, group_member, task_recipient WHERE user.user_id = group_member.user_id AND group_member.group_id = group.group_id AND group.group_id = task_recipient.group_id AND user.user_id = $user_id) ORDER BY due_date $sort LIMIT $first_result, 10;");
@@ -96,8 +96,9 @@ if (isset($_GET['show_completed'])) {
                     } else {
                         $group_result = mysqli_query($db, "SELECT name FROM user, `group`, group_member, task_recipient WHERE user.user_id = group_member.user_id AND group_member.group_id = group.group_id AND group.group_id = task_recipient.group_id AND user.user_id = $user_id AND task_recipient.task_id = $task_id;");
                         $groups = mysqli_fetch_assoc($group_result)['name'];
-                        $teacher_result = mysqli_query($db, "SELECT last_name from user, `group`, task, task_recipient, group_member WHERE user.user_id = task.owner_id AND task.task_id = task_recipient.task_id AND task_recipient.group_id = group.group_id AND group.group_id = group_member.group_id AND group_member.user_id = $user_id and task.task_id = $task_id GROUP BY last_name;");
-                        $teacher = mysqli_fetch_assoc($teacher_result)['last_name'];
+                        $teacher_result = mysqli_query($db, "SELECT first_name, last_name from user, `group`, task, task_recipient, group_member WHERE user.user_id = task.owner_id AND task.task_id = task_recipient.task_id AND task_recipient.group_id = group.group_id AND group.group_id = group_member.group_id AND group_member.user_id = $user_id and task.task_id = $task_id GROUP BY last_name;");
+                        $teacher = mysqli_fetch_assoc($teacher_result);
+                        $teacher_name = $teacher['first_name'] . " " . $teacher['last_name'];
                     }
         
                     echo "
@@ -105,7 +106,7 @@ if (isset($_GET['show_completed'])) {
                         <div class='info left'>
                             <p class='entity-title'><b>$title</b></p>
                             <p>$groups</p>";
-                    if ($_SESSION['role'] == "student") echo "<p>Mr $teacher</p>"; // figure out something with title
+                    if ($_SESSION['role'] == "student") echo "<p>$teacher_name</p>";
                     echo "</div>";
         
                     echo "
