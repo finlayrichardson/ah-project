@@ -43,14 +43,6 @@ if (empty($_GET['student_id'])) {
 
 exec("cd utils && ./script.sh $task_id $student_id");
 
-// $count = 0;
-function line_number() {
-    static $count = 1;
-    $count++;
-    $count = str_pad(strval($count), 3, ' ', STR_PAD_LEFT);
-    return "\n$count  ";
-}
-
 if (!empty(glob("./code/$task_id/$student_id/*"))) {
     $code = htmlspecialchars("  1  " . preg_replace_callback("(\r\n|\r|\n)", "line_number", rtrim(file_get_contents(glob("./code/$task_id/$student_id/*")[0]))));
 }

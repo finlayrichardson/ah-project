@@ -1,11 +1,11 @@
 <?php
 require('./utils/auth.php');
 
-if (!isset($_GET['page'])) {
+if (!isset($_GET['page']) || !intval($_GET['page'])) {
     $page = 1;
-  } else {
+} else {
     $page = intval($_GET['page']);
-  }
+}
 
 $sort = 'desc';
 if (isset($_GET['sort'])) {

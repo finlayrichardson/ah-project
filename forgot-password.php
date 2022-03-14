@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <div class='centre-box'>
             <h1>Forgot Password</h1>
             <hr>
-            <p>Please enter your email below and a link will be sent to change your password.</p>
+            <p>Please enter your email below and a link will be sent to reset your password.</p>
             <form method="POST" novalidate>
                 <input type="text" autocorrect="off" autocapitalize="none" name="email" required autofocus placeholder="Email" value="<?php if (isset($_GET['email'])) echo $_GET['email']; ?>">
                 <?php

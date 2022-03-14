@@ -17,9 +17,9 @@ if (mysqli_num_rows($result) != 1) {
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (isset($_FILES['file'])) {
-        if (!is_dir("./code/$task_id/$user_id")) {
+        if (!is_dir("./code/$task_id/$user_id") && str_ends_with($_FILES['file']['name'], '.py')) {
             mkdir("./code/$task_id/$user_id");
-            $upload_file = "./code/$task_id/$user_id/" . ltrim(basename( $_FILES['file']['name']), '.');
+            $upload_file = "./code/$task_id/$user_id/" . ltrim(basename($_FILES['file']['name']), '.');
             if (!move_uploaded_file($_FILES['file']['tmp_name'], $upload_file)) $errors[] = "Cannot upload file";
         }
     }

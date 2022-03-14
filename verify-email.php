@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     </head>
     <body>
         <div class='centre-box'>
-            <h1>Verify your email</h1>
+            <h1>Verify Email</h1>
             <hr>
             <?php
             echo "<p>Welcome $first_name $last_name, please click the button below to send a verification link to your email address.</p><br>";
