@@ -109,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         </div>
         <div class='box'>
             <form method="POST" novalidate>
-                <input type="text" name="name" required pattern="[-a-zA-ZäöüßÄÖÜ ]+" maxlength="50" placeholder="Name" value="<?php echo $group['name'];?>">
+                <input type="text" name="name" required pattern="[-a-zA-Z0-9äöüßÄÖÜ ]+" maxlength="50" placeholder="Name" value="<?php echo $group['name'];?>">
                 <?php
                 if (isset($errors['name'])) {
                     $error = $errors['name'];

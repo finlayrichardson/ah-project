@@ -78,7 +78,7 @@ nav ul li a,
     border-radius: 10px;
     margin-left: 40px;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    transition: transform 0.5s;
+    transition: transform 0.25s;
 }
 
 #logout a {
@@ -110,7 +110,7 @@ nav ul li a,
     width: 170px;
     height: 150px;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 10px rgba(0, 0, 0, 0.24);
-    transition: transform 0.5s;
+    transition: transform 0.25s;
     cursor: pointer;
 }
 
@@ -149,7 +149,7 @@ nav ul li a,
     border-radius: 7px;
     font-weight: 700;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 10px rgba(0, 0, 0, 0.24);
-    transition: transform 0.5s;
+    transition: transform 0.25s;
 }
 
 .file-upload-wrap {
@@ -214,7 +214,7 @@ nav ul li a,
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 10px rgba(0, 0, 0, 0.24);
     font-weight: 700;
     font-size: medium;
-    transition: transform 0.5s;
+    transition: transform 0.25s;
 }
 
 input[type="submit"] {
@@ -229,7 +229,7 @@ input[type="submit"] {
     cursor: pointer;
     border-radius: 10px;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 10px rgba(0, 0, 0, 0.24);
-    transition: transform 0.5s;
+    transition: transform 0.25s;
 }
 
 input[type="submit"]:hover,
@@ -432,7 +432,7 @@ input:checked + .slider:before {
     border-radius: 10px;
     padding: 15px;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 10px rgba(0, 0, 0, 0.24);
-    transition: transform 0.5s;
+    transition: transform 0.25s;
 }
 
 .dropdown {
@@ -456,7 +456,7 @@ input:checked + .slider:before {
     margin: 30px 20px;
     border-radius: 20px;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 10px rgba(0, 0, 0, 0.24);
-    transition: transform 0.5s;
+    transition: transform 0.25s;
     cursor: pointer;
 }
 
@@ -497,7 +497,7 @@ input:checked + .slider:before {
     background-color: var(--colour);
     border-radius: 10px;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    transition: transform 0.5s;
+    transition: transform 0.25s;
 }
 
 .left {
@@ -528,7 +528,7 @@ input:checked + .slider:before {
     border-radius: 10px;
     padding: 15px;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 10px rgba(0, 0, 0, 0.24);
-    transition: transform 0.5s;
+    transition: transform 0.25s;
 }
 
 #progress-bar {
@@ -564,7 +564,7 @@ input:checked + .slider:before {
     border-radius: 10px;
     padding: 10px 15px;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 10px rgba(0, 0, 0, 0.24);
-    transition: transform 0.5s;
+    transition: transform 0.25s;
 }
 
 .box {
@@ -659,7 +659,7 @@ input:checked + .slider:before {
     background-color: var(--colour);
     border-radius: 10px;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    transition: transform 0.5s;
+    transition: transform 0.25s;
 }
 
 #delete {

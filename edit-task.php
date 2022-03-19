@@ -116,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         </div>
         <div class='box'>
             <form method="POST" novalidate>
-                <input type="text" name="title" required pattern="[-a-zA-ZäöüßÄÖÜ ]+" maxlength="100" placeholder="Title" value="<?php echo $task['title'];?>">
+                <input type="text" name="title" required pattern="[-a-zA-Z0-9äöüßÄÖÜ ]+" maxlength="100" placeholder="Title" value="<?php echo $task['title'];?>">
                 <?php
                 if (isset($errors['title'])) {
                     $error = $errors['title'];

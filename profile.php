@@ -1,9 +1,5 @@
 <?php
 require('./utils/auth.php');
-$user_id = $_SESSION['user_id'];
-$first_name = $_SESSION['first_name'];
-$last_name = $_SESSION['last_name'];
-$email = $_SESSION['email'];
 ?>
 
 <!DOCTYPE html>
@@ -21,6 +17,10 @@ $email = $_SESSION['email'];
         </div>
         <div>
         <?php
+        $user_id = $_SESSION['user_id'];
+        $first_name = $_SESSION['first_name'];
+        $last_name = $_SESSION['last_name'];
+        $email = $_SESSION['email'];
         $groups = array();
         // Check for groups that the user owns
         $result = mysqli_query($db, "SELECT name FROM `group` WHERE owner_id = $user_id;");
