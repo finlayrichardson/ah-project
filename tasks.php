@@ -12,9 +12,11 @@ if (isset($_GET['sort'])) {
     if ($_GET['sort'] == 'asc' || $_GET['sort'] == 'desc') $sort = $_GET['sort'];
 }
 
-$show_completed = false;
-if (isset($_GET['show_completed'])) {
-    $show_completed = ($_GET['show_completed'] == "true") ? true : false;
+if ($_SESSION['role'] == "student") {
+    $show_completed = false;
+    if (isset($_GET['show_completed'])) {
+        $show_completed = ($_GET['show_completed'] == "true") ? true : false;
+    }
 }
 ?>
 
@@ -30,7 +32,12 @@ if (isset($_GET['show_completed'])) {
         <div class='title'>
             <h1>Tasks</h1>
             <div id='sort-options'>
-                <select class='dropdown' onchange='window.location="tasks?sort="+this.value+"&show_completed=<?php echo ($show_completed) ? "true" : "false";?>";'>
+                <select class='dropdown' onchange='window.location="tasks?sort="+this.value
+                <?php
+                if ($_SESSION["role"] == "student") {
+                    echo ($show_completed) ? "+\"&show_completed=true\"" : "+\"&show_completed=false\"";
+                }
+                ?>;'>
                     <option value='desc'>Sort by due date (latest first)</option>
                     <option value='asc'>Sort by due date (earliest first)</option>
                 </select>
@@ -56,9 +63,9 @@ if (isset($_GET['show_completed'])) {
             }
             echo "
                     <script>
-                        document.getElementsByClassName('dropdown')[0].value = '$sort';
-                        document.getElementById('checkbox').checked = '$show_completed';
-                    </script>";
+                        document.getElementsByClassName('dropdown')[0].value = '$sort';";
+            if ($_SESSION['role'] == "student") echo "document.getElementById('checkbox').checked = '$show_completed';";
+            echo "</script>";
             ?>
         </div>
         <?php
@@ -78,7 +85,7 @@ if (isset($_GET['show_completed'])) {
         } else {
             while ($row = mysqli_fetch_assoc($result)) {
                 $task_id = $row['task_id'];
-                if ($show_completed || !is_completed($task_id, $user_id)) {
+                if ($_SESSION['role'] != "student" || $show_completed || !is_completed($task_id, $user_id)) {
                     $title = $row['title'];
                     $due_date = date('d/m/y', strtotime($row['due_date']));
                     if ($_SESSION['role'] != "student") {
@@ -92,7 +99,7 @@ if (isset($_GET['show_completed'])) {
                         $count = count_submitted($task_id);
                         $num_result = mysqli_query($db, "SELECT COUNT(DISTINCT(user.user_id)) FROM user, `group`, group_member, task_recipient WHERE task_recipient.group_id = group.group_id AND group_member.user_id = user.user_id AND group_member.group_id = group.group_id AND task_id = $task_id AND role = 'student';");
                         $num = mysqli_fetch_array($num_result)[0];
-                        $width = $count / $num * 100;
+                        $width = ($num == 0) ? 0 : $count / $num * 100;
                     } else {
                         $group_result = mysqli_query($db, "SELECT name FROM user, `group`, group_member, task_recipient WHERE user.user_id = group_member.user_id AND group_member.group_id = group.group_id AND group.group_id = task_recipient.group_id AND user.user_id = $user_id AND task_recipient.task_id = $task_id;");
                         $groups = mysqli_fetch_assoc($group_result)['name'];

@@ -45,7 +45,7 @@ require('./utils/auth.php');
                         $count = count_submitted($task_id);
                         $num_result = mysqli_query($db, "SELECT COUNT(DISTINCT(user.user_id)) FROM user, `group`, group_member, task_recipient WHERE task_recipient.group_id = group.group_id AND group_member.user_id = user.user_id AND group_member.group_id = group.group_id AND task_id = $task_id AND role = 'student';");
                         $num = mysqli_fetch_array($num_result)[0];
-                        $width = $count / $num * 100;
+                        $width = ($num == 0) ? 0 : $count / $num * 100;
                     } else {
                         $group_result = mysqli_query($db, "SELECT name FROM user, `group`, group_member, task_recipient WHERE user.user_id = group_member.user_id AND group_member.group_id = group.group_id AND group.group_id = task_recipient.group_id AND user.user_id = $user_id AND task_recipient.task_id = $task_id;");
                         $groups = mysqli_fetch_assoc($group_result)['name'];

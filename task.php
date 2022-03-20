@@ -30,6 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
     // Delete task
     query("DELETE FROM task WHERE task_id = ?;", 'i', $task_id);
+    // Delete solutions
+    rmdir("./code/$task_id");
     load('tasks');
 }
 
