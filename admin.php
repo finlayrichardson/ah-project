@@ -88,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 $first_name = $row['first_name'];
                 $last_name = $row['last_name'];
                 $role = ucfirst($row['role']);
-                $verified = $row['verified'] == 1 ? "&nbsp;&nbsp;&nbsp;&nbsp;✓" : "&nbsp;&nbsp;&nbsp;&nbsp;✕";
+                $verified = ($row['verified'] == 1) ? "&nbsp;&nbsp;&nbsp;&nbsp;✓" : "&nbsp;&nbsp;&nbsp;&nbsp;✕";
 
                 echo "
                 <tr>
@@ -99,12 +99,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     <td>$role</td>
                     <td>$verified</td>
                 ";
-                echo ($role != "admin") ? "<td><form method='POST' id='action'>
+                echo ($role != "Admin") ? "<td><form method='POST' id='action'>
                                                     <input type='hidden' name='action' value='promote'>
                                                     <input type='hidden' name='user_id' value=$user_id>
                                                     <input type='submit' value='Promote'>
                                         </form></td>" : "<td></td>";
-                echo ($role != "student") ? "<td><form method='POST' id='action'>
+                echo ($role != "Student") ? "<td><form method='POST' id='action'>
                                                     <input type='hidden' name='action' value='demote'>
                                                     <input type='hidden' name='user_id' value=$user_id>
                                                     <input type='submit' value='Demote'>

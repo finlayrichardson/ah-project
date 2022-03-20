@@ -30,7 +30,7 @@ if (isset($_GET['show_completed'])) {
         <div class='title'>
             <h1>Tasks</h1>
             <div id='sort-options'>
-                <select class='dropdown' onchange='window.location="tasks?sort="+this.value;'>
+                <select class='dropdown' onchange='window.location="tasks?sort="+this.value+"&show_completed=<?php echo ($show_completed) ? "true" : "false";?>";'>
                     <option value='desc'>Sort by due date (latest first)</option>
                     <option value='asc'>Sort by due date (earliest first)</option>
                 </select>
@@ -123,7 +123,7 @@ if (isset($_GET['show_completed'])) {
                     if ($_SESSION['role'] != "student") {
                         echo "<p>$count/$num Submitted</p>";
                     } else {
-                        echo "<a href='/upload-code/$task_id'>Upload Code</a>";
+                        echo is_completed($task_id, $user_id) ? "<a href='/upload-code/$task_id' style='background-color: rgba(37, 174, 136, 1);'>Completed</a>" : "<a href='/upload-code/$task_id'>Upload Code</a>";
                     }
                     
                     echo "</div></div>";
