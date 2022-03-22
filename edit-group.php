@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             }
         }
     }
-    // Edit group or display errors
+    // Edit group if no errors
     if (empty($errors)) {
         $user_id = $_SESSION['user_id'];
         query("UPDATE `group` SET name = ? WHERE group_id = ?;", 'si', $name, $group_id);

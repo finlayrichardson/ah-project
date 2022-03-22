@@ -50,13 +50,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $errors['email'] = "⚠ Email already registered";
         }
     }
-    // Check if errors should be displayed or user should be inserted
+    // Insert user into database if no errors
     if (empty($errors)) {
         // Insert user into database
         query("INSERT INTO user (email, password, first_name, last_name, role) VALUES (?, ?, ?, ?, 'student');", 'ssss', $email, $password, $first_name, $last_name);
 
         // Setup session and go to verify-email
-        session_name("id");
+        session_name('id');
         session_start();
         $result = query("SELECT user_id FROM user WHERE email = ?;", 's', $email);
         $user_id = mysqli_fetch_row($result)[0];

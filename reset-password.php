@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 $password = password_hash(trim($_POST['password1']), PASSWORD_BCRYPT);
             }
 
-            // Change password or display errors
+            // Change password if no errors
             if (empty($errors)) {
                 // Change password
                 mysqli_query($db, "UPDATE user SET password = '$password' WHERE user_id = $user_id;");
@@ -57,14 +57,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         $error = $errors['password1'];
                         echo "<p class='error'>$error</p>";
                     }
-                    ?>
+                ?>
                 <input type="password" name="password2" required placeholder="Confirm Password" value="<?php if (isset($_POST['password2'])) echo $_POST['password2']; ?>">
                 <?php
                     if (isset($errors['password2'])) {
                         $error = $errors['password2'];
                         echo "<p class='error'>$error</p>";
                     }
-                    ?>
+                ?>
                 <input type="submit" value="Reset Password">
             </form>
         </div>

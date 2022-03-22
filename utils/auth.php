@@ -1,7 +1,7 @@
 <?php
 require('./utils/tools.php');
 require('./utils/connect-db.php');
-session_name("id");
+session_name('id');
 session_start();
 
 if (empty($_SESSION['user_id'])) {

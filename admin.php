@@ -49,14 +49,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         case "delete":
             // Delete user
             query("DELETE FROM user WHERE user_id = ?;", 'i', $user_id);
-            rmdir("./code/*/$user_id");
+            remove_dir("./code/*/$user_id");
             // Delete task folders if they are teacher
             $result = query("SELECT role FROM user WHERE user_id = ?;", 'i', $user_id);
             if (mysqli_fetch_assoc($result)['role'] != "student") {
                 $result = query("SELECT task_id FROM task WHERE owner_id = ?;", 'i', $user_id);
                 while ($row = mysqli_fetch_assoc($result)) {
                     $task_id = $row['task_id'];
-                    rmdir("./code/$task_id");
+                    remove_dir("./code/$task_id");
                 }
             }
             break;

@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     } else {
         $description = "";
     }
-    // Create task or display errors
+    // Create task if no errors
     if (empty($errors)) {
         $user_id = $_SESSION['user_id'];
         query("INSERT INTO task (owner_id, title, description, due_date, created_at, updated_at) VALUES (?, ?, ?, ?, NOW(), NOW());", 'isss', $user_id, $title, $description, $due_date);

@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     } else {
         $description = "";
     }
-    // Edit task or display errors
+    // Edit task if no errors
     if (empty($errors)) {
         $user_id = $_SESSION['user_id'];
         query("UPDATE task SET title = ?, description = ?, due_date = ?, updated_at = NOW() WHERE task_id = ?;", 'sssi', $title, $description, $due_date, $task_id);

@@ -1,5 +1,5 @@
 <?php
-session_name("id");
+session_name('id');
 session_start();
 if (isset($_SESSION['user_id'])) {
     // Logout user
@@ -39,24 +39,22 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         if (!password_verify($password, $user['password'])) {
             // Password is incorrect
             $errors['password'] = "⚠ Incorrect password";
-        }
-    }
+        } else {
+            // Password is correct
+            $_SESSION['user_id'] = $user['user_id'];
+            $_SESSION['email'] = $user['email'];
+            $_SESSION['first_name'] = $user['first_name'];
+            $_SESSION['last_name'] = $user['last_name'];
+            $_SESSION['role'] = $user['role'];
+            $_SESSION['verified'] = $user['verified'];
 
-    if (empty($errors)) {
-        // Password is correct
-        $_SESSION['user_id'] = $user['user_id'];
-        $_SESSION['email'] = $user['email'];
-        $_SESSION['first_name'] = $user['first_name'];
-        $_SESSION['last_name'] = $user['last_name'];
-        $_SESSION['role'] = $user['role'];
-        $_SESSION['verified'] = $user['verified'];
-
-        // Check if user needs to be returned to a page
-        if (isset($_GET['return'])) {
-            load($_GET['return']);
+            // Check if user needs to be returned to a page
+            if (isset($_GET['return'])) {
+                load($_GET['return']);
+            }
+            // Send user to index
+            load('index');
         }
-        // Send user to index
-        load('index');
     }
 }
 ?>

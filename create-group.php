@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             }
         }
     }
-    // Create group or display errors
+    // Create group if no errors
     if (empty($errors)) {
         $user_id = $_SESSION['user_id'];
         query("INSERT INTO `group` (owner_id, name) VALUES (?, ?);", 'is', $user_id, $name);

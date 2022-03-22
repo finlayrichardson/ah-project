@@ -89,3 +89,12 @@ function line_number() {
     $count = str_pad(strval($count), 3, ' ', STR_PAD_LEFT);
     return "\n$count  ";
 }
+
+// Recursively remove everything in a directory
+function remove_dir($path) {
+    $files = glob($path . '/*');
+	foreach ($files as $file) {
+		is_dir($file) ? remove_dir($file) : unlink($file);
+	}
+	rmdir($path);
+}

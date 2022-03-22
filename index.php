@@ -31,7 +31,7 @@ require('./utils/auth.php');
             $counter = 0;
             while (($row = mysqli_fetch_assoc($result)) && ($counter < 5)) {
                 $task_id = $row['task_id'];
-                if (!is_completed($task_id, $user_id)) {
+                if ($_SESSION['role'] != "student" || !is_completed($task_id, $user_id)) {
                     $title = $row['title'];
                     $due_date = date('d/m/y', strtotime($row['due_date']));
                     if ($_SESSION['role'] != "student") {
@@ -59,7 +59,7 @@ require('./utils/auth.php');
                         <div class='info left'>
                             <p class='entity-title'><b>$title</b></p>
                             <p>$groups</p>";
-                    if ($_SESSION['role'] == "student") echo "<p>$teacher_name</p>"; // figure out something with title
+                    if ($_SESSION['role'] == "student") echo "<p>$teacher_name</p>";
                     echo "</div>";
         
                     echo "

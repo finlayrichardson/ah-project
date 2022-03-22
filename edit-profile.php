@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             }
         }
     }
-    // Check if errors should be displayed or user should be updated
+    // Check if user should be updated
     if (empty($errors)) {
         // Update user details
         $user_id = $_SESSION['user_id'];

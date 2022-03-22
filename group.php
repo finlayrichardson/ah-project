@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $result = query("SELECT user_id FROM group_member WHERE group_id = ?", 'i', $group_id);
         while ($row = mysqli_fetch_assoc($result)) {
             $user_id = $row['user_id'];
-            rmdir("./code/$task_id/$user_id");
+            remove_dir("./code/$task_id/$user_id");
         }
     }
     load('groups');

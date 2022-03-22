@@ -23,6 +23,8 @@ html {
     min-height: 100vh;
 }
 
+/* Nav bar styling */
+
 nav {
     display: flex;
     justify-content: space-between;

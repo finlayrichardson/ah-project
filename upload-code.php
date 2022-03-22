@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (isset($_POST['delete'])) {
         if (is_dir("./code/$task_id/$user_id")) {
             array_map('unlink', glob("./code/$task_id/$user_id/*.*"));
-            rmdir("./code/$task_id/$user_id");
+            remove_dir("./code/$task_id/$user_id");
         }
     }
 }
@@ -78,12 +78,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 fetch(window.location.href, {method: "POST", body: formData});
             }
 
-            $('.file-upload-wrap').bind('dragover', function () {
-                $('.file-upload-wrap').addClass('file-dropping');
-            });
-            $('.file-upload-wrap').bind('dragleave', function () {
-                $('.file-upload-wrap').removeClass('file-dropping');
-            });
             <?php
             if (is_dir("./code/$task_id/$user_id")) {
                 $file_name = implode('', array_diff(scandir("./code/$task_id/$user_id"), array('..', '.')));
